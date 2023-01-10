@@ -15,6 +15,8 @@ tags:
 ### 实现
 Hyperf的db使用有两种方式，是否走ORM，ORM会对db查询及响应做多一层封装，底层最终也是通过`connection` 发起db请求。
 
+<!-- more -->
+
 `Hyperf\DbConnection\Model\Model` 继承 `Hyperf\Database\Model/Model` ，所有的db请求通过 `Hyperf\Database\Model\Bulder` 发出：
 ```php
 # vendor/hyperf/database/src/Model/Model.php   
