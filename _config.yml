@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 爱谁谁
+title: '爱谁谁'
 subtitle: ''
 description: '我们坐着不同的井 望着同样的天'
 keywords:
-author: ta_shuo
-language: zh-Hans
+author: 'ta_shuo'
+language: 'zh-CN'
 timezone: 'Asia/Shanghai'
 
 # URL
@@ -109,6 +109,7 @@ deploy:
   type: git
   repo: git@github.com:tashuo/github-pages.git
   branch: gh-pages
+  message: Site updated - {{ now('YYYY-MM-DD HH:mm:ss') }})
 
 # Comments plugin
 #duoshuo_shortname: mkidding
