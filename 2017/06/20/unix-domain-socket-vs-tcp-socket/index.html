@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.aisheishei.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="之前配置lnmp环境时有发现php-fpm既可以监听127.0.0.1:9000(ip+端口形式), 也可以监听&#x2F;path&#x2F;to&#x2F;unix&#x2F;socket(Unix Domain Socket形式), 用起来感觉并没有什么差异, 网上查下了资料，大略总结下。 Unix Domain Socket Unix domain socket 或者 IPC socket是一种终端，可以使 同一台操作系统 上的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unix Domain Socket vs TCP SOCKET">
+<meta property="og:url" content="https://www.aisheishei.com/2017/06/20/unix-domain-socket-vs-tcp-socket/index.html">
+<meta property="og:site_name" content="爱谁谁">
+<meta property="og:description" content="之前配置lnmp环境时有发现php-fpm既可以监听127.0.0.1:9000(ip+端口形式), 也可以监听&#x2F;path&#x2F;to&#x2F;unix&#x2F;socket(Unix Domain Socket形式), 用起来感觉并没有什么差异, 网上查下了资料，大略总结下。 Unix Domain Socket Unix domain socket 或者 IPC socket是一种终端，可以使 同一台操作系统 上的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-06-20T07:50:29.000Z">
+<meta property="article:modified_time" content="2023-01-10T07:40:42.166Z">
+<meta property="article:author" content="ta_shuo">
+<meta property="article:tag" content="unix domain socket">
+<meta property="article:tag" content="tcp&#x2F;ip">
+<meta property="article:tag" content="php-fpm">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.aisheishei.com/2017/06/20/unix-domain-socket-vs-tcp-socket/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.aisheishei.com/2017/06/20/unix-domain-socket-vs-tcp-socket/","path":"2017/06/20/unix-domain-socket-vs-tcp-socket/","title":"Unix Domain Socket vs TCP SOCKET"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Unix Domain Socket vs TCP SOCKET | 爱谁谁</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">爱谁谁</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404.html" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unix-Domain-Socket"><span class="nav-number">1.</span> <span class="nav-text">Unix Domain Socket</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E4%B8%80%E5%8F%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.</span> <span class="nav-text">同一台操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6%E6%A0%87%E8%AF%86%E8%BA%AB%E4%BB%BD"><span class="nav-number">1.2.</span> <span class="nav-text">系统文件标识身份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">1.3.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%80%E4%BB%A5%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">所以如何选择？</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ta_shuo"
+      src="/1.jpg">
+  <p class="site-author-name" itemprop="name">ta_shuo</p>
+  <div class="site-description" itemprop="description">我们坐着不同的井 望着同样的天</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tashuo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tashuo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:dangyaming@gmail.com" title="E-Mail → mailto:dangyaming@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.aisheishei.com/2017/06/20/unix-domain-socket-vs-tcp-socket/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/1.jpg">
+      <meta itemprop="name" content="ta_shuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱谁谁">
+      <meta itemprop="description" content="我们坐着不同的井 望着同样的天">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Unix Domain Socket vs TCP SOCKET | 爱谁谁">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Unix Domain Socket vs TCP SOCKET
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-06-20 15:50:29" itemprop="dateCreated datePublished" datetime="2017-06-20T15:50:29+08:00">2017-06-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-10 15:40:42" itemprop="dateModified" datetime="2023-01-10T15:40:42+08:00">2023-01-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>之前配置lnmp环境时有发现php-fpm既可以监听<code>127.0.0.1:9000</code>(ip+端口形式), 也可以监听<code>/path/to/unix/socket</code>(Unix Domain Socket形式), 用起来感觉并没有什么差异, 网上查下了资料，大略总结下。</p>
+<h2 id="Unix-Domain-Socket"><a href="#Unix-Domain-Socket" class="headerlink" title="Unix Domain Socket"></a>Unix Domain Socket</h2><blockquote>
+<p>Unix domain socket 或者 IPC socket是一种终端，可以使 <strong>同一台操作系统</strong> 上的两个或多个进程进行数据通信。与管道相比，Unix domain sockets 既可以使用字节流，又可以使用数据队列，而管道通信则只能使用字节流。Unix domain sockets的接口和Internet socket很像，但它不使用网络底层协议来通信。Unix domain socket 的功能是POSIX操作系统里的一种组件。</p>
+</blockquote>
+<blockquote>
+<p>Unix domain sockets <strong>使用系统文件的地址来作为自己的身份</strong>。它可以被系统进程引用。所以两个进程可以同时打开一个Unix domain sockets来进行通信。不过这种通信方式是发生在系统内核里而不会在网络里传播。</p>
+</blockquote>
+<h3 id="同一台操作系统"><a href="#同一台操作系统" class="headerlink" title="同一台操作系统"></a>同一台操作系统</h3><ul>
+<li>直接弊端: 限定UDS的使用只能在同一台服务器，<strong>即限定Nginx和php必须部署在同一台机</strong>。</li>
+</ul>
+<h3 id="系统文件标识身份"><a href="#系统文件标识身份" class="headerlink" title="系统文件标识身份"></a>系统文件标识身份</h3><ul>
+<li>方便利用linux的文件访问权限机制，来控制进程的访问权限。如Nginx运行用户为www, 则该socket文件必须对www用户有读写的权限，而其他没有读写权限的进程无法与php-fpm进程通信。</li>
+<li><em>less copying of data, fewer context switches</em>。相比基于TCP/IP协议栈的形式，UDS减少了如数据安全校验、路由、流量控制、封包解包等操作的性能消耗，在性能表现方面略高，不过这方面的性能优势只是理论上的，实际线上环境的差异应该不大。<span id="more"></span>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3></li>
+<li>网上看到一个很脑洞的UDS使用<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream backend </span><br><span class="line">&#123;</span><br><span class="line">    server unix:/var/run/php5-fpm.sock1  weight=100 max_fails=5 fail_timeout=5;</span><br><span class="line">    server unix:/var/run/php5-fpm.sock2  weight=100 max_fails=5 fail_timeout=5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>在同一台服务器php-fpm配置两个或更多UDS文件配合Nginx做负载均衡, 性能会略高于普通的单个的upstream backends。</p>
+<h2 id="所以如何选择？"><a href="#所以如何选择？" class="headerlink" title="所以如何选择？"></a>所以如何选择？</h2><ul>
+<li>php只有一台服务器且与Nginx在同一台机，建议使用Unix Domain Socket方式，性能会略高于TCP/IP，不过基本看不出来差异</li>
+<li>其他情况就只能监听ip+端口号, 没得选 :)</li>
+</ul>
+<p><br/><br/><br>参考资料：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://lists.freebsd.org/pipermail/freebsd-performance/2005-February/001143.html">unix domain sockets vs. internet sockets</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/unix-domain-socket/" rel="tag"># unix domain socket</a>
+              <a href="/tags/tcp-ip/" rel="tag"># tcp/ip</a>
+              <a href="/tags/php-fpm/" rel="tag"># php-fpm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/02/09/oauth2-csrf/" rel="prev" title="OAuth授权与CSRF攻击">
+                  <i class="fa fa-chevron-left"></i> OAuth授权与CSRF攻击
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/06/21/mysql-transaction-and-lock/" rel="next" title="数据库事务与并发控制">
+                  数据库事务与并发控制 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ta_shuo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
