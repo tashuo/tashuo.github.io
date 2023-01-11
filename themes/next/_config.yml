@@ -799,9 +799,9 @@ plausible:
 # Show number of visitors of each article.
 # You can visit https://www.leancloud.cn to get AppID and AppKey.
 leancloud_visitors:
-  enable: true
-  app_id: 6BPvtB8Qn8O110SFl7wnzln0-9Nh9j0Va
-  app_key: LXFj6CF50BH5PqwmoJLpSzWq
+  enable: false
+  app_id: xxx
+  app_key: xxx
   # Required for apps from CN region
   server_url: # <your server url>
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
