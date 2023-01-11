@@ -518,27 +518,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Go by Example - Functions</title>
-    <url>/2017/07/13/go-by-example-function/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Functions"><a href="#Go-by-Example-Functions" class="headerlink" title="Go by Example: Functions"></a><center>Go by Example: Functions</center></h2><p>函数是golang的核心。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接收两个int类型的参数，并返回两者之和。</span></span><br><span class="line"><span class="comment">// golang的函数需要显式的return。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plus</span><span class="params">(a <span class="type">int</span>, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多个同样类型的参数简便的定义。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plusPlus</span><span class="params">(a, b, c <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b + c</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    res := plus(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    fmt.Println(<span class="string">&quot;1+2=&quot;</span>, res)</span><br><span class="line"></span><br><span class="line">    res = plusPlus(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">    fmt.Println(<span class="string">&quot;1+2+3=&quot;</span>, res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run functions.go </span><br><span class="line">1+2 = 3</span><br><span class="line">1+2+3 = 6</span><br></pre></td></tr></table></figure>
-
-<p>原文链接：<a href="https://gobyexample.com/functions">Go by Example: Functions</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Go by Example - Goroutines</title>
     <url>/2017/08/03/go-by-example-goroutine/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
@@ -554,6 +533,27 @@
 
 
 <p>原文链接：<a href="https://gobyexample.com/goroutines">Go by Example: Goroutines</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Go by Example - Functions</title>
+    <url>/2017/07/13/go-by-example-function/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Functions"><a href="#Go-by-Example-Functions" class="headerlink" title="Go by Example: Functions"></a><center>Go by Example: Functions</center></h2><p>函数是golang的核心。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接收两个int类型的参数，并返回两者之和。</span></span><br><span class="line"><span class="comment">// golang的函数需要显式的return。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plus</span><span class="params">(a <span class="type">int</span>, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多个同样类型的参数简便的定义。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plusPlus</span><span class="params">(a, b, c <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b + c</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    res := plus(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    fmt.Println(<span class="string">&quot;1+2=&quot;</span>, res)</span><br><span class="line"></span><br><span class="line">    res = plusPlus(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">    fmt.Println(<span class="string">&quot;1+2+3=&quot;</span>, res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run functions.go </span><br><span class="line">1+2 = 3</span><br><span class="line">1+2+3 = 6</span><br></pre></td></tr></table></figure>
+
+<p>原文链接：<a href="https://gobyexample.com/functions">Go by Example: Functions</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -668,28 +668,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Go by Example - Mutexes</title>
-    <url>/2017/12/13/go-by-example-mutexes/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Mutexes"><a href="#Go-by-Example-Mutexes" class="headerlink" title="Go by Example: Mutexes"></a><center>Go by Example: Mutexes</center></h2><p>在前面的示例中我们看到如何通过原子操作来管理简单的计数器。对于更复杂的状态，我们可以使用互斥锁在多个goroutine中安全地访问数据。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;math/rand&quot;</span></span><br><span class="line">    <span class="string">&quot;sync&quot;</span></span><br><span class="line">    <span class="string">&quot;sync/atomic&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 此处状态是一个map</span></span><br><span class="line">    <span class="keyword">var</span> state = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">int</span>]<span class="type">int</span>)</span><br><span class="line">    <span class="comment">// 初始化锁</span></span><br><span class="line">    <span class="keyword">var</span> mutex = &amp;sync.Mutex&#123;&#125;</span><br><span class="line">    <span class="comment">// 定义两个变量用于追踪读和写的总次数</span></span><br><span class="line">    <span class="keyword">var</span> readOps <span class="type">uint64</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> writeOps <span class="type">uint64</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动100个goroutines读取状态值，每个goroutine耗时1毫秒</span></span><br><span class="line">    <span class="keyword">for</span> r := <span class="number">0</span>; r &lt; <span class="number">100</span>; r++ &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            total := <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> &#123;</span><br><span class="line">                <span class="comment">// 随机读取状态的某一个值</span></span><br><span class="line">                <span class="comment">// 1、加锁</span></span><br><span class="line">                <span class="comment">// 2、读取</span></span><br><span class="line">                <span class="comment">// 3、解锁</span></span><br><span class="line">                key := rand.Intn(<span class="number">5</span>)</span><br><span class="line">                mutex.Lock()</span><br><span class="line">                total += state[key]</span><br><span class="line">                mutex.Unlock()</span><br><span class="line">                <span class="comment">// 次数自增1</span></span><br><span class="line">                atomic.AddUint64(&amp;readOps, <span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">                <span class="comment">// 两次读取之间睡眠1毫秒</span></span><br><span class="line">                time.Sleep(time.Millisecond)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 同上，启动10个goroutines模拟写操作</span></span><br><span class="line">    <span class="comment">// 随机给状态赋值，写操作次数自增1，睡眠1毫秒</span></span><br><span class="line">    <span class="keyword">for</span> w := <span class="number">0</span>; w &lt; <span class="number">10</span>; w++ &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="keyword">for</span> &#123;</span><br><span class="line">                key := rand.Intn(<span class="number">5</span>)</span><br><span class="line">                val := rand.Intn(<span class="number">100</span>)</span><br><span class="line">                mutex.Lock()</span><br><span class="line">                state[key] = val</span><br><span class="line">                mutex.Unlock()</span><br><span class="line">                atomic.AddUint64(&amp;writeOps, <span class="number">1</span>)</span><br><span class="line">                time.Sleep(time.Millisecond)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 睡眠一秒等待读写操作</span></span><br><span class="line">    <span class="comment">// 打印出读写次数</span></span><br><span class="line">    time.Sleep(time.Second)</span><br><span class="line">    readOpsFinal := atomic.LoadUint64(&amp;readOps)</span><br><span class="line">    fmt.Println(<span class="string">&quot;readOps:&quot;</span>, readOpsFinal)</span><br><span class="line">    writeOpsFinal := atomic.LoadUint64(&amp;writeOps)</span><br><span class="line">    fmt.Println(<span class="string">&quot;writeOps:&quot;</span>, writeOpsFinal)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用锁取出最后的状态值</span></span><br><span class="line">    mutex.Lock()</span><br><span class="line">    fmt.Println(<span class="string">&quot;state:&quot;</span>, state)</span><br><span class="line">    mutex.Unlock()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run mutex.go</span><br><span class="line">readOps: 78300</span><br><span class="line">writeOps: 7830</span><br><span class="line">state: map[1:86 0:61 4:17 2:26 3:26]</span><br></pre></td></tr></table></figure>
-
-<p>执行程序，根据输出得知读写次数分别为78300和7830，最后的状态为map[1:86 0:61 4:17 2:26 3:26]</p>
-<p>原文链接：<a href="https://gobyexample.com/mutexes">Go by Example: Mutexes</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Go by Example - Multiple Return Values</title>
     <url>/2017/07/18/go-by-example-mutiple-return-values/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
@@ -705,6 +683,28 @@
 
 
 <p>原文链接：<a href="https://gobyexample.com/multiple-return-values">Go by Example: Multiple Return Values</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Go by Example - Mutexes</title>
+    <url>/2017/12/13/go-by-example-mutexes/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Mutexes"><a href="#Go-by-Example-Mutexes" class="headerlink" title="Go by Example: Mutexes"></a><center>Go by Example: Mutexes</center></h2><p>在前面的示例中我们看到如何通过原子操作来管理简单的计数器。对于更复杂的状态，我们可以使用互斥锁在多个goroutine中安全地访问数据。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;math/rand&quot;</span></span><br><span class="line">    <span class="string">&quot;sync&quot;</span></span><br><span class="line">    <span class="string">&quot;sync/atomic&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 此处状态是一个map</span></span><br><span class="line">    <span class="keyword">var</span> state = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">int</span>]<span class="type">int</span>)</span><br><span class="line">    <span class="comment">// 初始化锁</span></span><br><span class="line">    <span class="keyword">var</span> mutex = &amp;sync.Mutex&#123;&#125;</span><br><span class="line">    <span class="comment">// 定义两个变量用于追踪读和写的总次数</span></span><br><span class="line">    <span class="keyword">var</span> readOps <span class="type">uint64</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> writeOps <span class="type">uint64</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动100个goroutines读取状态值，每个goroutine耗时1毫秒</span></span><br><span class="line">    <span class="keyword">for</span> r := <span class="number">0</span>; r &lt; <span class="number">100</span>; r++ &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            total := <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> &#123;</span><br><span class="line">                <span class="comment">// 随机读取状态的某一个值</span></span><br><span class="line">                <span class="comment">// 1、加锁</span></span><br><span class="line">                <span class="comment">// 2、读取</span></span><br><span class="line">                <span class="comment">// 3、解锁</span></span><br><span class="line">                key := rand.Intn(<span class="number">5</span>)</span><br><span class="line">                mutex.Lock()</span><br><span class="line">                total += state[key]</span><br><span class="line">                mutex.Unlock()</span><br><span class="line">                <span class="comment">// 次数自增1</span></span><br><span class="line">                atomic.AddUint64(&amp;readOps, <span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">                <span class="comment">// 两次读取之间睡眠1毫秒</span></span><br><span class="line">                time.Sleep(time.Millisecond)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 同上，启动10个goroutines模拟写操作</span></span><br><span class="line">    <span class="comment">// 随机给状态赋值，写操作次数自增1，睡眠1毫秒</span></span><br><span class="line">    <span class="keyword">for</span> w := <span class="number">0</span>; w &lt; <span class="number">10</span>; w++ &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="keyword">for</span> &#123;</span><br><span class="line">                key := rand.Intn(<span class="number">5</span>)</span><br><span class="line">                val := rand.Intn(<span class="number">100</span>)</span><br><span class="line">                mutex.Lock()</span><br><span class="line">                state[key] = val</span><br><span class="line">                mutex.Unlock()</span><br><span class="line">                atomic.AddUint64(&amp;writeOps, <span class="number">1</span>)</span><br><span class="line">                time.Sleep(time.Millisecond)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 睡眠一秒等待读写操作</span></span><br><span class="line">    <span class="comment">// 打印出读写次数</span></span><br><span class="line">    time.Sleep(time.Second)</span><br><span class="line">    readOpsFinal := atomic.LoadUint64(&amp;readOps)</span><br><span class="line">    fmt.Println(<span class="string">&quot;readOps:&quot;</span>, readOpsFinal)</span><br><span class="line">    writeOpsFinal := atomic.LoadUint64(&amp;writeOps)</span><br><span class="line">    fmt.Println(<span class="string">&quot;writeOps:&quot;</span>, writeOpsFinal)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用锁取出最后的状态值</span></span><br><span class="line">    mutex.Lock()</span><br><span class="line">    fmt.Println(<span class="string">&quot;state:&quot;</span>, state)</span><br><span class="line">    mutex.Unlock()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run mutex.go</span><br><span class="line">readOps: 78300</span><br><span class="line">writeOps: 7830</span><br><span class="line">state: map[1:86 0:61 4:17 2:26 3:26]</span><br></pre></td></tr></table></figure>
+
+<p>执行程序，根据输出得知读写次数分别为78300和7830，最后的状态为map[1:86 0:61 4:17 2:26 3:26]</p>
+<p>原文链接：<a href="https://gobyexample.com/mutexes">Go by Example: Mutexes</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -1076,28 +1076,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Go by Example - Worker Pools</title>
-    <url>/2017/11/24/go-by-example-worker-pool/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Worker-Pools"><a href="#Go-by-Example-Worker-Pools" class="headerlink" title="Go by Example: Worker Pools"></a><center>Go by Example: Worker Pools</center></h2><p>这节探索如何使用<code>goroutine</code>和<code>channel</code>实现工作池的功能。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个是工作进程，用来执行并发的任务</span></span><br><span class="line"><span class="comment">// 每个进程都会从管道jobs接受工作，并且将相应发送至管道results</span></span><br><span class="line"><span class="comment">// 每个工作我们都会睡眠一秒用以模拟一项耗时的任务</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(id <span class="type">int</span>, jobs &lt;-<span class="keyword">chan</span> <span class="type">int</span>, results <span class="keyword">chan</span>&lt;- <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> j := <span class="keyword">range</span> jobs &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;worker&quot;</span>, id, <span class="string">&quot;started job&quot;</span>, j)</span><br><span class="line">        time.Sleep(time.Second)</span><br><span class="line">        fmt.Println(<span class="string">&quot;worker&quot;</span>, id, <span class="string">&quot;finished job&quot;</span>, j)</span><br><span class="line">        results &lt;- j * <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 初始化两个管道用以给工作进程分配任务及接收结果</span></span><br><span class="line">    jobs := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">100</span>)</span><br><span class="line">    results := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动三个工作进程</span></span><br><span class="line">    <span class="comment">// 此时它们是阻塞的，因为管道jobs是空的</span></span><br><span class="line">    <span class="keyword">for</span> w:= <span class="number">1</span>; w &lt;= <span class="number">3</span>; w++ &#123;</span><br><span class="line">        <span class="keyword">go</span> worker(w, jobs, results)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化5个任务</span></span><br><span class="line">    <span class="comment">// 关闭管道jobs，标识没有多余的任务了</span></span><br><span class="line">    <span class="keyword">for</span> j:= <span class="number">1</span>; j &lt;= <span class="number">5</span>; j++ &#123;</span><br><span class="line">        jobs &lt;- j</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">close</span>(jobs)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 收集所有任务的结果</span></span><br><span class="line">    <span class="keyword">for</span> a := <span class="number">1</span>; a &lt;= <span class="number">5</span>; a++ &#123;</span><br><span class="line">        &lt;-results</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run worker-pool.go</span><br><span class="line">worker 3 started job 1</span><br><span class="line">worker 2 started job 3</span><br><span class="line">worker 1 started job 2</span><br><span class="line">worker 3 finished job 1</span><br><span class="line">worker 3 started job 4</span><br><span class="line">worker 2 finished job 3</span><br><span class="line">worker 1 finished job 2</span><br><span class="line">worker 2 started job 5</span><br><span class="line">worker 2 finished job 5</span><br><span class="line">worker 3 finished job 4</span><br></pre></td></tr></table></figure>
-
-<p>通过输出可以看出5个任务被多个工作进程执行。程序只消耗了2秒多而不是5秒，是因为所有的任务被3个工作进程并发处理。</p>
-<p>原文链接：<a href="https://gobyexample.com/worker-pools">Go by Example: Worker Pools</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Go by Example - Variadic Functions</title>
     <url>/2017/07/18/go-by-example-variadic-function/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
@@ -1113,6 +1091,28 @@
 
 
 <p>原文链接：<a href="https://gobyexample.com/variadic-functions">Go by Example: Variadic Functions</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Go by Example - Worker Pools</title>
+    <url>/2017/11/24/go-by-example-worker-pool/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Worker-Pools"><a href="#Go-by-Example-Worker-Pools" class="headerlink" title="Go by Example: Worker Pools"></a><center>Go by Example: Worker Pools</center></h2><p>这节探索如何使用<code>goroutine</code>和<code>channel</code>实现工作池的功能。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个是工作进程，用来执行并发的任务</span></span><br><span class="line"><span class="comment">// 每个进程都会从管道jobs接受工作，并且将相应发送至管道results</span></span><br><span class="line"><span class="comment">// 每个工作我们都会睡眠一秒用以模拟一项耗时的任务</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(id <span class="type">int</span>, jobs &lt;-<span class="keyword">chan</span> <span class="type">int</span>, results <span class="keyword">chan</span>&lt;- <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> j := <span class="keyword">range</span> jobs &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;worker&quot;</span>, id, <span class="string">&quot;started job&quot;</span>, j)</span><br><span class="line">        time.Sleep(time.Second)</span><br><span class="line">        fmt.Println(<span class="string">&quot;worker&quot;</span>, id, <span class="string">&quot;finished job&quot;</span>, j)</span><br><span class="line">        results &lt;- j * <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 初始化两个管道用以给工作进程分配任务及接收结果</span></span><br><span class="line">    jobs := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">100</span>)</span><br><span class="line">    results := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动三个工作进程</span></span><br><span class="line">    <span class="comment">// 此时它们是阻塞的，因为管道jobs是空的</span></span><br><span class="line">    <span class="keyword">for</span> w:= <span class="number">1</span>; w &lt;= <span class="number">3</span>; w++ &#123;</span><br><span class="line">        <span class="keyword">go</span> worker(w, jobs, results)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化5个任务</span></span><br><span class="line">    <span class="comment">// 关闭管道jobs，标识没有多余的任务了</span></span><br><span class="line">    <span class="keyword">for</span> j:= <span class="number">1</span>; j &lt;= <span class="number">5</span>; j++ &#123;</span><br><span class="line">        jobs &lt;- j</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">close</span>(jobs)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 收集所有任务的结果</span></span><br><span class="line">    <span class="keyword">for</span> a := <span class="number">1</span>; a &lt;= <span class="number">5</span>; a++ &#123;</span><br><span class="line">        &lt;-results</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run worker-pool.go</span><br><span class="line">worker 3 started job 1</span><br><span class="line">worker 2 started job 3</span><br><span class="line">worker 1 started job 2</span><br><span class="line">worker 3 finished job 1</span><br><span class="line">worker 3 started job 4</span><br><span class="line">worker 2 finished job 3</span><br><span class="line">worker 1 finished job 2</span><br><span class="line">worker 2 started job 5</span><br><span class="line">worker 2 finished job 5</span><br><span class="line">worker 3 finished job 4</span><br></pre></td></tr></table></figure>
+
+<p>通过输出可以看出5个任务被多个工作进程执行。程序只消耗了2秒多而不是5秒，是因为所有的任务被3个工作进程并发处理。</p>
+<p>原文链接：<a href="https://gobyexample.com/worker-pools">Go by Example: Worker Pools</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -1152,23 +1152,6 @@
       <tags>
         <tag>连接池</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>我不会织毛衣</title>
-    <url>/2016/12/20/kidding/</url>
-    <content><![CDATA[<br/>
-<center>我深深的爱着你😚</center>
-<center>你却爱着一个傻逼😞</center>
-<center>傻逼也没关系😉</center> 
-<center>我就是 那个傻逼😎</center>
-<center>啦啦啦啦啦啦啦</center>
-<center>...</center>
-
-
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
   </entry>
   <entry>
     <title>Laravel跨域处理</title>
@@ -1260,6 +1243,23 @@
         <tag>跨域</tag>
         <tag>CORS</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>我不会织毛衣</title>
+    <url>/2016/12/20/kidding/</url>
+    <content><![CDATA[<br/>
+<center>我深深的爱着你😚</center>
+<center>你却爱着一个傻逼😞</center>
+<center>傻逼也没关系😉</center> 
+<center>我就是 那个傻逼😎</center>
+<center>啦啦啦啦啦啦啦</center>
+<center>...</center>
+
+
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
   </entry>
   <entry>
     <title>MySQL常用表结构调整语句</title>
@@ -1659,21 +1659,6 @@
       </tags>
   </entry>
   <entry>
-    <title>新的开始</title>
-    <url>/2016/12/18/new-begining/</url>
-    <content><![CDATA[<p>从厦门回广州也有一段时日，终于有心思又折腾起博客来。</p>
-<p>从最开始自己写的简陋的博客程序，接着转Wordpress，再之后就是托管在github gh-pages的静态页面，辗转多次积攒许久的博客已无影踪，就像丢失一件陪伴多年很少用的劳什子，依然会心有戚戚，毕竟是’我’的东西，就如已消逝的过去的我的遗物，没经过’他’的同意擅自丢弃，也不太好吧。</p>
-<p>所以就重新开始权当对过去的一点补偿，关于生活，关于工作，关于兴趣或多或少都要表达出来，要么是话语要么就是文字，希望自己能坚持下去，加油 😬</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-        <tag>广州</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数据库事务与并发控制</title>
     <url>/2017/06/21/mysql-transaction-and-lock/</url>
     <content><![CDATA[<h3 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h3><blockquote>
@@ -1829,6 +1814,21 @@
       </tags>
   </entry>
   <entry>
+    <title>新的开始</title>
+    <url>/2016/12/18/new-begining/</url>
+    <content><![CDATA[<p>从厦门回广州也有一段时日，终于有心思又折腾起博客来。</p>
+<p>从最开始自己写的简陋的博客程序，接着转Wordpress，再之后就是托管在github gh-pages的静态页面，辗转多次积攒许久的博客已无影踪，就像丢失一件陪伴多年很少用的劳什子，依然会心有戚戚，毕竟是’我’的东西，就如已消逝的过去的我的遗物，没经过’他’的同意擅自丢弃，也不太好吧。</p>
+<p>所以就重新开始权当对过去的一点补偿，关于生活，关于工作，关于兴趣或多或少都要表达出来，要么是话语要么就是文字，希望自己能坚持下去，加油 😬</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+        <tag>广州</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《人间失格》 - 第一手扎</title>
     <url>/2017/01/04/no-longer-human-1/</url>
     <content><![CDATA[<p>我这一生，尽是可耻之事</p>
@@ -1981,25 +1981,6 @@ Pragma: no-cache
       </tags>
   </entry>
   <entry>
-    <title>重置MySQL root密码</title>
-    <url>/2016/12/19/reset-mysql-root-password/</url>
-    <content><![CDATA[<p>OSX(brew)环境重置MySQL的root用户密码   </p>
-<h4 id="停止MySQL服务"><a href="#停止MySQL服务" class="headerlink" title="停止MySQL服务"></a>停止MySQL服务</h4><p><code>$ brew services stop mysql</code></p>
-<h4 id="启动MySQL安全模式"><a href="#启动MySQL安全模式" class="headerlink" title="启动MySQL安全模式"></a>启动MySQL安全模式</h4><p><code>$ mysqld_safe --skip-grant-tables</code>  </p>
-<p>‘–skip-grant-tables’ 参数会忽略权限验证及免密码登录</p>
-<h4 id="登入MySQL"><a href="#登入MySQL" class="headerlink" title="登入MySQL"></a>登入MySQL</h4><p><code>$ mysql</code></p>
-<h4 id="修改root用户密码"><a href="#修改root用户密码" class="headerlink" title="修改root用户密码"></a>修改root用户密码</h4><p><code>mysql&gt; use mysql;</code><br><code>mysql&gt; update user set authentication_string=PASSWORD(&#39;your-new-password&#39;) where user=&#39;root&#39;;</code></p>
-<h4 id="重启MySQL服务"><a href="#重启MySQL服务" class="headerlink" title="重启MySQL服务"></a>重启MySQL服务</h4><p><code>$ pkill mysqld</code><br><code>$ brew services start mysql</code></p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一次PHP图片上传验证不严谨引发的血案</title>
     <url>/2017/07/05/php-upload-image-security/</url>
     <content><![CDATA[<p>之前做过一个项目涉及到用户上传图片，当时项目比较小且一个人做就没用框架。上传这部分的验证综合服务器没有安装<code>exif</code>、<code>gd</code>扩展就简单根据 <strong><code>getimagesize</code></strong>(<a href="http://php.net/manual/zh/function.getimagesize.php">文档</a>) 函数是否返回false判断，后面出现了问题。</p>
@@ -2051,6 +2032,25 @@ Pragma: no-cache
       <tags>
         <tag>upload</tag>
         <tag>security</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>重置MySQL root密码</title>
+    <url>/2016/12/19/reset-mysql-root-password/</url>
+    <content><![CDATA[<p>OSX(brew)环境重置MySQL的root用户密码   </p>
+<h4 id="停止MySQL服务"><a href="#停止MySQL服务" class="headerlink" title="停止MySQL服务"></a>停止MySQL服务</h4><p><code>$ brew services stop mysql</code></p>
+<h4 id="启动MySQL安全模式"><a href="#启动MySQL安全模式" class="headerlink" title="启动MySQL安全模式"></a>启动MySQL安全模式</h4><p><code>$ mysqld_safe --skip-grant-tables</code>  </p>
+<p>‘–skip-grant-tables’ 参数会忽略权限验证及免密码登录</p>
+<h4 id="登入MySQL"><a href="#登入MySQL" class="headerlink" title="登入MySQL"></a>登入MySQL</h4><p><code>$ mysql</code></p>
+<h4 id="修改root用户密码"><a href="#修改root用户密码" class="headerlink" title="修改root用户密码"></a>修改root用户密码</h4><p><code>mysql&gt; use mysql;</code><br><code>mysql&gt; update user set authentication_string=PASSWORD(&#39;your-new-password&#39;) where user=&#39;root&#39;;</code></p>
+<h4 id="重启MySQL服务"><a href="#重启MySQL服务" class="headerlink" title="重启MySQL服务"></a>重启MySQL服务</h4><p><code>$ pkill mysqld</code><br><code>$ brew services start mysql</code></p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
