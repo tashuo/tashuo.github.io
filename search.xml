@@ -148,6 +148,50 @@
       </tags>
   </entry>
   <entry>
+    <title>Go by Example - Array</title>
+    <url>/2017/07/11/go-by-example-array/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Array"><a href="#Go-by-Example-Array" class="headerlink" title="Go by Example: Array"></a><center>Go by Example: Array</center></h2><p>golang中的数组是一个<strong>特定长度</strong>的元素有序集合。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 定义一个长度为5的元素类型为int的数组，元素的类型和数组的长度都是数组的属性。默认情况数组是零值，如int型的话就是数组长度个0。</span></span><br><span class="line">    <span class="keyword">var</span> a[<span class="number">5</span>] <span class="type">int</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;emp:&quot;</span>, a)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据索引设置／获取数组中某项的值</span></span><br><span class="line">    a[<span class="number">4</span>] = <span class="number">100</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;set:&quot;</span>, a)</span><br><span class="line">    fmt.Println(<span class="string">&quot;get:&quot;</span>, a[<span class="number">4</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取数组的长度</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;len:&quot;</span>, <span class="built_in">len</span>(a))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义并初始化一个数组</span></span><br><span class="line">    b := [<span class="number">5</span>]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;dcl:&quot;</span>, b)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数组类型是一维的，但是可以通过复合类型来构造多维的结构。</span></span><br><span class="line">    <span class="keyword">var</span> twoD [<span class="number">2</span>][<span class="number">3</span>]<span class="type">int</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">2</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">3</span>; j++ &#123;</span><br><span class="line">            twoD[i][j] = i + j</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;2d:&quot;</span>, twoD)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run arrays.go</span><br><span class="line">emp: [0 0 0 0 0]</span><br><span class="line"><span class="built_in">set</span>: [0 0 0 0 100]</span><br><span class="line">get: 100</span><br><span class="line">len: 5</span><br><span class="line">dcl: [1 2 3 4 5]</span><br><span class="line">2d:  [[0 1 2] [1 2 3]]</span><br></pre></td></tr></table></figure>
+
+
+<p>原文链接：<a href="https://gobyexample.com/arrays">Go by Example: Arrays</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Go by Example - Atomic Counters</title>
+    <url>/2017/11/28/go-by-example-atomic-counter/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Atomic-Counters"><a href="#Go-by-Example-Atomic-Counters" class="headerlink" title="Go by Example: Atomic Counters"></a><center>Go by Example: Atomic Counters</center></h2><p><code>golang</code>管理状态的主要机制是通过<code>channel</code>的通信，可以通过之前的<code>worker pools</code>的例子看到。还有一些其他的管理状态的方式，这次我们探究一下<code>sync/atomic</code>包中的可以被多个goroutine访问的<code>atomic counters</code>.</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;sync/atomic&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 使用无符号正整数用来表示计数</span></span><br><span class="line">    <span class="keyword">var</span> ops <span class="type">uint64</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 为了模拟并发更新，我们启动50个goroutine，每个goroutine对计数自增1，大概1毫秒的耗时</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">50</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="keyword">for</span> &#123;</span><br><span class="line">                <span class="comment">// 使用AddUint64进行原子性的递增操作，将变量的地址作为参数传给该函数</span></span><br><span class="line">                atomic.AddUint64(&amp;ops, <span class="number">1</span>)</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 睡眠1毫秒，模拟耗时</span></span><br><span class="line">                time.Sleep(time.Millisecond)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 睡眠1秒进行若干累加操作</span></span><br><span class="line">    time.Sleep(time.Second)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 由于计数器可能正在被其他goroutine进行累加操作，为了安全的获取计数值，我们通过LoadUint64函数获取计数器的一个拷贝，将计数器的内存地址给该函数</span></span><br><span class="line">    opsFinal := atomic.LoadUint64(&amp;ops)</span><br><span class="line">    fmt.Println(<span class="string">&quot;ops: &quot;</span>, opsFinal)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run atomic-counter.go</span><br><span class="line">ops:  41280</span><br></pre></td></tr></table></figure>
+
+<p>运行该程序，通过返回值可得知计数器累加了大概40000多次</p>
+<p>原文链接：<a href="https://gobyexample.com/atomic-counters">Go by Example: Atomic Counters</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
     <title>《约翰·克利斯朵夫》节选</title>
     <url>/2017/08/21/Jean-Christophe-Note/</url>
     <content><![CDATA[<blockquote>
@@ -277,50 +321,6 @@
       <tags>
         <tag>笔记</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Go by Example - Array</title>
-    <url>/2017/07/11/go-by-example-array/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Array"><a href="#Go-by-Example-Array" class="headerlink" title="Go by Example: Array"></a><center>Go by Example: Array</center></h2><p>golang中的数组是一个<strong>特定长度</strong>的元素有序集合。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 定义一个长度为5的元素类型为int的数组，元素的类型和数组的长度都是数组的属性。默认情况数组是零值，如int型的话就是数组长度个0。</span></span><br><span class="line">    <span class="keyword">var</span> a[<span class="number">5</span>] <span class="type">int</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;emp:&quot;</span>, a)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据索引设置／获取数组中某项的值</span></span><br><span class="line">    a[<span class="number">4</span>] = <span class="number">100</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;set:&quot;</span>, a)</span><br><span class="line">    fmt.Println(<span class="string">&quot;get:&quot;</span>, a[<span class="number">4</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取数组的长度</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;len:&quot;</span>, <span class="built_in">len</span>(a))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义并初始化一个数组</span></span><br><span class="line">    b := [<span class="number">5</span>]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;dcl:&quot;</span>, b)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数组类型是一维的，但是可以通过复合类型来构造多维的结构。</span></span><br><span class="line">    <span class="keyword">var</span> twoD [<span class="number">2</span>][<span class="number">3</span>]<span class="type">int</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">2</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">3</span>; j++ &#123;</span><br><span class="line">            twoD[i][j] = i + j</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;2d:&quot;</span>, twoD)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run arrays.go</span><br><span class="line">emp: [0 0 0 0 0]</span><br><span class="line"><span class="built_in">set</span>: [0 0 0 0 100]</span><br><span class="line">get: 100</span><br><span class="line">len: 5</span><br><span class="line">dcl: [1 2 3 4 5]</span><br><span class="line">2d:  [[0 1 2] [1 2 3]]</span><br></pre></td></tr></table></figure>
-
-
-<p>原文链接：<a href="https://gobyexample.com/arrays">Go by Example: Arrays</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Go by Example - Atomic Counters</title>
-    <url>/2017/11/28/go-by-example-atomic-counter/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Atomic-Counters"><a href="#Go-by-Example-Atomic-Counters" class="headerlink" title="Go by Example: Atomic Counters"></a><center>Go by Example: Atomic Counters</center></h2><p><code>golang</code>管理状态的主要机制是通过<code>channel</code>的通信，可以通过之前的<code>worker pools</code>的例子看到。还有一些其他的管理状态的方式，这次我们探究一下<code>sync/atomic</code>包中的可以被多个goroutine访问的<code>atomic counters</code>.</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;sync/atomic&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 使用无符号正整数用来表示计数</span></span><br><span class="line">    <span class="keyword">var</span> ops <span class="type">uint64</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 为了模拟并发更新，我们启动50个goroutine，每个goroutine对计数自增1，大概1毫秒的耗时</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">50</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="keyword">for</span> &#123;</span><br><span class="line">                <span class="comment">// 使用AddUint64进行原子性的递增操作，将变量的地址作为参数传给该函数</span></span><br><span class="line">                atomic.AddUint64(&amp;ops, <span class="number">1</span>)</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 睡眠1毫秒，模拟耗时</span></span><br><span class="line">                time.Sleep(time.Millisecond)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 睡眠1秒进行若干累加操作</span></span><br><span class="line">    time.Sleep(time.Second)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 由于计数器可能正在被其他goroutine进行累加操作，为了安全的获取计数值，我们通过LoadUint64函数获取计数器的一个拷贝，将计数器的内存地址给该函数</span></span><br><span class="line">    opsFinal := atomic.LoadUint64(&amp;ops)</span><br><span class="line">    fmt.Println(<span class="string">&quot;ops: &quot;</span>, opsFinal)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run atomic-counter.go</span><br><span class="line">ops:  41280</span><br></pre></td></tr></table></figure>
-
-<p>运行该程序，通过返回值可得知计数器累加了大概40000多次</p>
-<p>原文链接：<a href="https://gobyexample.com/atomic-counters">Go by Example: Atomic Counters</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
   </entry>
   <entry>
     <title>Go by Example - Channel Buffering</title>
@@ -518,6 +518,27 @@
       </categories>
   </entry>
   <entry>
+    <title>Go by Example - Functions</title>
+    <url>/2017/07/13/go-by-example-function/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Functions"><a href="#Go-by-Example-Functions" class="headerlink" title="Go by Example: Functions"></a><center>Go by Example: Functions</center></h2><p>函数是golang的核心。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接收两个int类型的参数，并返回两者之和。</span></span><br><span class="line"><span class="comment">// golang的函数需要显式的return。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plus</span><span class="params">(a <span class="type">int</span>, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多个同样类型的参数简便的定义。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plusPlus</span><span class="params">(a, b, c <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b + c</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    res := plus(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    fmt.Println(<span class="string">&quot;1+2=&quot;</span>, res)</span><br><span class="line"></span><br><span class="line">    res = plusPlus(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">    fmt.Println(<span class="string">&quot;1+2+3=&quot;</span>, res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run functions.go </span><br><span class="line">1+2 = 3</span><br><span class="line">1+2+3 = 6</span><br></pre></td></tr></table></figure>
+
+<p>原文链接：<a href="https://gobyexample.com/functions">Go by Example: Functions</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Go by Example - Goroutines</title>
     <url>/2017/08/03/go-by-example-goroutine/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
@@ -533,27 +554,6 @@
 
 
 <p>原文链接：<a href="https://gobyexample.com/goroutines">Go by Example: Goroutines</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Go by Example - Functions</title>
-    <url>/2017/07/13/go-by-example-function/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Functions"><a href="#Go-by-Example-Functions" class="headerlink" title="Go by Example: Functions"></a><center>Go by Example: Functions</center></h2><p>函数是golang的核心。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接收两个int类型的参数，并返回两者之和。</span></span><br><span class="line"><span class="comment">// golang的函数需要显式的return。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plus</span><span class="params">(a <span class="type">int</span>, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多个同样类型的参数简便的定义。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plusPlus</span><span class="params">(a, b, c <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b + c</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    res := plus(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    fmt.Println(<span class="string">&quot;1+2=&quot;</span>, res)</span><br><span class="line"></span><br><span class="line">    res = plusPlus(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">    fmt.Println(<span class="string">&quot;1+2+3=&quot;</span>, res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run functions.go </span><br><span class="line">1+2 = 3</span><br><span class="line">1+2+3 = 6</span><br></pre></td></tr></table></figure>
-
-<p>原文链接：<a href="https://gobyexample.com/functions">Go by Example: Functions</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -668,28 +668,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Go by Example - Multiple Return Values</title>
-    <url>/2017/07/18/go-by-example-mutiple-return-values/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Multiple-Return-Values"><a href="#Go-by-Example-Multiple-Return-Values" class="headerlink" title="Go by Example: Multiple Return Values"></a><center>Go by Example: Multiple Return Values</center></h2><p>golang原生支持多个返回值，这在golang的编程习惯中很常见，如函数同时返回返回值和error。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// (int, int)标识函数会返回两个int值</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">vals</span><span class="params">()</span></span> (<span class="type">int</span>, <span class="type">int</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">3</span>, <span class="number">7</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 使用两个变量接收两个返回值</span></span><br><span class="line">    a, b := vals()</span><br><span class="line">    fmt.Println(a)</span><br><span class="line">    fmt.Println(b)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用‘_’可以忽略掉该返回值</span></span><br><span class="line">    _, c := vals()</span><br><span class="line">    fmt.Println(c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run multiple-return-values.go</span><br><span class="line">3</span><br><span class="line">7</span><br><span class="line">7</span><br></pre></td></tr></table></figure>
-
-
-<p>原文链接：<a href="https://gobyexample.com/multiple-return-values">Go by Example: Multiple Return Values</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Go by Example - Mutexes</title>
     <url>/2017/12/13/go-by-example-mutexes/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
@@ -705,6 +683,28 @@
 
 <p>执行程序，根据输出得知读写次数分别为78300和7830，最后的状态为map[1:86 0:61 4:17 2:26 3:26]</p>
 <p>原文链接：<a href="https://gobyexample.com/mutexes">Go by Example: Mutexes</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Go by Example - Multiple Return Values</title>
+    <url>/2017/07/18/go-by-example-mutiple-return-values/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Multiple-Return-Values"><a href="#Go-by-Example-Multiple-Return-Values" class="headerlink" title="Go by Example: Multiple Return Values"></a><center>Go by Example: Multiple Return Values</center></h2><p>golang原生支持多个返回值，这在golang的编程习惯中很常见，如函数同时返回返回值和error。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// (int, int)标识函数会返回两个int值</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">vals</span><span class="params">()</span></span> (<span class="type">int</span>, <span class="type">int</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">3</span>, <span class="number">7</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 使用两个变量接收两个返回值</span></span><br><span class="line">    a, b := vals()</span><br><span class="line">    fmt.Println(a)</span><br><span class="line">    fmt.Println(b)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用‘_’可以忽略掉该返回值</span></span><br><span class="line">    _, c := vals()</span><br><span class="line">    fmt.Println(c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run multiple-return-values.go</span><br><span class="line">3</span><br><span class="line">7</span><br><span class="line">7</span><br></pre></td></tr></table></figure>
+
+
+<p>原文链接：<a href="https://gobyexample.com/multiple-return-values">Go by Example: Multiple Return Values</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -797,6 +797,25 @@
       </categories>
   </entry>
   <entry>
+    <title>Go by Example - Recursion</title>
+    <url>/2017/07/18/go-by-example-recursion/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Recursion"><a href="#Go-by-Example-Recursion" class="headerlink" title="Go by Example: Recursion"></a><center>Go by Example: Recursion</center></h2><p>golang也支持递归函数。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个函数fact递归调用自己直到参数变为0。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fact</span><span class="params">(n <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> n * fact(n<span class="number">-1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(fact(<span class="number">7</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原文链接：<a href="https://gobyexample.com/recursion">Go by Example: Recursion</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Go by Example - Rate Limiting</title>
     <url>/2017/11/24/go-by-example-rate-limiting/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
@@ -812,25 +831,6 @@
 
 <p>前5个请求跟预期一样是每200秒处理一个，后面5个请求中的前3个并没有被200毫秒的规则限制到。</p>
 <p>原文链接：<a href="https://gobyexample.com/rate-limiting">Go by Example: Rate Limiting</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Go by Example - Recursion</title>
-    <url>/2017/07/18/go-by-example-recursion/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Recursion"><a href="#Go-by-Example-Recursion" class="headerlink" title="Go by Example: Recursion"></a><center>Go by Example: Recursion</center></h2><p>golang也支持递归函数。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个函数fact递归调用自己直到参数变为0。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fact</span><span class="params">(n <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> n * fact(n<span class="number">-1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(fact(<span class="number">7</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>原文链接：<a href="https://gobyexample.com/recursion">Go by Example: Recursion</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -908,22 +908,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Go by Example - Stateful Goroutines</title>
-    <url>/2018/02/06/go-by-example-stateful-goroutines/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Stateful-Goroutines"><a href="#Go-by-Example-Stateful-Goroutines" class="headerlink" title="Go by Example: Stateful Goroutines"></a><center>Go by Example: Stateful Goroutines</center></h2><p>未完待续…</p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Go by Example - Structs</title>
     <url>/2017/07/28/go-by-example-struct/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
@@ -938,6 +922,22 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run structs.go</span><br><span class="line">&#123;Bob 20&#125;</span><br><span class="line">&#123;Alice 30&#125;</span><br><span class="line">&#123;Fred 0&#125;</span><br><span class="line">&amp;&#123;Ann 40&#125;</span><br><span class="line">Sean</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td></tr></table></figure>
 
 <p>原文链接：<a href="https://gobyexample.com/structs">Go by Example: Structs</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Go by Example - Stateful Goroutines</title>
+    <url>/2018/02/06/go-by-example-stateful-goroutines/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Stateful-Goroutines"><a href="#Go-by-Example-Stateful-Goroutines" class="headerlink" title="Go by Example: Stateful Goroutines"></a><center>Go by Example: Stateful Goroutines</center></h2><p>未完待续…</p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -981,28 +981,6 @@
 
 <p>在执行1600毫秒被停止时Ticker 500毫秒的间隔应该已经重复执行了三次</p>
 <p>原文链接：<a href="https://gobyexample.com/tickers">Go by Example: Tickers</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Go by Example - Timeouts</title>
-    <url>/2017/08/24/go-by-example-timeout/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Timeouts"><a href="#Go-by-Example-Timeouts" class="headerlink" title="Go by Example: Timeouts"></a><center>Go by Example: Timeouts</center></h2><p>超时对于需要联接外部资源或需要限定执行时间的程序非常重要，在golang中因为存在<code>channel</code>和<code>select</code>使得超时实现起来非常简单。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 通过管道c1模拟一个2s后才有返回值的外部请求</span></span><br><span class="line">    c1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        time.Sleep(time.Second * <span class="number">2</span>)</span><br><span class="line">        c1 &lt;- <span class="string">&quot;result 1&quot;</span></span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用select执行一条超时操作</span></span><br><span class="line">    <span class="comment">// res等待管道c1的值，&lt;-time.After(time.Second * 1)等待一个一秒后发送的值。</span></span><br><span class="line">    <span class="comment">// 由于select会执行第一个就绪的条件，所以如果前者执行时间超过后者代码中规定的一秒便会进入后者超时的情况</span></span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> res := &lt;-c1:</span><br><span class="line">            fmt.Println(res)</span><br><span class="line">        <span class="keyword">case</span> &lt;-time.After(time.Second * <span class="number">1</span>):</span><br><span class="line">            fmt.Println(<span class="string">&quot;timeout1&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 由于res会在两秒后就绪，小于超时的三秒限制，所以不会超时</span></span><br><span class="line">    c2 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        time.Sleep(time.Second * <span class="number">2</span>)</span><br><span class="line">        c2 &lt;- <span class="string">&quot;result 2&quot;</span></span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> res := &lt;-c2:</span><br><span class="line">            fmt.Println(res)</span><br><span class="line">        <span class="keyword">case</span> &lt;-time.After(time.Second * <span class="number">3</span>):</span><br><span class="line">            fmt.Println(<span class="string">&quot;timeout 2&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run timeout.go</span><br><span class="line">timeout1</span><br><span class="line">result 2</span><br></pre></td></tr></table></figure>
-
-<p>使用select结构的超时模式需要借助管道进行通信，这通常是个好主意因为其他一些golang重要的功能也是基于管道和select。</p>
-<p>原文链接：<a href="https://gobyexample.com/timeouts">Go by Example: Timeouts</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -1054,21 +1032,21 @@
       </categories>
   </entry>
   <entry>
-    <title>Go by Example - Variables</title>
-    <url>/2017/07/10/go-by-example-variables/</url>
+    <title>Go by Example - Timeouts</title>
+    <url>/2017/08/24/go-by-example-timeout/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
 <blockquote>
 <p>Go by Example</p>
 <p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
 <p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
 </blockquote>
-<h2 id="Go-by-Example-Variables"><a href="#Go-by-Example-Variables" class="headerlink" title="Go by Example: Variables"></a><center>Go by Example: Variables</center></h2><p>golang中的变量被显式声明，编译时会做类型检查。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> fmt</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 使用var关键字声明一个变量并赋值，变量名在前，类型在后</span></span><br><span class="line">    <span class="keyword">var</span> a <span class="type">string</span> = <span class="string">&quot;initial&quot;</span></span><br><span class="line">    fmt.Println(a)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可以一次性初始化多个变量并赋值</span></span><br><span class="line">    <span class="keyword">var</span> b,c <span class="type">int</span> = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">    fmt.Println(b, c)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// golang会自动推断出未显式声明类型的变量</span></span><br><span class="line">    <span class="keyword">var</span> d = <span class="literal">true</span></span><br><span class="line">    fmt.Println(d)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化未赋值的变量，golang默认会赋值其相应类型的零值</span></span><br><span class="line">    <span class="keyword">var</span> e <span class="type">int</span></span><br><span class="line">    fmt.Println(e)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 也可以使用&#x27;:=&#x27;操作符</span></span><br><span class="line">    f := <span class="string">&quot;short&quot;</span></span><br><span class="line">    fmt.Println(f)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Go-by-Example-Timeouts"><a href="#Go-by-Example-Timeouts" class="headerlink" title="Go by Example: Timeouts"></a><center>Go by Example: Timeouts</center></h2><p>超时对于需要联接外部资源或需要限定执行时间的程序非常重要，在golang中因为存在<code>channel</code>和<code>select</code>使得超时实现起来非常简单。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 通过管道c1模拟一个2s后才有返回值的外部请求</span></span><br><span class="line">    c1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        time.Sleep(time.Second * <span class="number">2</span>)</span><br><span class="line">        c1 &lt;- <span class="string">&quot;result 1&quot;</span></span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用select执行一条超时操作</span></span><br><span class="line">    <span class="comment">// res等待管道c1的值，&lt;-time.After(time.Second * 1)等待一个一秒后发送的值。</span></span><br><span class="line">    <span class="comment">// 由于select会执行第一个就绪的条件，所以如果前者执行时间超过后者代码中规定的一秒便会进入后者超时的情况</span></span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> res := &lt;-c1:</span><br><span class="line">            fmt.Println(res)</span><br><span class="line">        <span class="keyword">case</span> &lt;-time.After(time.Second * <span class="number">1</span>):</span><br><span class="line">            fmt.Println(<span class="string">&quot;timeout1&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 由于res会在两秒后就绪，小于超时的三秒限制，所以不会超时</span></span><br><span class="line">    c2 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        time.Sleep(time.Second * <span class="number">2</span>)</span><br><span class="line">        c2 &lt;- <span class="string">&quot;result 2&quot;</span></span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> res := &lt;-c2:</span><br><span class="line">            fmt.Println(res)</span><br><span class="line">        <span class="keyword">case</span> &lt;-time.After(time.Second * <span class="number">3</span>):</span><br><span class="line">            fmt.Println(<span class="string">&quot;timeout 2&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run variables.go</span><br><span class="line">initial</span><br><span class="line">1 2</span><br><span class="line"><span class="literal">true</span></span><br><span class="line">0</span><br><span class="line">short</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run timeout.go</span><br><span class="line">timeout1</span><br><span class="line">result 2</span><br></pre></td></tr></table></figure>
 
-
-<p>原文链接：<a href="https://gobyexample.com/variables">Go by Example: Variables</a></p>
+<p>使用select结构的超时模式需要借助管道进行通信，这通常是个好主意因为其他一些golang重要的功能也是基于管道和select。</p>
+<p>原文链接：<a href="https://gobyexample.com/timeouts">Go by Example: Timeouts</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -1098,21 +1076,21 @@
       </categories>
   </entry>
   <entry>
-    <title>Go by Example - Worker Pools</title>
-    <url>/2017/11/24/go-by-example-worker-pool/</url>
+    <title>Go by Example - Variables</title>
+    <url>/2017/07/10/go-by-example-variables/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
 <blockquote>
 <p>Go by Example</p>
 <p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
 <p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
 </blockquote>
-<h2 id="Go-by-Example-Worker-Pools"><a href="#Go-by-Example-Worker-Pools" class="headerlink" title="Go by Example: Worker Pools"></a><center>Go by Example: Worker Pools</center></h2><p>这节探索如何使用<code>goroutine</code>和<code>channel</code>实现工作池的功能。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个是工作进程，用来执行并发的任务</span></span><br><span class="line"><span class="comment">// 每个进程都会从管道jobs接受工作，并且将相应发送至管道results</span></span><br><span class="line"><span class="comment">// 每个工作我们都会睡眠一秒用以模拟一项耗时的任务</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(id <span class="type">int</span>, jobs &lt;-<span class="keyword">chan</span> <span class="type">int</span>, results <span class="keyword">chan</span>&lt;- <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> j := <span class="keyword">range</span> jobs &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;worker&quot;</span>, id, <span class="string">&quot;started job&quot;</span>, j)</span><br><span class="line">        time.Sleep(time.Second)</span><br><span class="line">        fmt.Println(<span class="string">&quot;worker&quot;</span>, id, <span class="string">&quot;finished job&quot;</span>, j)</span><br><span class="line">        results &lt;- j * <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 初始化两个管道用以给工作进程分配任务及接收结果</span></span><br><span class="line">    jobs := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">100</span>)</span><br><span class="line">    results := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动三个工作进程</span></span><br><span class="line">    <span class="comment">// 此时它们是阻塞的，因为管道jobs是空的</span></span><br><span class="line">    <span class="keyword">for</span> w:= <span class="number">1</span>; w &lt;= <span class="number">3</span>; w++ &#123;</span><br><span class="line">        <span class="keyword">go</span> worker(w, jobs, results)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化5个任务</span></span><br><span class="line">    <span class="comment">// 关闭管道jobs，标识没有多余的任务了</span></span><br><span class="line">    <span class="keyword">for</span> j:= <span class="number">1</span>; j &lt;= <span class="number">5</span>; j++ &#123;</span><br><span class="line">        jobs &lt;- j</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">close</span>(jobs)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 收集所有任务的结果</span></span><br><span class="line">    <span class="keyword">for</span> a := <span class="number">1</span>; a &lt;= <span class="number">5</span>; a++ &#123;</span><br><span class="line">        &lt;-results</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Go-by-Example-Variables"><a href="#Go-by-Example-Variables" class="headerlink" title="Go by Example: Variables"></a><center>Go by Example: Variables</center></h2><p>golang中的变量被显式声明，编译时会做类型检查。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> fmt</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 使用var关键字声明一个变量并赋值，变量名在前，类型在后</span></span><br><span class="line">    <span class="keyword">var</span> a <span class="type">string</span> = <span class="string">&quot;initial&quot;</span></span><br><span class="line">    fmt.Println(a)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可以一次性初始化多个变量并赋值</span></span><br><span class="line">    <span class="keyword">var</span> b,c <span class="type">int</span> = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">    fmt.Println(b, c)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// golang会自动推断出未显式声明类型的变量</span></span><br><span class="line">    <span class="keyword">var</span> d = <span class="literal">true</span></span><br><span class="line">    fmt.Println(d)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化未赋值的变量，golang默认会赋值其相应类型的零值</span></span><br><span class="line">    <span class="keyword">var</span> e <span class="type">int</span></span><br><span class="line">    fmt.Println(e)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 也可以使用&#x27;:=&#x27;操作符</span></span><br><span class="line">    f := <span class="string">&quot;short&quot;</span></span><br><span class="line">    fmt.Println(f)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run worker-pool.go</span><br><span class="line">worker 3 started job 1</span><br><span class="line">worker 2 started job 3</span><br><span class="line">worker 1 started job 2</span><br><span class="line">worker 3 finished job 1</span><br><span class="line">worker 3 started job 4</span><br><span class="line">worker 2 finished job 3</span><br><span class="line">worker 1 finished job 2</span><br><span class="line">worker 2 started job 5</span><br><span class="line">worker 2 finished job 5</span><br><span class="line">worker 3 finished job 4</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run variables.go</span><br><span class="line">initial</span><br><span class="line">1 2</span><br><span class="line"><span class="literal">true</span></span><br><span class="line">0</span><br><span class="line">short</span><br></pre></td></tr></table></figure>
 
-<p>通过输出可以看出5个任务被多个工作进程执行。程序只消耗了2秒多而不是5秒，是因为所有的任务被3个工作进程并发处理。</p>
-<p>原文链接：<a href="https://gobyexample.com/worker-pools">Go by Example: Worker Pools</a></p>
+
+<p>原文链接：<a href="https://gobyexample.com/variables">Go by Example: Variables</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -1152,6 +1130,28 @@
       <tags>
         <tag>连接池</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Go by Example - Worker Pools</title>
+    <url>/2017/11/24/go-by-example-worker-pool/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Worker-Pools"><a href="#Go-by-Example-Worker-Pools" class="headerlink" title="Go by Example: Worker Pools"></a><center>Go by Example: Worker Pools</center></h2><p>这节探索如何使用<code>goroutine</code>和<code>channel</code>实现工作池的功能。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个是工作进程，用来执行并发的任务</span></span><br><span class="line"><span class="comment">// 每个进程都会从管道jobs接受工作，并且将相应发送至管道results</span></span><br><span class="line"><span class="comment">// 每个工作我们都会睡眠一秒用以模拟一项耗时的任务</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(id <span class="type">int</span>, jobs &lt;-<span class="keyword">chan</span> <span class="type">int</span>, results <span class="keyword">chan</span>&lt;- <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> j := <span class="keyword">range</span> jobs &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;worker&quot;</span>, id, <span class="string">&quot;started job&quot;</span>, j)</span><br><span class="line">        time.Sleep(time.Second)</span><br><span class="line">        fmt.Println(<span class="string">&quot;worker&quot;</span>, id, <span class="string">&quot;finished job&quot;</span>, j)</span><br><span class="line">        results &lt;- j * <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 初始化两个管道用以给工作进程分配任务及接收结果</span></span><br><span class="line">    jobs := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">100</span>)</span><br><span class="line">    results := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动三个工作进程</span></span><br><span class="line">    <span class="comment">// 此时它们是阻塞的，因为管道jobs是空的</span></span><br><span class="line">    <span class="keyword">for</span> w:= <span class="number">1</span>; w &lt;= <span class="number">3</span>; w++ &#123;</span><br><span class="line">        <span class="keyword">go</span> worker(w, jobs, results)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化5个任务</span></span><br><span class="line">    <span class="comment">// 关闭管道jobs，标识没有多余的任务了</span></span><br><span class="line">    <span class="keyword">for</span> j:= <span class="number">1</span>; j &lt;= <span class="number">5</span>; j++ &#123;</span><br><span class="line">        jobs &lt;- j</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">close</span>(jobs)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 收集所有任务的结果</span></span><br><span class="line">    <span class="keyword">for</span> a := <span class="number">1</span>; a &lt;= <span class="number">5</span>; a++ &#123;</span><br><span class="line">        &lt;-results</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run worker-pool.go</span><br><span class="line">worker 3 started job 1</span><br><span class="line">worker 2 started job 3</span><br><span class="line">worker 1 started job 2</span><br><span class="line">worker 3 finished job 1</span><br><span class="line">worker 3 started job 4</span><br><span class="line">worker 2 finished job 3</span><br><span class="line">worker 1 finished job 2</span><br><span class="line">worker 2 started job 5</span><br><span class="line">worker 2 finished job 5</span><br><span class="line">worker 3 finished job 4</span><br></pre></td></tr></table></figure>
+
+<p>通过输出可以看出5个任务被多个工作进程执行。程序只消耗了2秒多而不是5秒，是因为所有的任务被3个工作进程并发处理。</p>
+<p>原文链接：<a href="https://gobyexample.com/worker-pools">Go by Example: Worker Pools</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
   </entry>
   <entry>
     <title>Laravel跨域处理</title>
@@ -1278,6 +1278,34 @@
       <categories>
         <category>笔记</category>
         <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL连接数过多的处理</title>
+    <url>/2016/12/19/mysql-too-many-connections/</url>
+    <content><![CDATA[<p>场景：MySQL出现“too many connections”错误  </p>
+<p>MySQL默认会额外保留一条供root用户建立的连接，以确保root用户可随时登录查看并检测服务器状态，当出现上述场景时，我们就可通过<code>show [full] processlist</code>命令查看当前所有进程状态，通过kill掉某些慢sql及分析产生原因来优化sql代码. 操作如下.</p>
+<h3 id="查看mysql所有执行状态"><a href="#查看mysql所有执行状态" class="headerlink" title="查看mysql所有执行状态"></a>查看mysql所有执行状态</h3><p><code>mysql&gt; show full processlist</code>  </p>
+<p>如果MySQL登录用户有<a href="http://dev.mysql.com/doc/refman/5.7/en/privileges-provided.html#priv_process">PROCESS权限</a>，列表会输出所有进程信息，否则只有当前登录用户所属的进程，若不加full关键字，Info字段信息会只截取前100个字符显示.  </p>
+<p>列表字段说明：</p>
+<h4 id="id"><a href="#id" class="headerlink" title="id"></a>id</h4><p>MySQL连接的id标示</p>
+<h4 id="User"><a href="#User" class="headerlink" title="User"></a>User</h4><p>建立此次连接的MySQL user</p>
+<h4 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h4><p>此次连接建立的客户端，如果是系统进程此处则为空。MySQL通过此次TCP/IP连接中的<code>host_name:client_port</code>信息获取host name</p>
+<h4 id="db"><a href="#db" class="headerlink" title="db"></a>db</h4><p>操作的数据库，可能为null</p>
+<h4 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h4><p>当前sql语句的类型，一般为休眠（sleep），查询（query），连接（connect）</p>
+<h4 id="Time"><a href="#Time" class="headerlink" title="Time"></a>Time</h4><p>当前进程在当前状态停留的时间，单位秒</p>
+<h4 id="State"><a href="#State" class="headerlink" title="State"></a>State</h4><p>当前进程的<a href="http://dev.mysql.com/doc/refman/5.7/en/general-thread-states.html">执行状态</a>，大部分的状态切换很快，<strong>如果发现某个进程在某个状态阻塞很久说明sql执行可能有问题</strong></p>
+<h4 id="Info"><a href="#Info" class="headerlink" title="Info"></a>Info</h4><p>进程详情信息，如select查询进程此处会是select语句</p>
+<span id="more"></span>
+<h3 id="杀掉某个进程"><a href="#杀掉某个进程" class="headerlink" title="杀掉某个进程"></a>杀掉某个进程</h3><p><code>mysql&gt; kill &#123;id&#125;</code>  </p>
+<p>通过上面的state/Command/Time字段可大致判断出有问题的sql语句，可通过kill命令杀掉该进程，MySQL命令只能一个个kill进程，批量kill需结合循环进行，示例如下:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment"># kill掉阻塞到当前状态已超过200秒的进程</span></span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">mysqli_query</span>(<span class="string">&quot;SHOW FULL PROCESSLIST&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span> (<span class="variable">$row</span> = <span class="title function_ invoke__">mysqli_fetch_array</span>(<span class="variable">$result</span>)) &#123;</span><br><span class="line">      <span class="variable">$process_id</span> = <span class="variable">$row</span>[<span class="string">&quot;Id&quot;</span>];</span><br><span class="line">      <span class="keyword">if</span> (<span class="variable">$row</span>[<span class="string">&quot;Time&quot;</span>] &gt; <span class="number">200</span> ) &#123;</span><br><span class="line">        <span class="variable">$sql</span> = <span class="string">&quot;KILL <span class="subst">$process_id</span>&quot;</span>;</span><br><span class="line">        <span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$sql</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>笔记</category>
       </categories>
       <tags>
         <tag>mysql</tag>
@@ -1631,31 +1659,18 @@
       </tags>
   </entry>
   <entry>
-    <title>MySQL连接数过多的处理</title>
-    <url>/2016/12/19/mysql-too-many-connections/</url>
-    <content><![CDATA[<p>场景：MySQL出现“too many connections”错误  </p>
-<p>MySQL默认会额外保留一条供root用户建立的连接，以确保root用户可随时登录查看并检测服务器状态，当出现上述场景时，我们就可通过<code>show [full] processlist</code>命令查看当前所有进程状态，通过kill掉某些慢sql及分析产生原因来优化sql代码. 操作如下.</p>
-<h3 id="查看mysql所有执行状态"><a href="#查看mysql所有执行状态" class="headerlink" title="查看mysql所有执行状态"></a>查看mysql所有执行状态</h3><p><code>mysql&gt; show full processlist</code>  </p>
-<p>如果MySQL登录用户有<a href="http://dev.mysql.com/doc/refman/5.7/en/privileges-provided.html#priv_process">PROCESS权限</a>，列表会输出所有进程信息，否则只有当前登录用户所属的进程，若不加full关键字，Info字段信息会只截取前100个字符显示.  </p>
-<p>列表字段说明：</p>
-<h4 id="id"><a href="#id" class="headerlink" title="id"></a>id</h4><p>MySQL连接的id标示</p>
-<h4 id="User"><a href="#User" class="headerlink" title="User"></a>User</h4><p>建立此次连接的MySQL user</p>
-<h4 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h4><p>此次连接建立的客户端，如果是系统进程此处则为空。MySQL通过此次TCP/IP连接中的<code>host_name:client_port</code>信息获取host name</p>
-<h4 id="db"><a href="#db" class="headerlink" title="db"></a>db</h4><p>操作的数据库，可能为null</p>
-<h4 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h4><p>当前sql语句的类型，一般为休眠（sleep），查询（query），连接（connect）</p>
-<h4 id="Time"><a href="#Time" class="headerlink" title="Time"></a>Time</h4><p>当前进程在当前状态停留的时间，单位秒</p>
-<h4 id="State"><a href="#State" class="headerlink" title="State"></a>State</h4><p>当前进程的<a href="http://dev.mysql.com/doc/refman/5.7/en/general-thread-states.html">执行状态</a>，大部分的状态切换很快，<strong>如果发现某个进程在某个状态阻塞很久说明sql执行可能有问题</strong></p>
-<h4 id="Info"><a href="#Info" class="headerlink" title="Info"></a>Info</h4><p>进程详情信息，如select查询进程此处会是select语句</p>
-<span id="more"></span>
-<h3 id="杀掉某个进程"><a href="#杀掉某个进程" class="headerlink" title="杀掉某个进程"></a>杀掉某个进程</h3><p><code>mysql&gt; kill &#123;id&#125;</code>  </p>
-<p>通过上面的state/Command/Time字段可大致判断出有问题的sql语句，可通过kill命令杀掉该进程，MySQL命令只能一个个kill进程，批量kill需结合循环进行，示例如下:</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment"># kill掉阻塞到当前状态已超过200秒的进程</span></span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">mysqli_query</span>(<span class="string">&quot;SHOW FULL PROCESSLIST&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span> (<span class="variable">$row</span> = <span class="title function_ invoke__">mysqli_fetch_array</span>(<span class="variable">$result</span>)) &#123;</span><br><span class="line">      <span class="variable">$process_id</span> = <span class="variable">$row</span>[<span class="string">&quot;Id&quot;</span>];</span><br><span class="line">      <span class="keyword">if</span> (<span class="variable">$row</span>[<span class="string">&quot;Time&quot;</span>] &gt; <span class="number">200</span> ) &#123;</span><br><span class="line">        <span class="variable">$sql</span> = <span class="string">&quot;KILL <span class="subst">$process_id</span>&quot;</span>;</span><br><span class="line">        <span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$sql</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>新的开始</title>
+    <url>/2016/12/18/new-begining/</url>
+    <content><![CDATA[<p>从厦门回广州也有一段时日，终于有心思又折腾起博客来。</p>
+<p>从最开始自己写的简陋的博客程序，接着转Wordpress，再之后就是托管在github gh-pages的静态页面，辗转多次积攒许久的博客已无影踪，就像丢失一件陪伴多年很少用的劳什子，依然会心有戚戚，毕竟是’我’的东西，就如已消逝的过去的我的遗物，没经过’他’的同意擅自丢弃，也不太好吧。</p>
+<p>所以就重新开始权当对过去的一点补偿，关于生活，关于工作，关于兴趣或多或少都要表达出来，要么是话语要么就是文字，希望自己能坚持下去，加油 😬</p>
 ]]></content>
       <categories>
-        <category>笔记</category>
+        <category>生活</category>
       </categories>
       <tags>
-        <tag>mysql</tag>
+        <tag>生活</tag>
+        <tag>广州</tag>
       </tags>
   </entry>
   <entry>
@@ -1811,21 +1826,6 @@
       <tags>
         <tag>mysql</tag>
         <tag>acid</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>新的开始</title>
-    <url>/2016/12/18/new-begining/</url>
-    <content><![CDATA[<p>从厦门回广州也有一段时日，终于有心思又折腾起博客来。</p>
-<p>从最开始自己写的简陋的博客程序，接着转Wordpress，再之后就是托管在github gh-pages的静态页面，辗转多次积攒许久的博客已无影踪，就像丢失一件陪伴多年很少用的劳什子，依然会心有戚戚，毕竟是’我’的东西，就如已消逝的过去的我的遗物，没经过’他’的同意擅自丢弃，也不太好吧。</p>
-<p>所以就重新开始权当对过去的一点补偿，关于生活，关于工作，关于兴趣或多或少都要表达出来，要么是话语要么就是文字，希望自己能坚持下去，加油 😬</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-        <tag>广州</tag>
       </tags>
   </entry>
   <entry>
@@ -2079,6 +2079,32 @@ Pragma: no-cache
       </tags>
   </entry>
   <entry>
+    <title>许知远：庸众的胜利</title>
+    <url>/2017/01/17/the-victory-of-mediocre-persons/</url>
+    <content><![CDATA[<blockquote>
+<p>文: 许知远<br>来源: 凤凰网<br>链接: <a href="http://book.ifeng.com/culture/1/detail_2010_05/11/1504069_0.shtml">http://book.ifeng.com/culture/1/detail_2010_05/11/1504069_0.shtml</a> </p>
+</blockquote>
+<p>大约三十年前，当法国学生们被问道，谁是他们最仰慕的公众人物时，他们选择的不是老年萨特，而是米歇尔.科卢奇——一位电视喜剧演员，以嘲讽和出言不逊著称。</p>
+<p>时代的风尚转变了，六十年代的理想主义、改变世界的愿望，让位于七十年代的幻灭与狭隘的个人主义。嘲讽成了时代的情绪，人们在乎的是姿态，而不是内容。</p>
+<p>此刻的中国，人人都在谈论韩寒。他像是越来越压抑、越来越迷惘的时代的最后救命稻草。上了年纪的知识分子说他头脑清醒，媒体欢呼他是“青年领袖”、“年度人物”，青年人觉得他不仅很酷，还有思想。</p>
+<p>没人能否认韩寒的魅力。他能把赛车冠军、畅销书作家、叛逆小子和即兴讽刺者等多重的角色结合，并能在种种诱惑面前保持警惕，况且他才二十七岁。人们尤其着迷于最后一点，他在自己全球浏览量第一的博客上，嘲讽这社会中的种种愚蠢和不公——它们绝大多数与这个越来越膨胀和傲慢的官僚系统相关。有些时候，他不仅嘲讽，还期待创造意义，尽管他还不清楚这意义到底是什么。</p>
+<p>作为一个青年人，这似乎已经足了，他必定是我们时代最可爱、最聪明的明星人物。但很多人(包括一些自认有思想的人)把他推到了一个令他本人都尴尬的位置——他要成为这个时代的英雄，象征着思想的力量，象征着对权力的反抗。</p>
+<p>但这不是韩寒，人们越是把他推向这个位置，越暴露出这个时代、这些高声吶喊者的愚蠢、脆弱与怯懦。在某种意义上，韩寒的胜利不是他个人的胜利，而是这个正在兴起的庸众时代的胜利。</p>
+<p>是的，你可以说每个杰出人物必然与他身处的时代相关联，但一种越来越明显的趋势是——名声和有影响力越来越与个人的质量、才能与成就无关。在西方，这是个Paris Hilton和苏珊大妈的年代——她因为有名而有名，因为不怕出丑而有名。在中国，这是个李宇春与小沈阳的年代——人们因她小小的个性，或是他的自我贬损，而把票投给他们。</p>
+<p>韩寒与他们不同，却也是被同样一种力量推到今天的舞台。他是这个时代明星文化与成功文化的产物，也符合这个时代所推崇的业余精神——赛车、写作、表演，你都要会一点；他还下意识响应了日趋悤烈的反智倾向，他的文章总是如此浅显直白，没有任何阅读障碍，也不会提到任何你不知道的知识；还有他嘲讽式的挑衅姿态，显得如此机智，他还熟知挑战的分寸，绝不真正越政治雷池一步；他也从来不暴露自己内心的焦灼与困惑，很酷……</p>
+<span id="more"></span>
+
+<p>于是谈论韩寒，变成了一次全方位的心理按摩。你沐浴了青春、酷、成功、机智、还觉得自己参与了一场反抗，同时又是如此安全，你不需要付出任何智力上、道德上的代价，也没有任何精神上的仿徨，他是这个社会最美妙的消费品。</p>
+<p>但世上真有如此美事吗？用LXB来比较韩寒，既不恰当也不公平。但是，公众对两者的态度，却恰好不过的映衬了这个时代的特征。人们不谈论LXB，是因为他的名字不能出现在公共话语空间，也因为这有点危险。但集体性地沉默与忽视也在表明，其实我们对于真正的自由与反抗毫无兴趣，甚至心生恐惧。自由是需要付出代价的，它不仅要反抗，而且有明确的主张。这需要智力与情感上的成熟，并愿意为自己的决定承担后果。</p>
+<p>对于韩寒的热烈推崇，是整个社会拒绝付出代价的标志。当我们沉浸于只言词组的嘲讽时，一定误以为自己已消解了这可恶的权力体制，其实一点没变，嘲讽只是为上面裹了一层糖衣，但我们进行自我麻醉，还将此视作一次反抗。</p>
+<p>而且，人们或许也觉得，韩寒也不需要为行动承担任何后果，他可以进行象征性、边缘性的反抗了，然后还全身而退，像是去商场进行一次购物。韩寒成了所有人的借口，人们借着他撒娇，卖弄自己那可怜的“小心思”。</p>
+<p>但公众必定为这种愚蠢和怯懦付出代价。既然他们对于真正的成就缺乏兴趣，不去赞叹那些卓绝的道德勇气，不去准备接纳真正的思想，他们就只能在这个烂泥塘中继续打转，相互抱怨、相互麻痹。因为这庸众的数量是如此的巨大，他们还会产生这样的错觉——中国已经影响世界。中国的确影响了世界，但它只是数量上的造就，而非真正值得尊敬的成就。韩寒掀起的迷狂，衬托出这个崛起大国的内在苍白、可悲、浅薄——一个聪明的青年人、说出了一些真话，他就让这个时代的神经震颤不已。与其说这是韩寒的胜利，不如说是庸众的胜利，或是整个民族的失败。</p>
+]]></content>
+      <categories>
+        <category>社会</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Symfony EasyAdminBundle初体验</title>
     <url>/2016/12/22/symfony-easyadmin-begin/</url>
     <content><![CDATA[<h2 id="安装symfony"><a href="#安装symfony" class="headerlink" title="安装symfony"></a>安装<a href="http://symfony.com/doc/current/setup.html">symfony</a></h2><h3 id="Linux-OSX"><a href="#Linux-OSX" class="headerlink" title="Linux/OSX"></a>Linux/OSX</h3><ul>
@@ -2221,32 +2247,6 @@ Pragma: no-cache
         <tag>tcp/ip</tag>
         <tag>php-fpm</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>许知远：庸众的胜利</title>
-    <url>/2017/01/17/the-victory-of-mediocre-persons/</url>
-    <content><![CDATA[<blockquote>
-<p>文: 许知远<br>来源: 凤凰网<br>链接: <a href="http://book.ifeng.com/culture/1/detail_2010_05/11/1504069_0.shtml">http://book.ifeng.com/culture/1/detail_2010_05/11/1504069_0.shtml</a> </p>
-</blockquote>
-<p>大约三十年前，当法国学生们被问道，谁是他们最仰慕的公众人物时，他们选择的不是老年萨特，而是米歇尔.科卢奇——一位电视喜剧演员，以嘲讽和出言不逊著称。</p>
-<p>时代的风尚转变了，六十年代的理想主义、改变世界的愿望，让位于七十年代的幻灭与狭隘的个人主义。嘲讽成了时代的情绪，人们在乎的是姿态，而不是内容。</p>
-<p>此刻的中国，人人都在谈论韩寒。他像是越来越压抑、越来越迷惘的时代的最后救命稻草。上了年纪的知识分子说他头脑清醒，媒体欢呼他是“青年领袖”、“年度人物”，青年人觉得他不仅很酷，还有思想。</p>
-<p>没人能否认韩寒的魅力。他能把赛车冠军、畅销书作家、叛逆小子和即兴讽刺者等多重的角色结合，并能在种种诱惑面前保持警惕，况且他才二十七岁。人们尤其着迷于最后一点，他在自己全球浏览量第一的博客上，嘲讽这社会中的种种愚蠢和不公——它们绝大多数与这个越来越膨胀和傲慢的官僚系统相关。有些时候，他不仅嘲讽，还期待创造意义，尽管他还不清楚这意义到底是什么。</p>
-<p>作为一个青年人，这似乎已经足了，他必定是我们时代最可爱、最聪明的明星人物。但很多人(包括一些自认有思想的人)把他推到了一个令他本人都尴尬的位置——他要成为这个时代的英雄，象征着思想的力量，象征着对权力的反抗。</p>
-<p>但这不是韩寒，人们越是把他推向这个位置，越暴露出这个时代、这些高声吶喊者的愚蠢、脆弱与怯懦。在某种意义上，韩寒的胜利不是他个人的胜利，而是这个正在兴起的庸众时代的胜利。</p>
-<p>是的，你可以说每个杰出人物必然与他身处的时代相关联，但一种越来越明显的趋势是——名声和有影响力越来越与个人的质量、才能与成就无关。在西方，这是个Paris Hilton和苏珊大妈的年代——她因为有名而有名，因为不怕出丑而有名。在中国，这是个李宇春与小沈阳的年代——人们因她小小的个性，或是他的自我贬损，而把票投给他们。</p>
-<p>韩寒与他们不同，却也是被同样一种力量推到今天的舞台。他是这个时代明星文化与成功文化的产物，也符合这个时代所推崇的业余精神——赛车、写作、表演，你都要会一点；他还下意识响应了日趋悤烈的反智倾向，他的文章总是如此浅显直白，没有任何阅读障碍，也不会提到任何你不知道的知识；还有他嘲讽式的挑衅姿态，显得如此机智，他还熟知挑战的分寸，绝不真正越政治雷池一步；他也从来不暴露自己内心的焦灼与困惑，很酷……</p>
-<span id="more"></span>
-
-<p>于是谈论韩寒，变成了一次全方位的心理按摩。你沐浴了青春、酷、成功、机智、还觉得自己参与了一场反抗，同时又是如此安全，你不需要付出任何智力上、道德上的代价，也没有任何精神上的仿徨，他是这个社会最美妙的消费品。</p>
-<p>但世上真有如此美事吗？用LXB来比较韩寒，既不恰当也不公平。但是，公众对两者的态度，却恰好不过的映衬了这个时代的特征。人们不谈论LXB，是因为他的名字不能出现在公共话语空间，也因为这有点危险。但集体性地沉默与忽视也在表明，其实我们对于真正的自由与反抗毫无兴趣，甚至心生恐惧。自由是需要付出代价的，它不仅要反抗，而且有明确的主张。这需要智力与情感上的成熟，并愿意为自己的决定承担后果。</p>
-<p>对于韩寒的热烈推崇，是整个社会拒绝付出代价的标志。当我们沉浸于只言词组的嘲讽时，一定误以为自己已消解了这可恶的权力体制，其实一点没变，嘲讽只是为上面裹了一层糖衣，但我们进行自我麻醉，还将此视作一次反抗。</p>
-<p>而且，人们或许也觉得，韩寒也不需要为行动承担任何后果，他可以进行象征性、边缘性的反抗了，然后还全身而退，像是去商场进行一次购物。韩寒成了所有人的借口，人们借着他撒娇，卖弄自己那可怜的“小心思”。</p>
-<p>但公众必定为这种愚蠢和怯懦付出代价。既然他们对于真正的成就缺乏兴趣，不去赞叹那些卓绝的道德勇气，不去准备接纳真正的思想，他们就只能在这个烂泥塘中继续打转，相互抱怨、相互麻痹。因为这庸众的数量是如此的巨大，他们还会产生这样的错觉——中国已经影响世界。中国的确影响了世界，但它只是数量上的造就，而非真正值得尊敬的成就。韩寒掀起的迷狂，衬托出这个崛起大国的内在苍白、可悲、浅薄——一个聪明的青年人、说出了一些真话，他就让这个时代的神经震颤不已。与其说这是韩寒的胜利，不如说是庸众的胜利，或是整个民族的失败。</p>
-]]></content>
-      <categories>
-        <category>社会</category>
-      </categories>
   </entry>
   <entry>
     <title>vim常用命令</title>

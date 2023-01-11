@@ -723,13 +723,6 @@
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/mysql/</loc>
-    <lastmod>2023-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.aisheishei.com/categories/php/hyperf/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -737,7 +730,7 @@
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/categories/%E6%96%87%E5%AD%A6/</loc>
+    <loc>https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/mysql/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -745,6 +738,13 @@
   
   <url>
     <loc>https://www.aisheishei.com/categories/php/laravel/</loc>
+    <lastmod>2023-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aisheishei.com/categories/%E6%96%87%E5%AD%A6/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -765,13 +765,6 @@
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/categories/symfony/</loc>
-    <lastmod>2023-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.aisheishei.com/categories/%E7%A4%BE%E4%BC%9A/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -779,7 +772,7 @@
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/programming/</loc>
+    <loc>https://www.aisheishei.com/categories/symfony/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -787,6 +780,13 @@
   
   <url>
     <loc>https://www.aisheishei.com/categories/PHP/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2023-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/programming/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
