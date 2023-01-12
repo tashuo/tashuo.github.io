@@ -2295,7 +2295,7 @@ Pragma: no-cache
       </tags>
   </entry>
   <entry>
-    <title>hexo-next</title>
+    <title>hexo next及github配置</title>
     <url>/2023/01/12/hexo-next/</url>
     <content><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>之前博客许久未打理，本地的node环境和hexo版本也比较陈旧，删除了github旧仓库重新跑了一遍，做下记录以便日后参考</p>
 <h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><blockquote>
@@ -2345,6 +2345,15 @@ Pragma: no-cache
 <li><p>github-page配置<br> <a href="https://docs.github.com/zh/pages/getting-started-with-github-pages/creating-a-github-pages-site">Github Page</a></p>
 </li>
 <li><p>项目部署配置<br> <a href="https://hexo.io/zh-cn/docs/github-pages#%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2">Hexo一键部署</a></p>
+</li>
+<li><p>git hook配置</p>
+<p>关联到github-page后，仓库源文件在master分支，public静态资源在gh-pages分支，增加hook可以更加方便的维护源文件和部署静态文件：</p>
+<ol>
+<li>新增或修改项目下的hook文件<code>.git/hook/pre-push</code> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">branch=<span class="string">&quot;<span class="subst">$(git rev-parse --symbolic --abbrev-ref $(git symbolic-ref HEAD)</span>)&quot;</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$branch</span>&quot;</span> = <span class="string">&quot;master&quot;</span> ]</span><br><span class="line"><span class="keyword">then</span> </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;---- start deploy -----&quot;</span></span><br><span class="line">    /usr/local/bin/hexo g -d <span class="comment"># 此处修改为本地hexo的执行路径</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+</li>
+<li>增加可执行的文件权限 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$: <span class="built_in">chmod</span> +x .git/hook/pre-push</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这样配置之后，新增的md格式文章在master分支编辑完成直接commit+push，会自动生成静态页面并且部署至远程服务器，不需要额外的操作，也保证了仓库的源文件与静态文件版本的一致</p>
 </li>
 </ol>
 ]]></content>

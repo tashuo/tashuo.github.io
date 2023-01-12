@@ -6,7 +6,7 @@
   <link href="https://www.aisheishei.com/atom.xml" rel="self"/>
   
   <link href="https://www.aisheishei.com/"/>
-  <updated>2023-01-12T08:10:22.313Z</updated>
+  <updated>2023-01-12T09:46:48.022Z</updated>
   <id>https://www.aisheishei.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>hexo-next</title>
+    <title>hexo next及github配置</title>
     <link href="https://www.aisheishei.com/2023/01/12/hexo-next/"/>
     <id>https://www.aisheishei.com/2023/01/12/hexo-next/</id>
     <published>2023-01-12T07:56:50.000Z</published>
-    <updated>2023-01-12T08:10:22.313Z</updated>
+    <updated>2023-01-12T09:46:48.022Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;之前博客许久未打理，本地的node环境和hexo版本也比较陈旧，删除了github旧仓库重新跑了一遍，做下记录以便日后参考&lt;/p&gt;
