@@ -2294,4 +2294,66 @@ Pragma: no-cache
         <tag>vim</tag>
       </tags>
   </entry>
+  <entry>
+    <title>hexo-next</title>
+    <url>/2023/01/12/hexo-next/</url>
+    <content><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>之前博客许久未打理，本地的node环境和hexo版本也比较陈旧，删除了github旧仓库重新跑了一遍，做下记录以便日后参考</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><blockquote>
+<p><a href="https://hexo.io/zh-cn/docs/">hexo文档</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://theme-next.js.org/docs/getting-started/">next主题文档</a></p>
+</blockquote>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
+<li><p>安装hexo及项目初始化</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$: npm install -g hexo-cli <span class="comment"># 安装hexo</span></span><br><span class="line"></span><br><span class="line">$: hexo init my_project <span class="comment"># 初始化项目</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>项目配置</p>
+<p> <a href="https://hexo.io/zh-cn/docs/configuration">配置</a></p>
+</li>
+<li><p>安装next主题</p>
+<p> <a href="https://theme-next.js.org/docs/getting-started/">Getting Started</a></p>
+<p> 此处使用git方式下载的包在生成静态文件时index.html中包含模板标签，访问有问题，暂时没找到原因，所以使用了npm方式安装：</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$: <span class="built_in">cd</span> my_project &amp;&amp; npm install hexo-theme-next <span class="comment"># 安装next主题</span></span><br><span class="line">$: <span class="built_in">cp</span> -rp node_modules/hexo-theme-next themes/next <span class="comment"># 此处将npm包拷贝到项目的themes目录，方便主题配置文件的版本管理</span></span><br><span class="line">$: npm uninstall hexo-theme-next</span><br></pre></td></tr></table></figure>
+<span id="more"></span></li>
+<li><p>启用next主题</p>
+ <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 项目的_config.yml</span></span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>主题自定义配置</p>
+<p> <a href="https://theme-next.iissnan.com/getting-started.html">开始使用</a></p>
+</li>
+<li><p>第三方插件</p>
+<ol>
+<li>字数统计 <a href="https://hexo-next.readthedocs.io/zh_CN/latest/next/advanced/%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1/">字数统计</a></li>
+<li>本地搜索 <a href="https://theme-next.iissnan.com/third-party-services.html#local-search">第三方服务集成</a></li>
+<li>Disqus评论插件 <a href="https://theme-next.iissnan.com/third-party-services.html#disqus">第三方服务集成</a></li>
+<li>Waline评论及阅读数统计插件 <a href="https://waline.js.org/guide/get-started/">快速上手</a><ol>
+<li>根据上面文档指引，创建并且成功部署Vercel，<em>HTML 引入 (客户端)部分</em>不用做</li>
+<li>hexo安装waline扩展并且在主题中进行配置 <code>$:npm install @waline/hexo-next</code> <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">waline:</span></span><br><span class="line">  <span class="comment"># New! Whether enable this plugin</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Waline server address url, you should set this to your own link</span></span><br><span class="line">  <span class="attr">serverURL:</span> <span class="string">https://your-domain.vercel.app</span> <span class="comment"># 替换为你自己的域名</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Waline library CDN url, you can set this to your preferred CDN</span></span><br><span class="line">  <span class="attr">libUrl:</span> <span class="string">https://unpkg.com/@waline/client@v2/dist/waline.js</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Waline CSS styles CDN url, you can set this to your preferred CDN</span></span><br><span class="line">  <span class="attr">cssUrl:</span> <span class="string">https://unpkg.com/@waline/client@v2/dist/waline.css</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Custom locales</span></span><br><span class="line">  <span class="comment"># locale:</span></span><br><span class="line">  <span class="comment">#   placeholder: Welcome to comment # Comment box placeholder</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># If false, comment count will only be displayed in post page, not in home page</span></span><br><span class="line">  <span class="attr">commentCount:</span> <span class="literal">true</span> <span class="comment"># 开启评论数展示</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Pageviews count, <span class="doctag">Note:</span> You should not enable both `waline.pageview` and `leancloud_visitors`.</span></span><br><span class="line">  <span class="attr">pageview:</span> <span class="literal">true</span> <span class="comment"># 开启阅读数展示</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Custom emoji</span></span><br><span class="line">  <span class="attr">emoji:</span></span><br><span class="line">  <span class="comment">#   - https://unpkg.com/@waline/emojis@1.0.1/weibo</span></span><br><span class="line">  <span class="comment">#   - https://unpkg.com/@waline/emojis@1.0.1/alus</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">https://unpkg.com/@waline/emojis@1.0.1/bilibili</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">https://unpkg.com/@waline/emojis@1.0.1/qq</span></span><br><span class="line">  <span class="comment">#   - https://unpkg.com/@waline/emojis@1.0.1/tieba</span></span><br><span class="line">  <span class="comment">#   - https://unpkg.com/@waline/emojis@1.0.1/tw-emoji</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Comment infomation, valid meta are nick, mail and link</span></span><br><span class="line">  <span class="comment"># meta:</span></span><br><span class="line">  <span class="comment">#   - nick</span></span><br><span class="line">  <span class="comment">#   - mail</span></span><br><span class="line">  <span class="comment">#   - link</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Set required meta field, e.g.: [nick] | [nick, mail]</span></span><br><span class="line">  <span class="comment"># requiredMeta:</span></span><br><span class="line">  <span class="comment">#   - nick</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Language, available values: en-US, zh-CN, zh-TW, pt-BR, ru-RU, jp-JP</span></span><br><span class="line">  <span class="attr">lang:</span> <span class="string">zh-CN</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Word limit, no limit when setting to 0</span></span><br><span class="line">  <span class="comment"># wordLimit: 0</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Whether enable login, can choose from &#x27;enable&#x27;, &#x27;disable&#x27; and &#x27;force&#x27;</span></span><br><span class="line">  <span class="comment"># login: enable</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># comment per page</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>开启了<strong>pageview</strong>的话需要在leancloud应用的结构化数据中创建<code>Counter</code>这个Class，本质上阅读数存储在<code>Counter</code> 表中，评论数据存储在<code>Comment</code> 表中</li>
+</ol>
+</li>
+<li><del>leancloud阅读次数</del> (Waline可以做)此路不通，不管是国内还国外的云函数部署都需要绑定独立的域名才能使用，暂时没有多余的域名</li>
+</ol>
+</li>
+<li><p>增加标签页面和分类页面</p>
+<p> <a href="https://theme-next.iissnan.com/theme-settings.html#tags-page">主题配置</a></p>
+<p> <a href="https://theme-next.iissnan.com/theme-settings.html#categories-page">主题配置</a></p>
+<p> 这样可以在主题的menu配置中加上这两个页面，不然<code>public/tags</code>和<code>public/categories</code>文件夹不会生成<code>index.html</code></p>
+</li>
+<li><p>github-page配置<br> <a href="https://docs.github.com/zh/pages/getting-started-with-github-pages/creating-a-github-pages-site">Github Page</a></p>
+</li>
+<li><p>项目部署配置<br> <a href="https://hexo.io/zh-cn/docs/github-pages#%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2">Hexo一键部署</a></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>next</tag>
+      </tags>
+  </entry>
 </search>

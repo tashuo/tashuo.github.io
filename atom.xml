@@ -6,7 +6,7 @@
   <link href="https://www.aisheishei.com/atom.xml" rel="self"/>
   
   <link href="https://www.aisheishei.com/"/>
-  <updated>2023-01-10T08:19:11.466Z</updated>
+  <updated>2023-01-12T08:10:22.313Z</updated>
   <id>https://www.aisheishei.com/</id>
   
   <author>
@@ -15,6 +15,44 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo-next</title>
+    <link href="https://www.aisheishei.com/2023/01/12/hexo-next/"/>
+    <id>https://www.aisheishei.com/2023/01/12/hexo-next/</id>
+    <published>2023-01-12T07:56:50.000Z</published>
+    <updated>2023-01-12T08:10:22.313Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;之前博客许久未打理，本地的node环境和hexo版本也比较陈旧，删除了github旧仓库重新跑了一遍，做下记录以便日后参考&lt;/p&gt;
+&lt;h3 id=&quot;参考文档&quot;&gt;&lt;a href=&quot;#参考文档&quot; class=&quot;headerlink&quot; title=&quot;参考文档&quot;&gt;&lt;/a&gt;参考文档&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://hexo.io/zh-cn/docs/&quot;&gt;hexo文档&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://theme-next.js.org/docs/getting-started/&quot;&gt;next主题文档&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;流程&quot;&gt;&lt;a href=&quot;#流程&quot; class=&quot;headerlink&quot; title=&quot;流程&quot;&gt;&lt;/a&gt;流程&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;安装hexo及项目初始化&lt;/p&gt;
+ &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$: npm install -g hexo-cli &lt;span class=&quot;comment&quot;&gt;# 安装hexo&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$: hexo init my_project &lt;span class=&quot;comment&quot;&gt;# 初始化项目&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;项目配置&lt;/p&gt;
+&lt;p&gt; &lt;a href=&quot;https://hexo.io/zh-cn/docs/configuration&quot;&gt;配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装next主题&lt;/p&gt;
+&lt;p&gt; &lt;a href=&quot;https://theme-next.js.org/docs/getting-started/&quot;&gt;Getting Started&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; 此处使用git方式下载的包在生成静态文件时index.html中包含模板标签，访问有问题，暂时没找到原因，所以使用了npm方式安装：&lt;/p&gt;
+ &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$: &lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; my_project &amp;amp;&amp;amp; npm install hexo-theme-next &lt;span class=&quot;comment&quot;&gt;# 安装next主题&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$: &lt;span class=&quot;built_in&quot;&gt;cp&lt;/span&gt; -rp node_modules/hexo-theme-next themes/next &lt;span class=&quot;comment&quot;&gt;# 此处将npm包拷贝到项目的themes目录，方便主题配置文件的版本管理&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$: npm uninstall hexo-theme-next&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="笔记" scheme="https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="hexo" scheme="https://www.aisheishei.com/tags/hexo/"/>
+    
+    <category term="next" scheme="https://www.aisheishei.com/tags/next/"/>
+    
+  </entry>
   
   <entry>
     <title>Hyperf db连接池</title>
@@ -591,34 +629,6 @@
     
     
     <category term="mysql" scheme="https://www.aisheishei.com/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Go by Example - Channel Synchronization</title>
-    <link href="https://www.aisheishei.com/2017/08/03/go-by-example-channel-synchronization/"/>
-    <id>https://www.aisheishei.com/2017/08/03/go-by-example-channel-synchronization/</id>
-    <published>2017-08-03T08:39:56.000Z</published>
-    <updated>2023-01-10T07:40:42.095Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;翻译自 &lt;a href=&quot;https://gobyexample.com/&quot;&gt;https://gobyexample.com/&lt;/a&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Go by Example&lt;/p&gt;
-&lt;p&gt;Go is an open source</summary>
-        
-      
-    
-    
-    
-    <category term="golang" scheme="https://www.aisheishei.com/categories/golang/"/>
-    
-    <category term="笔记" scheme="https://www.aisheishei.com/categories/golang/%E7%AC%94%E8%AE%B0/"/>
-    
     
   </entry>
   

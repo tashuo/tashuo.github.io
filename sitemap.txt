@@ -1,3 +1,4 @@
+https://www.aisheishei.com/2023/01/12/hexo-next/
 https://www.aisheishei.com/2023/01/09/hyperf-db-connection-pool/
 https://www.aisheishei.com/404.html
 https://www.aisheishei.com/categories/index.html
@@ -78,6 +79,8 @@ https://www.aisheishei.com/tags/unix-domain-socket/
 https://www.aisheishei.com/tags/tcp-ip/
 https://www.aisheishei.com/tags/php-fpm/
 https://www.aisheishei.com/tags/vim/
+https://www.aisheishei.com/tags/hexo/
+https://www.aisheishei.com/tags/next/
 https://www.aisheishei.com/categories/life/
 https://www.aisheishei.com/categories/golang/
 https://www.aisheishei.com/categories/golang/%E7%AC%94%E8%AE%B0/
