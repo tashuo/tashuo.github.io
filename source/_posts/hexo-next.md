@@ -1,5 +1,5 @@
 ---
-title: hexo-next
+title: hexo next及github配置
 date: 2023-01-12 15:56:50
 categories:
 - 笔记
@@ -153,3 +153,28 @@ tags:
 
 9. 项目部署配置
     [Hexo一键部署](https://hexo.io/zh-cn/docs/github-pages#%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2)
+
+10. git hook配置
+    
+    关联到github-page后，仓库源文件在master分支，public静态资源在gh-pages分支，增加hook可以更加方便的维护源文件和部署静态文件：
+    
+    1. 新增或修改项目下的hook文件`.git/hook/pre-push`
+        
+        ```bash
+        #!/bin/sh
+        branch="$(git rev-parse --symbolic --abbrev-ref $(git symbolic-ref HEAD))"
+        if [ "$branch" = "master" ]
+        then 
+            echo "---- start deploy -----"
+            /usr/local/bin/hexo g -d # 此处修改为本地hexo的执行路径
+        fi
+        exit 0
+        ```
+        
+    2. 增加可执行的文件权限
+        
+        ```bash
+        $: chmod +x .git/hook/pre-push
+        ```
+    
+    这样配置之后，新增的md格式文章在master分支编辑完成直接commit+push，会自动生成静态页面并且部署至远程服务器，不需要额外的操作，也保证了仓库的源文件与静态文件版本的一致
