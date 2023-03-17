@@ -6,7 +6,7 @@
   <link href="https://www.aisheishei.com/atom.xml" rel="self"/>
   
   <link href="https://www.aisheishei.com/"/>
-  <updated>2023-01-12T09:46:48.022Z</updated>
+  <updated>2023-03-17T15:28:30.203Z</updated>
   <id>https://www.aisheishei.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记一次mysql被黑的经历</title>
+    <link href="https://www.aisheishei.com/2023/03/17/flarum-mysql-recover/"/>
+    <id>https://www.aisheishei.com/2023/03/17/flarum-mysql-recover/</id>
+    <published>2023-03-17T15:11:11.000Z</published>
+    <updated>2023-03-17T15:28:30.203Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;记一次mysql被黑的经历&quot;&gt;&lt;a href=&quot;#记一次mysql被黑的经历&quot; class=&quot;headerlink&quot; title=&quot;记一次mysql被黑的经历&quot;&gt;&lt;/a&gt;记一次mysql被黑的经历&lt;/h1&gt;&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;前段时间用&lt;code&gt;flarum&lt;/code&gt;搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～&lt;/p&gt;
+&lt;h2 id=&quot;中招&quot;&gt;&lt;a href=&quot;#中招&quot; class=&quot;headerlink&quot; title=&quot;中招&quot;&gt;&lt;/a&gt;中招&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://i.328888.xyz/2023/03/17/LGKvq.png&quot; alt=&quot;LGKvq.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;错误日志：这他娘的库子都没了:)&lt;br&gt;&lt;img src=&quot;https://i.328888.xyz/2023/03/17/LGoEN.png&quot; alt=&quot;LGoEN.png&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="php" scheme="https://www.aisheishei.com/categories/php/"/>
+    
+    <category term="mysql" scheme="https://www.aisheishei.com/categories/php/mysql/"/>
+    
+    
+    <category term="flarum" scheme="https://www.aisheishei.com/tags/flarum/"/>
+    
+  </entry>
   
   <entry>
     <title>hexo next及github配置</title>
@@ -602,33 +625,6 @@
     
     
     <category term="笔记" scheme="https://www.aisheishei.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL的explain文档</title>
-    <link href="https://www.aisheishei.com/2017/08/04/mysql-explain/"/>
-    <id>https://www.aisheishei.com/2017/08/04/mysql-explain/</id>
-    <published>2017-08-04T07:12:48.000Z</published>
-    <updated>2023-01-10T07:40:42.146Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;文档原地址：&lt;a href=&quot;https://dev.mysql.com/doc/refman/5.7/en/explain-output.html&quot;&gt;EXPLAIN Output Format&lt;/a&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;EXPLAIN提供一些MySQL执行SQL语句的信息，包括SELECT, DELETE, INSERT, REPLACE和UPDATE等语句。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;MySQL 5.6.3之前只支持SELECT&lt;/strong&gt;。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;EXPLAIN作用于SELECT语句时会返回一列信息。SELECT语句会按照一定顺序输出表的内容。MySQL使用循环嵌套的方式处理所有的连表操作。这意味着MySQL会从第一张表中读取一行数据，然后在第二张表中读出相匹配的数据，然后第三张表等等。当所有的表都被执行到，MySQL会输出选中的列并且回溯表的数据直到找到匹配更多行的表。从找到的这个表里面读取下一行数据，然后下一个表。&lt;/p&gt;
-&lt;p&gt;EXPLAIN的输出包含不同的分割开来的数据。另外，对于SELECT语句，EXPLAIN还会生成一些额外的信息与&lt;code&gt;SHOW WARNING&lt;/code&gt;的输出一起显示。&lt;/p&gt;
-&lt;h2 id=&quot;输出内容&quot;&gt;&lt;a href=&quot;#输出内容&quot; class=&quot;headerlink&quot; title=&quot;输出内容&quot;&gt;&lt;/a&gt;输出内容&lt;/h2&gt;&lt;p&gt;下面介绍&lt;code&gt;EXPLAIN&lt;/code&gt;命令的输出内容，稍后会补充&lt;code&gt;type&lt;/code&gt;,&lt;code&gt;Extra&lt;/code&gt;两个字段的信息。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;EXPLAIN&lt;/code&gt;输出的每行信息都对应于相应的一张表。每行输出的内容都总结在下文的表格中，表格最后一列是更加详细的说明。表格第一列是字段名，第二列是当加了&lt;code&gt;FORMAT=JSON&lt;/code&gt;参数时跟第一列相同概念的字段名。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="笔记" scheme="https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="mysql" scheme="https://www.aisheishei.com/tags/mysql/"/>
     
   </entry>
   

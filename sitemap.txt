@@ -1,3 +1,4 @@
+https://www.aisheishei.com/2023/03/17/flarum-mysql-recover/
 https://www.aisheishei.com/2023/01/12/hexo-next/
 https://www.aisheishei.com/2023/01/09/hyperf-db-connection-pool/
 https://www.aisheishei.com/404.html
@@ -81,6 +82,7 @@ https://www.aisheishei.com/tags/php-fpm/
 https://www.aisheishei.com/tags/vim/
 https://www.aisheishei.com/tags/hexo/
 https://www.aisheishei.com/tags/next/
+https://www.aisheishei.com/tags/flarum/
 https://www.aisheishei.com/categories/life/
 https://www.aisheishei.com/categories/golang/
 https://www.aisheishei.com/categories/golang/%E7%AC%94%E8%AE%B0/
@@ -97,3 +99,4 @@ https://www.aisheishei.com/categories/symfony/
 https://www.aisheishei.com/categories/PHP/%E7%AC%94%E8%AE%B0/
 https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/programming/
 https://www.aisheishei.com/categories/symfony/%E7%AC%94%E8%AE%B0/
+https://www.aisheishei.com/categories/php/mysql/
