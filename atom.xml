@@ -6,7 +6,7 @@
   <link href="https://www.aisheishei.com/atom.xml" rel="self"/>
   
   <link href="https://www.aisheishei.com/"/>
-  <updated>2023-03-17T15:28:30.203Z</updated>
+  <updated>2023-03-17T15:33:31.064Z</updated>
   <id>https://www.aisheishei.com/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="https://www.aisheishei.com/2023/03/17/flarum-mysql-recover/"/>
     <id>https://www.aisheishei.com/2023/03/17/flarum-mysql-recover/</id>
     <published>2023-03-17T15:11:11.000Z</published>
-    <updated>2023-03-17T15:28:30.203Z</updated>
+    <updated>2023-03-17T15:33:31.064Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;记一次mysql被黑的经历&quot;&gt;&lt;a href=&quot;#记一次mysql被黑的经历&quot; class=&quot;headerlink&quot; title=&quot;记一次mysql被黑的经历&quot;&gt;&lt;/a&gt;记一次mysql被黑的经历&lt;/h1&gt;&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;前段时间用&lt;code&gt;flarum&lt;/code&gt;搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～&lt;/p&gt;
+    <summary type="html">&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;前段时间用&lt;code&gt;flarum&lt;/code&gt;搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～&lt;/p&gt;
 &lt;h2 id=&quot;中招&quot;&gt;&lt;a href=&quot;#中招&quot; class=&quot;headerlink&quot; title=&quot;中招&quot;&gt;&lt;/a&gt;中招&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://i.328888.xyz/2023/03/17/LGKvq.png&quot; alt=&quot;LGKvq.png&quot;&gt;&lt;/p&gt;
 &lt;p&gt;错误日志：这他娘的库子都没了:)&lt;br&gt;&lt;img src=&quot;https://i.328888.xyz/2023/03/17/LGoEN.png&quot; alt=&quot;LGoEN.png&quot;&gt;&lt;/p&gt;</summary>
     

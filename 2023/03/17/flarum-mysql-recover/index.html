@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.aisheishei.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="记一次mysql被黑的经历背景前段时间用flarum搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～ 中招 错误日志：这他娘的库子都没了:)">
+    <meta name="description" content="背景前段时间用flarum搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～ 中招 错误日志：这他娘的库子都没了:)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次mysql被黑的经历">
 <meta property="og:url" content="https://www.aisheishei.com/2023/03/17/flarum-mysql-recover/index.html">
 <meta property="og:site_name" content="爱谁谁">
-<meta property="og:description" content="记一次mysql被黑的经历背景前段时间用flarum搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～ 中招 错误日志：这他娘的库子都没了:)">
+<meta property="og:description" content="背景前段时间用flarum搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～ 中招 错误日志：这他娘的库子都没了:)">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.328888.xyz/2023/03/17/LGKvq.png">
 <meta property="og:image" content="https://i.328888.xyz/2023/03/17/LGoEN.png">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://i.328888.xyz/2023/03/17/LGJpb.png">
 <meta property="og:image" content="https://i.328888.xyz/2023/03/17/LGM4z.png">
 <meta property="article:published_time" content="2023-03-17T15:11:11.000Z">
-<meta property="article:modified_time" content="2023-03-17T15:28:30.203Z">
+<meta property="article:modified_time" content="2023-03-17T15:33:31.064Z">
 <meta property="article:author" content="ta_shuo">
 <meta property="article:tag" content="flarum">
 <meta name="twitter:card" content="summary">
@@ -152,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%B0%E4%B8%80%E6%AC%A1mysql%E8%A2%AB%E9%BB%91%E7%9A%84%E7%BB%8F%E5%8E%86"><span class="nav-number">1.</span> <span class="nav-text">记一次mysql被黑的经历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E6%8B%9B"><span class="nav-number">1.2.</span> <span class="nav-text">中招</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A2%E6%8D%9F"><span class="nav-number">1.3.</span> <span class="nav-text">止损</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A5%AD%E5%87%BAmysqlbinlog%E8%BF%BD%E8%B8%AA%E6%BA%AF%E6%BA%90"><span class="nav-number">1.3.1.</span> <span class="nav-text">祭出mysqlbinlog追踪溯源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%A2%E5%A4%8Droot%E6%9D%83%E9%99%90"><span class="nav-number">1.3.2.</span> <span class="nav-text">恢复root权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.3.</span> <span class="nav-text">恢复数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%87%BB"><span class="nav-number">1.4.</span> <span class="nav-text">反击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E6%8B%9B"><span class="nav-number">2.</span> <span class="nav-text">中招</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A2%E6%8D%9F"><span class="nav-number">3.</span> <span class="nav-text">止损</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A5%AD%E5%87%BAmysqlbinlog%E8%BF%BD%E8%B8%AA%E6%BA%AF%E6%BA%90"><span class="nav-number">3.1.</span> <span class="nav-text">祭出mysqlbinlog追踪溯源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%A2%E5%A4%8Droot%E6%9D%83%E9%99%90"><span class="nav-number">3.2.</span> <span class="nav-text">恢复root权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E6%95%B0%E6%8D%AE"><span class="nav-number">3.3.</span> <span class="nav-text">恢复数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%87%BB"><span class="nav-number">4.</span> <span class="nav-text">反击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -311,7 +311,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="记一次mysql被黑的经历"><a href="#记一次mysql被黑的经历" class="headerlink" title="记一次mysql被黑的经历"></a>记一次mysql被黑的经历</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前段时间用<code>flarum</code>搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～</p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前段时间用<code>flarum</code>搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～</p>
 <h2 id="中招"><a href="#中招" class="headerlink" title="中招"></a>中招</h2><p><img src="https://i.328888.xyz/2023/03/17/LGKvq.png" alt="LGKvq.png"></p>
 <p>错误日志：这他娘的库子都没了:)<br><img src="https://i.328888.xyz/2023/03/17/LGoEN.png" alt="LGoEN.png"></p>
 <span id="more"></span>

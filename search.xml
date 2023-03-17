@@ -2368,7 +2368,7 @@ Pragma: no-cache
   <entry>
     <title>记一次mysql被黑的经历</title>
     <url>/2023/03/17/flarum-mysql-recover/</url>
-    <content><![CDATA[<h1 id="记一次mysql被黑的经历"><a href="#记一次mysql被黑的经历" class="headerlink" title="记一次mysql被黑的经历"></a>记一次mysql被黑的经历</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前段时间用<code>flarum</code>搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～</p>
+    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前段时间用<code>flarum</code>搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～</p>
 <h2 id="中招"><a href="#中招" class="headerlink" title="中招"></a>中招</h2><p><img src="https://i.328888.xyz/2023/03/17/LGKvq.png" alt="LGKvq.png"></p>
 <p>错误日志：这他娘的库子都没了:)<br><img src="https://i.328888.xyz/2023/03/17/LGoEN.png" alt="LGoEN.png"></p>
 <span id="more"></span>
