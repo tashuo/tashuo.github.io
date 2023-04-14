@@ -2407,4 +2407,50 @@ Pragma: no-cache
         <tag>flarum</tag>
       </tags>
   </entry>
+  <entry>
+    <title>nestjs websocket 实现私聊、系统推送</title>
+    <url>/2023/04/14/nestjs-websocket/</url>
+    <content><![CDATA[<h2 id="Nestjs-websocket开发记录"><a href="#Nestjs-websocket开发记录" class="headerlink" title="Nestjs websocket开发记录"></a>Nestjs websocket开发记录</h2><p><a href="https://docs.nestjs.com/websockets/gateways">官方文档</a>介绍的比较详细了，但实际开发过程中还是遇到了不少问题，在此做一下记录.</p>
+<h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><h3 id="websocket"><a href="#websocket" class="headerlink" title="websocket"></a>websocket</h3><blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API">https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API</a></p>
+</blockquote>
+<h3 id="流行的websocket库"><a href="#流行的websocket库" class="headerlink" title="流行的websocket库"></a>流行的websocket库</h3><p><a href="https://github.com/websockets/ws">ws</a></p>
+<p><a href="https://github.com/socketio/socket.io">socket.io</a></p>
+<h3 id="Nest配套"><a href="#Nest配套" class="headerlink" title="Nest配套"></a>Nest配套</h3><blockquote>
+<p>In Nest, a gateway is simply a class annotated with @WebSocketGateway() decorator. Technically, gateways are platform-agnostic which makes them compatible with any WebSockets library once an adapter is created. There are two WS platforms supported out-of-the-box: socket.io and ws.</p>
+</blockquote>
+<p>nest提供了<code>gateway</code>的概念，<code>gateway</code>与平台无关，底层可以适配任何websocket库，此处选用更为流行的<code>socket.io</code>做为示例，而且项目切换驱动的代码改动非常小，即便后面要改为<code>ws</code>也没有太大负担，架构设计甚是优雅.</p>
+<h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pnpm i --save @nestjs/websockets @nestjs/platform-socket.io socket.io</span><br></pre></td></tr></table></figure>
+<p><em>使用<code>ws</code>库：</em></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pnpm i --save @nestjs/websockets @nestjs/platform-ws ws</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h3 id="Gateway"><a href="#Gateway" class="headerlink" title="Gateway"></a>Gateway</h3><p><code>gateway</code>相当于websocket server，可以设置websocket监听的端口(注意此处不要与http端口冲突)、可以监听所有客户端连接的生命周期事件，业务层面所有类型的消息监听和发送也是在此类中完成，通过<code>@SubscribeMessage</code>装饰器可以声明方法监听的事件类型及处理逻辑.</p>
+<p><code>gateway</code>写好后在<code>Module</code>中声明为<code>Provider</code>就会生效，可以用Postman进行测试，需要注意的是，<code>socket.io</code>server必须使用<code>socket.io</code>client才能通信，所以测试时需要根据使用的库选用不同的客户端进行测试，Postman的websocket request支持原生和<code>socket.io</code>两种类型，别跟我一样选错了在那儿绞尽脑汁.</p>
+<h3 id="鉴权"><a href="#鉴权" class="headerlink" title="鉴权"></a>鉴权</h3><p>和http一样，当一个websocket客户端发起连接请求和消息时服务端需要判断其合法性及身份，此处涉及到两个逻辑，<strong>建立websocket连接</strong>和<strong>处理消息</strong>.</p>
+<p>websocket连接是由http请求<code>upgrade</code>成功后创建，对应于<code>gateway</code>的<code>handleConnection</code>方法，而nest的<code>guard</code>本身也适用于<code>gateway</code>，但不幸的是只作用于<code>@SubscribeMessage</code>装饰的方法，连接的生命周期事件不受影响，所以需要在<code>handleConnection</code>中单独做鉴权，其他<code>@SubscribeMessage</code>方法通过<code>guard</code>统一处理；</p>
+<p>但后面又发现一个问题，<code>handleConnection</code>调用时服务端其实已经跟客户端建立连接</p>
+<blockquote>
+<p>WebSocket establishes the connection (either before or at the beginning of handleConnection)</p>
+</blockquote>
+<p>在连接建立和鉴权逻辑执行完毕这段时间的所有消息不受鉴权逻辑影响，虽然鉴权逻辑可能不需要多少时间，但bug就是bug，本着严谨的态度，又找到一个更为合理的方案：<code>allowRequest</code></p>
+<p><a href="https://user-images.githubusercontent.com/11506653/82481833-ef199780-9aa3-11ea-93de-ae6e7b214072.png"><img src="https://user-images.githubusercontent.com/11506653/82481833-ef199780-9aa3-11ea-93de-ae6e7b214072.png" alt="ixXO7d.md.png"></a></p>
+<p><code>allowRequest</code>也是在<code>upgrade</code>时调用，而且是成功后才会创建websocket连接，符合我们的鉴权要求，需要配合<code>adapter</code>使用，<a href="https://docs.nestjs.com/websockets/adapter">https://docs.nestjs.com/websockets/adapter</a></p>
+<p>最终根据以上的调研，大致确定了以下的鉴权方案：</p>
+<ol>
+<li>自定义<code>Adapter</code>的<code>createIOServer</code>方法中通过<code>allowRequest</code>绑定的函数进行鉴权，用于确保所有建立的websocket连接都是合法的</li>
+<li><code>gateway</code>的<code>handleConnection</code>中根据jwt解析出用户信息，跟当前connection做关联，后面所有的<code>@SubscribeMessage</code>方法都可以直接使用该connection的用户信息</li>
+<li><code>@SubscribeMessage</code>所有方法使用通用的<code>guard</code>做鉴权，此处的鉴权本质上是对connection活跃性的探测，如果发现不活跃了直接断开连接让客户端重连，此处需要结合心跳逻辑，活跃性由心跳维持，假如长时间未收到心跳包，则判定该客户端连接异常或掉线.</li>
+</ol>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>该方案实行的前提是客户端在建立连接后不会更换token，假如由于客户端逻辑异常，同一条连接上出现了不同的token，整个业务数据就会有问题，因为当前方案是根据连接建立时传入的token绑定用户信息的，后续的通信不会对token进行校验，无论是否传了新的token或不传token都会作为该用户的消息进行处理.</p>
+<p>可以在该仓库找到所有的代码：<a href="https://github.com/tashuo/nest-websocket">https://github.com/tashuo/nest-websocket</a></p>
+]]></content>
+      <categories>
+        <category>typescript</category>
+        <category>nestjs</category>
+      </categories>
+      <tags>
+        <tag>socket.io</tag>
+        <tag>webscoket</tag>
+      </tags>
+  </entry>
 </search>

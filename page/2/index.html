@@ -155,18 +155,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -197,6 +197,137 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.aisheishei.com/2017/11/24/go-by-example-rate-limiting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/1.jpg">
+      <meta itemprop="name" content="ta_shuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱谁谁">
+      <meta itemprop="description" content="我们坐着不同的井 望着同样的天">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 爱谁谁">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/11/24/go-by-example-rate-limiting/" class="post-title-link" itemprop="url">Go by Example - Rate Limiting</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-11-24 15:28:43" itemprop="dateCreated datePublished" datetime="2017-11-24T15:28:43+08:00">2017-11-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/golang/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2017/11/24/go-by-example-rate-limiting/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2017/11/24/go-by-example-rate-limiting/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/2017/11/24/go-by-example-rate-limiting/"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>翻译自 <a target="_blank" rel="noopener" href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Rate-Limiting"><a href="#Go-by-Example-Rate-Limiting" class="headerlink" title="Go by Example: Rate Limiting"></a><center>Go by Example: Rate Limiting</center></h2><p>限速是控制资源利用率和维持服务质量的一种重要机制。golang通过<code>goroutines</code>、<code>channels</code>和<code>tickers</code>优雅的支持限速。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 首先来看下基本的限速功能</span></span><br><span class="line">    <span class="comment">// 假设我们想限制对请求的处理</span></span><br><span class="line">    <span class="comment">// 我们将从同一个管道中提供这样的请求</span></span><br><span class="line">    requests := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>,  <span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++ &#123;</span><br><span class="line">        requests &lt;- i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">close</span>(requests)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 该管道每200毫秒接收一个值</span></span><br><span class="line">    <span class="comment">// 这个是我们限速的核心</span></span><br><span class="line">    limiter := time.Tick(time.Millisecond * <span class="number">200</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过处理每个请求时管道接收值的阻塞，我们限制每200毫秒只处理一个请求</span></span><br><span class="line">    <span class="keyword">for</span> req := <span class="keyword">range</span> requests &#123;</span><br><span class="line">        &lt;-limiter</span><br><span class="line">        fmt.Println(<span class="string">&quot;request&quot;</span>, req, time.Now())</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 某些时候可能希望在保持整体限速规则下允许少量的请求不受限制</span></span><br><span class="line">    <span class="comment">// 可以通过含有缓冲区的管道来实现</span></span><br><span class="line">    <span class="comment">// burstyLimiter管道可以使同时处理的请求达到3个</span></span><br><span class="line">    burstyLimiter := <span class="built_in">make</span>(<span class="keyword">chan</span> time.Time, <span class="number">3</span>)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;</span><br><span class="line">        burstyLimiter &lt;- time.Now()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 每200毫秒发送给burstyLimiter管道一个值</span></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> t := <span class="keyword">range</span> time.Tick(time.Millisecond * <span class="number">200</span>) &#123;</span><br><span class="line">            burstyLimiter &lt;- t</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模拟5个新的请求，前三个请求由于burstyLimiter管道缓冲区的处理可以突破200毫秒的限制</span></span><br><span class="line">    burstyRequests := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++ &#123;</span><br><span class="line">        burstyRequests &lt;- i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">close</span>(burstyRequests)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> req := <span class="keyword">range</span> burstyRequests &#123;</span><br><span class="line">        &lt;-burstyLimiter</span><br><span class="line">        fmt.Println(<span class="string">&quot;request&quot;</span>, req, time.Now())</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tashuo:golang ta_shuo$ go run rate-limiting.go</span><br><span class="line">request 1 2017-11-24 15:45:04.641607273 +0800 CST</span><br><span class="line">request 2 2017-11-24 15:45:04.838581623 +0800 CST</span><br><span class="line">request 3 2017-11-24 15:45:05.040839234 +0800 CST</span><br><span class="line">request 4 2017-11-24 15:45:05.241695212 +0800 CST</span><br><span class="line">request 5 2017-11-24 15:45:05.441367122 +0800 CST</span><br><span class="line">request 1 2017-11-24 15:45:05.441428032 +0800 CST</span><br><span class="line">request 2 2017-11-24 15:45:05.441435722 +0800 CST</span><br><span class="line">request 3 2017-11-24 15:45:05.441440602 +0800 CST</span><br><span class="line">request 4 2017-11-24 15:45:05.641538132 +0800 CST</span><br><span class="line">request 5 2017-11-24 15:45:05.84206538 +0800 CST</span><br></pre></td></tr></table></figure>
+
+<p>前5个请求跟预期一样是每200秒处理一个，后面5个请求中的前3个并没有被200毫秒的规则限制到。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://gobyexample.com/rate-limiting">Go by Example: Rate Limiting</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1375,145 +1506,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.aisheishei.com/2017/08/21/Jean-Christophe-Note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/1.jpg">
-      <meta itemprop="name" content="ta_shuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="爱谁谁">
-      <meta itemprop="description" content="我们坐着不同的井 望着同样的天">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 爱谁谁">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/08/21/Jean-Christophe-Note/" class="post-title-link" itemprop="url">《约翰·克利斯朵夫》节选</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2017-08-21 21:55:41" itemprop="dateCreated datePublished" datetime="2017-08-21T21:55:41+08:00">2017-08-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/life/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2017/08/21/Jean-Christophe-Note/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2017/08/21/Jean-Christophe-Note/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/2017/08/21/Jean-Christophe-Note/"></span>
-    </span>
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>4.1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>作者：[法] 罗曼·罗兰 </p>
-<p>出版年: 2012-1-1</p>
-<p>出版社: 江苏文艺</p>
-<p>译者：傅雷</p>
-<p>ISBN: 9787539946801</p>
-<p>豆瓣链接：<a target="_blank" rel="noopener" href="https://book.douban.com/subject/7000672/">https://book.douban.com/subject/7000672/</a></p>
-</blockquote>
-<p><br/><br/></p>
-<h2 align="center">卷三 · 少年</h2>
-<h4 align="center">第三部 · 阿达 <部分段落节选 P275-P282></h4>
-<br/>
-
-<p>克里斯朵夫认为责任是例外的固然不错，但爱情也一样是例外的。一切都是例外的。一切有点儿价值的东西，它的最可怕的敌人，并非是不好的东西，–（连恶意也有它的价值，）–而是它本身成了习惯性。心灵的致命的仇敌，乃是时间的磨蚀。</p>
-<p>阿达开始厌倦了。她不够聪明，不知道在一个像克里斯朵夫那样生机勃勃的人身上，想法使她的爱情与日俱新。在这次爱情中间，她的感官和虚荣心已经把所有的乐趣都榨取到了。现在她只剩下一桩乐趣，就是把爱情毁灭。她有那种暧昧的本能，为多少女子（连善良的在内）多少男子（连聪明的在内）所共有的。–他们都不能在人生中有所创造：作品，儿女，行动，什么都不能，但还有相当的生命力，受不了自己的一无所用。他们但愿别人跟自己一样的没用，便竭力想做到这一点。有时候这是无心的；他们一发觉这种居心不良的欲望，就大义凌然的把它打消。但多数的时候他们鼓励这种欲望，尽量把一切活着的，喜欢活着的，有资格活着的，加以摧毁；而摧毁的程度当然要看他们的力量如何：有些事小规模的，仅仅以周围亲近的人为对象；有些是大举进攻，以广大的群众为目标。把伟大的人物伟大的思想拉下来，拉得跟自己一般高低的批评家，还有以引诱爱人堕落为快的女孩子，是两种性质相同的恶兽。–可是后面的一种更讨人喜欢。</p>
-<p>因此阿达极想把克里斯朵夫腐化一下，使他屈辱。其实她还没有这个力量。便是腐化人家，她那点聪明也嫌不够；她自己也觉得，所以她怀恨克里斯朵夫的一大原因，就是她的爱情没有力量伤害他。她不承认有伤害他的欲望；要是能阻止自己，也许她还不会这么做。但她认为要伤害他而办不到未免太岂有此理。倘使一个女人没有一种幻像，使她觉得能完全驾驭那个爱她的人，给他不论是好是坏的影响，那就是这个男人爱她爱得不够，而她非要试试自己的力量不可了。克里斯朵夫没有留意到这些，所以阿达说着玩儿问他：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/08/21/Jean-Christophe-Note/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
@@ -1536,13 +1530,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">111k</span>
+    <span title="站点总字数">113k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:41</span>
+    <span title="站点阅读时长">1:43</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动

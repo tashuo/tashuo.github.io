@@ -6,7 +6,7 @@
   <link href="https://www.aisheishei.com/atom.xml" rel="self"/>
   
   <link href="https://www.aisheishei.com/"/>
-  <updated>2023-03-17T15:33:31.064Z</updated>
+  <updated>2023-04-14T11:06:41.413Z</updated>
   <id>https://www.aisheishei.com/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nestjs websocket 实现私聊、系统推送</title>
+    <link href="https://www.aisheishei.com/2023/04/14/nestjs-websocket/"/>
+    <id>https://www.aisheishei.com/2023/04/14/nestjs-websocket/</id>
+    <published>2023-04-14T11:04:24.000Z</published>
+    <updated>2023-04-14T11:06:41.413Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Nestjs-websocket开发记录&quot;&gt;&lt;a href=&quot;#Nestjs-websocket开发记录&quot; class=&quot;headerlink&quot; title=&quot;Nestjs websocket开发记录&quot;&gt;&lt;/a&gt;Nestjs websocket开发记录&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://docs.nestjs.com/websockets/gateways&quot;&gt;官方文档&lt;/a&gt;介绍的比较详细了，但实际开发过程中还是遇到了不少问题，在此做一下记录.&lt;/p&gt;
+&lt;h2 id=&quot;背景知识&quot;&gt;&lt;a href=&quot;#背景知识&quot; class=&quot;headerlink&quot; title=&quot;背景知识&quot;&gt;&lt;/a&gt;背景知识&lt;/h2&gt;&lt;h3 id=&quot;websocket&quot;&gt;&lt;a href=&quot;#websocket&quot; class=&quot;headerlink&quot; title=&quot;websocket&quot;&gt;&lt;/a&gt;websocket&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API&quot;&gt;https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;流行的websocket库&quot;&gt;&lt;a href=&quot;#流行的websocket库&quot; class=&quot;headerlink&quot; title=&quot;流行的websocket库&quot;&gt;&lt;/a&gt;流行的websocket库&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/websockets/ws&quot;&gt;ws&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/socketio/socket.io&quot;&gt;socket.io&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Nest配套&quot;&gt;&lt;a href=&quot;#Nest配套&quot; class=&quot;headerlink&quot; title=&quot;Nest配套&quot;&gt;&lt;/a&gt;Nest配套&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;In Nest, a gateway is simply a class annotated with @WebSocketGateway() decorator. Technically, gateways are platform-agnostic which makes them compatible with any WebSockets library once an adapter is created. There are two WS platforms supported out-of-the-box: socket.io and ws.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;nest提供了&lt;code&gt;gateway&lt;/code&gt;的概念，&lt;code&gt;gateway&lt;/code&gt;与平台无关，底层可以适配任何websocket库，此处选用更为流行的&lt;code&gt;socket.io&lt;/code&gt;做为示例，而且项目切换驱动的代码改动非常小，即便后面要改为&lt;code&gt;ws&lt;/code&gt;也没有太大负担，架构设计甚是优雅.&lt;/p&gt;
+&lt;h2 id=&quot;开发&quot;&gt;&lt;a href=&quot;#开发&quot; class=&quot;headerlink&quot; title=&quot;开发&quot;&gt;&lt;/a&gt;开发&lt;/h2&gt;&lt;h3 id=&quot;安装依赖&quot;&gt;&lt;a href=&quot;#安装依赖&quot; class=&quot;headerlink&quot; title=&quot;安装依赖&quot;&gt;&lt;/a&gt;安装依赖&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ pnpm i --save @nestjs/websockets @nestjs/platform-socket.io socket.io&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;em&gt;使用&lt;code&gt;ws&lt;/code&gt;库：&lt;/em&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ pnpm i --save @nestjs/websockets @nestjs/platform-ws ws&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="typescript" scheme="https://www.aisheishei.com/categories/typescript/"/>
+    
+    <category term="nestjs" scheme="https://www.aisheishei.com/categories/typescript/nestjs/"/>
+    
+    
+    <category term="socket.io" scheme="https://www.aisheishei.com/tags/socket-io/"/>
+    
+    <category term="webscoket" scheme="https://www.aisheishei.com/tags/webscoket/"/>
+    
+  </entry>
   
   <entry>
     <title>记一次mysql被黑的经历</title>
@@ -591,40 +626,6 @@
     
     <category term="笔记" scheme="https://www.aisheishei.com/categories/golang/%E7%AC%94%E8%AE%B0/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>《约翰·克利斯朵夫》节选</title>
-    <link href="https://www.aisheishei.com/2017/08/21/Jean-Christophe-Note/"/>
-    <id>https://www.aisheishei.com/2017/08/21/Jean-Christophe-Note/</id>
-    <published>2017-08-21T13:55:41.000Z</published>
-    <updated>2023-01-10T07:40:42.087Z</updated>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;作者：[法] 罗曼·罗兰 &lt;/p&gt;
-&lt;p&gt;出版年: 2012-1-1&lt;/p&gt;
-&lt;p&gt;出版社: 江苏文艺&lt;/p&gt;
-&lt;p&gt;译者：傅雷&lt;/p&gt;
-&lt;p&gt;ISBN: 9787539946801&lt;/p&gt;
-&lt;p&gt;豆瓣链接：&lt;a href=&quot;https://book.douban.com/subject/7000672/&quot;&gt;https://book.douban.com/subject/7000672/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;br/&gt;&lt;br/&gt;&lt;/p&gt;
-&lt;h2 align=&quot;center&quot;&gt;卷三 · 少年&lt;/h2&gt;
-&lt;h4 align=&quot;center&quot;&gt;第三部 · 阿达 &lt;部分段落节选 P275-P282&gt;&lt;/h4&gt;
-&lt;br/&gt;
-
-&lt;p&gt;克里斯朵夫认为责任是例外的固然不错，但爱情也一样是例外的。一切都是例外的。一切有点儿价值的东西，它的最可怕的敌人，并非是不好的东西，–（连恶意也有它的价值，）–而是它本身成了习惯性。心灵的致命的仇敌，乃是时间的磨蚀。&lt;/p&gt;
-&lt;p&gt;阿达开始厌倦了。她不够聪明，不知道在一个像克里斯朵夫那样生机勃勃的人身上，想法使她的爱情与日俱新。在这次爱情中间，她的感官和虚荣心已经把所有的乐趣都榨取到了。现在她只剩下一桩乐趣，就是把爱情毁灭。她有那种暧昧的本能，为多少女子（连善良的在内）多少男子（连聪明的在内）所共有的。–他们都不能在人生中有所创造：作品，儿女，行动，什么都不能，但还有相当的生命力，受不了自己的一无所用。他们但愿别人跟自己一样的没用，便竭力想做到这一点。有时候这是无心的；他们一发觉这种居心不良的欲望，就大义凌然的把它打消。但多数的时候他们鼓励这种欲望，尽量把一切活着的，喜欢活着的，有资格活着的，加以摧毁；而摧毁的程度当然要看他们的力量如何：有些事小规模的，仅仅以周围亲近的人为对象；有些是大举进攻，以广大的群众为目标。把伟大的人物伟大的思想拉下来，拉得跟自己一般高低的批评家，还有以引诱爱人堕落为快的女孩子，是两种性质相同的恶兽。–可是后面的一种更讨人喜欢。&lt;/p&gt;
-&lt;p&gt;因此阿达极想把克里斯朵夫腐化一下，使他屈辱。其实她还没有这个力量。便是腐化人家，她那点聪明也嫌不够；她自己也觉得，所以她怀恨克里斯朵夫的一大原因，就是她的爱情没有力量伤害他。她不承认有伤害他的欲望；要是能阻止自己，也许她还不会这么做。但她认为要伤害他而办不到未免太岂有此理。倘使一个女人没有一种幻像，使她觉得能完全驾驭那个爱她的人，给他不论是好是坏的影响，那就是这个男人爱她爱得不够，而她非要试试自己的力量不可了。克里斯朵夫没有留意到这些，所以阿达说着玩儿问他：&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="生活" scheme="https://www.aisheishei.com/categories/life/"/>
-    
-    
-    <category term="笔记" scheme="https://www.aisheishei.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
