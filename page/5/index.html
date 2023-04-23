@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -166,7 +166,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -197,6 +197,137 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.aisheishei.com/2017/07/11/go-by-example-array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/1.jpg">
+      <meta itemprop="name" content="ta_shuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱谁谁">
+      <meta itemprop="description" content="我们坐着不同的井 望着同样的天">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 爱谁谁">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/07/11/go-by-example-array/" class="post-title-link" itemprop="url">Go by Example - Array</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-07-11 16:10:26" itemprop="dateCreated datePublished" datetime="2017-07-11T16:10:26+08:00">2017-07-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/golang/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2017/07/11/go-by-example-array/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2017/07/11/go-by-example-array/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/2017/07/11/go-by-example-array/"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>965</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>翻译自 <a target="_blank" rel="noopener" href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Array"><a href="#Go-by-Example-Array" class="headerlink" title="Go by Example: Array"></a><center>Go by Example: Array</center></h2><p>golang中的数组是一个<strong>特定长度</strong>的元素有序集合。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 定义一个长度为5的元素类型为int的数组，元素的类型和数组的长度都是数组的属性。默认情况数组是零值，如int型的话就是数组长度个0。</span></span><br><span class="line">    <span class="keyword">var</span> a[<span class="number">5</span>] <span class="type">int</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;emp:&quot;</span>, a)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据索引设置／获取数组中某项的值</span></span><br><span class="line">    a[<span class="number">4</span>] = <span class="number">100</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;set:&quot;</span>, a)</span><br><span class="line">    fmt.Println(<span class="string">&quot;get:&quot;</span>, a[<span class="number">4</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取数组的长度</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;len:&quot;</span>, <span class="built_in">len</span>(a))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义并初始化一个数组</span></span><br><span class="line">    b := [<span class="number">5</span>]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;dcl:&quot;</span>, b)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数组类型是一维的，但是可以通过复合类型来构造多维的结构。</span></span><br><span class="line">    <span class="keyword">var</span> twoD [<span class="number">2</span>][<span class="number">3</span>]<span class="type">int</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">2</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">3</span>; j++ &#123;</span><br><span class="line">            twoD[i][j] = i + j</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;2d:&quot;</span>, twoD)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ go run arrays.go</span><br><span class="line">emp: [0 0 0 0 0]</span><br><span class="line"><span class="built_in">set</span>: [0 0 0 0 100]</span><br><span class="line">get: 100</span><br><span class="line">len: 5</span><br><span class="line">dcl: [1 2 3 4 5]</span><br><span class="line">2d:  [[0 1 2] [1 2 3]]</span><br></pre></td></tr></table></figure>
+
+
+<p>原文链接：<a target="_blank" rel="noopener" href="https://gobyexample.com/arrays">Go by Example: Arrays</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1375,140 +1506,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.aisheishei.com/2017/06/20/unix-domain-socket-vs-tcp-socket/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/1.jpg">
-      <meta itemprop="name" content="ta_shuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="爱谁谁">
-      <meta itemprop="description" content="我们坐着不同的井 望着同样的天">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 爱谁谁">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/06/20/unix-domain-socket-vs-tcp-socket/" class="post-title-link" itemprop="url">Unix Domain Socket vs TCP SOCKET</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2017-06-20 15:50:29" itemprop="dateCreated datePublished" datetime="2017-06-20T15:50:29+08:00">2017-06-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2017/06/20/unix-domain-socket-vs-tcp-socket/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2017/06/20/unix-domain-socket-vs-tcp-socket/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/2017/06/20/unix-domain-socket-vs-tcp-socket/"></span>
-    </span>
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>之前配置lnmp环境时有发现php-fpm既可以监听<code>127.0.0.1:9000</code>(ip+端口形式), 也可以监听<code>/path/to/unix/socket</code>(Unix Domain Socket形式), 用起来感觉并没有什么差异, 网上查下了资料，大略总结下。</p>
-<h2 id="Unix-Domain-Socket"><a href="#Unix-Domain-Socket" class="headerlink" title="Unix Domain Socket"></a>Unix Domain Socket</h2><blockquote>
-<p>Unix domain socket 或者 IPC socket是一种终端，可以使 <strong>同一台操作系统</strong> 上的两个或多个进程进行数据通信。与管道相比，Unix domain sockets 既可以使用字节流，又可以使用数据队列，而管道通信则只能使用字节流。Unix domain sockets的接口和Internet socket很像，但它不使用网络底层协议来通信。Unix domain socket 的功能是POSIX操作系统里的一种组件。</p>
-</blockquote>
-<blockquote>
-<p>Unix domain sockets <strong>使用系统文件的地址来作为自己的身份</strong>。它可以被系统进程引用。所以两个进程可以同时打开一个Unix domain sockets来进行通信。不过这种通信方式是发生在系统内核里而不会在网络里传播。</p>
-</blockquote>
-<h3 id="同一台操作系统"><a href="#同一台操作系统" class="headerlink" title="同一台操作系统"></a>同一台操作系统</h3><ul>
-<li>直接弊端: 限定UDS的使用只能在同一台服务器，<strong>即限定Nginx和php必须部署在同一台机</strong>。</li>
-</ul>
-<h3 id="系统文件标识身份"><a href="#系统文件标识身份" class="headerlink" title="系统文件标识身份"></a>系统文件标识身份</h3><ul>
-<li>方便利用linux的文件访问权限机制，来控制进程的访问权限。如Nginx运行用户为www, 则该socket文件必须对www用户有读写的权限，而其他没有读写权限的进程无法与php-fpm进程通信。</li>
-<li><em>less copying of data, fewer context switches</em>。相比基于TCP/IP协议栈的形式，UDS减少了如数据安全校验、路由、流量控制、封包解包等操作的性能消耗，在性能表现方面略高，不过这方面的性能优势只是理论上的，实际线上环境的差异应该不大。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/06/20/unix-domain-socket-vs-tcp-socket/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1533,13 +1530,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">113k</span>
+    <span title="站点总字数">116k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:43</span>
+    <span title="站点阅读时长">1:46</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动

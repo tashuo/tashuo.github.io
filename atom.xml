@@ -6,7 +6,7 @@
   <link href="https://www.aisheishei.com/atom.xml" rel="self"/>
   
   <link href="https://www.aisheishei.com/"/>
-  <updated>2023-04-14T11:06:41.413Z</updated>
+  <updated>2023-04-23T10:08:56.269Z</updated>
   <id>https://www.aisheishei.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从零开始编写Nest库</title>
+    <link href="https://www.aisheishei.com/2023/04/23/first-nest-library/"/>
+    <id>https://www.aisheishei.com/2023/04/23/first-nest-library/</id>
+    <published>2023-04-23T10:00:58.000Z</published>
+    <updated>2023-04-23T10:08:56.269Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;十万个为什么&quot;&gt;&lt;a href=&quot;#十万个为什么&quot; class=&quot;headerlink&quot; title=&quot;十万个为什么&quot;&gt;&lt;/a&gt;十万个为什么&lt;/h3&gt;&lt;p&gt;&lt;code&gt;nest&lt;/code&gt;库是什么？&lt;code&gt;nest&lt;/code&gt;是一个&lt;code&gt;typescript&lt;/code&gt;构建的&lt;code&gt;node&lt;/code&gt;框架，那&lt;code&gt;nest&lt;/code&gt;库可以理解为依赖&lt;code&gt;nest&lt;/code&gt;框架的&lt;code&gt;node&lt;/code&gt;库？&lt;code&gt;node&lt;/code&gt;是一个&lt;code&gt;javascript&lt;/code&gt;服务端的运行环境，那又要怎样用&lt;code&gt;typescript&lt;/code&gt;编写&lt;code&gt;javascript&lt;/code&gt;库呢？做为一只从其他语言(&lt;code&gt;js&lt;/code&gt;几乎零基础只会简单的&lt;code&gt;jQuery&lt;/code&gt;)转来学习&lt;code&gt;nest&lt;/code&gt;的菜鸟刚开始总会在某些时刻冷不丁得被这些概念绕的云里雾里，不过是因为直接跨过&lt;code&gt;js&lt;/code&gt;、&lt;code&gt;node&lt;/code&gt;、&lt;code&gt;ts&lt;/code&gt;直接啃&lt;code&gt;nest&lt;/code&gt;的原因，底层建筑不牢固直接搬砖终究是雾里看花，而从零手撸一个&lt;code&gt;nest&lt;/code&gt;库不妨可以视为一个敲门砖，可以带我们看一探&lt;code&gt;js&lt;/code&gt;世界的冰山一角.&lt;/p&gt;
+&lt;h3 id=&quot;撸起袖子开干&quot;&gt;&lt;a href=&quot;#撸起袖子开干&quot; class=&quot;headerlink&quot; title=&quot;撸起袖子开干&quot;&gt;&lt;/a&gt;撸起袖子开干&lt;/h3&gt;&lt;h4 id=&quot;给它一个家&quot;&gt;&lt;a href=&quot;#给它一个家&quot; class=&quot;headerlink&quot; title=&quot;给它一个家&quot;&gt;&lt;/a&gt;给它一个家&lt;/h4&gt;&lt;p&gt;&lt;code&gt;nest&lt;/code&gt;库终究也是一个独立的项目，和其他开源库一样我们使用&lt;code&gt;github&lt;/code&gt;来做版本管理，新建一个空白仓库&lt;code&gt;clone&lt;/code&gt;到本地.&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$: git &lt;span class=&quot;built_in&quot;&gt;clone&lt;/span&gt; https://github.com/tashuo/nestjs-config&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$: &lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; nestjs-config&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;给它一支指挥棒&quot;&gt;&lt;a href=&quot;#给它一支指挥棒&quot; class=&quot;headerlink&quot; title=&quot;给它一支指挥棒&quot;&gt;&lt;/a&gt;给它一支指挥棒&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;npm&lt;/code&gt; is the world’s largest software registry. Open source developers from every continent use npm to share and borrow packages, and many organizations use npm to manage private development as well.&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="typescript" scheme="https://www.aisheishei.com/categories/typescript/"/>
+    
+    <category term="nestjs" scheme="https://www.aisheishei.com/categories/typescript/nestjs/"/>
+    
+    
+    <category term="npm" scheme="https://www.aisheishei.com/tags/npm/"/>
+    
+    <category term="jest" scheme="https://www.aisheishei.com/tags/jest/"/>
+    
+    <category term="javascript" scheme="https://www.aisheishei.com/tags/javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>nestjs websocket 实现私聊、系统推送</title>
@@ -579,34 +610,6 @@
     <id>https://www.aisheishei.com/2017/08/24/go-by-example-select/</id>
     <published>2017-08-24T02:03:07.000Z</published>
     <updated>2023-01-10T07:40:42.122Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;翻译自 &lt;a href=&quot;https://gobyexample.com/&quot;&gt;https://gobyexample.com/&lt;/a&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Go by Example&lt;/p&gt;
-&lt;p&gt;Go is an open source</summary>
-        
-      
-    
-    
-    
-    <category term="golang" scheme="https://www.aisheishei.com/categories/golang/"/>
-    
-    <category term="笔记" scheme="https://www.aisheishei.com/categories/golang/%E7%AC%94%E8%AE%B0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Go by Example - Channel Directions</title>
-    <link href="https://www.aisheishei.com/2017/08/23/go-by-example-channel-direction/"/>
-    <id>https://www.aisheishei.com/2017/08/23/go-by-example-channel-direction/</id>
-    <published>2017-08-23T09:04:20.000Z</published>
-    <updated>2023-01-10T07:40:42.094Z</updated>
     
     
       
