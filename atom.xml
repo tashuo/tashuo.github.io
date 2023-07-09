@@ -6,7 +6,7 @@
   <link href="https://www.aisheishei.com/atom.xml" rel="self"/>
   
   <link href="https://www.aisheishei.com/"/>
-  <updated>2023-04-23T10:08:56.269Z</updated>
+  <updated>2023-07-09T15:31:44.230Z</updated>
   <id>https://www.aisheishei.com/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nest-command-tool</title>
+    <link href="https://www.aisheishei.com/2023/07/09/nest-command-tool/"/>
+    <id>https://www.aisheishei.com/2023/07/09/nest-command-tool/</id>
+    <published>2023-07-09T15:30:53.000Z</published>
+    <updated>2023-07-09T15:31:44.230Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;&lt;code&gt;nest&lt;/code&gt;官方未提供自定义命令的模块，所以出现很多功能丰富的第三方库，比如的有&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="typescript" scheme="https://www.aisheishei.com/categories/typescript/"/>
+    
+    <category term="nestjs" scheme="https://www.aisheishei.com/categories/typescript/nestjs/"/>
+    
+    
+    <category term="npm" scheme="https://www.aisheishei.com/tags/npm/"/>
+    
+    <category term="jest" scheme="https://www.aisheishei.com/tags/jest/"/>
+    
+    <category term="javascript" scheme="https://www.aisheishei.com/tags/javascript/"/>
+    
+    <category term="yargs" scheme="https://www.aisheishei.com/tags/yargs/"/>
+    
+    <category term="commander" scheme="https://www.aisheishei.com/tags/commander/"/>
+    
+  </entry>
   
   <entry>
     <title>从零开始编写Nest库</title>
@@ -582,34 +617,6 @@
     <id>https://www.aisheishei.com/2017/08/24/go-by-example-timeout/</id>
     <published>2017-08-24T03:05:22.000Z</published>
     <updated>2023-01-10T07:40:42.133Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;翻译自 &lt;a href=&quot;https://gobyexample.com/&quot;&gt;https://gobyexample.com/&lt;/a&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Go by Example&lt;/p&gt;
-&lt;p&gt;Go is an open source</summary>
-        
-      
-    
-    
-    
-    <category term="golang" scheme="https://www.aisheishei.com/categories/golang/"/>
-    
-    <category term="笔记" scheme="https://www.aisheishei.com/categories/golang/%E7%AC%94%E8%AE%B0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Go by Example - Select</title>
-    <link href="https://www.aisheishei.com/2017/08/24/go-by-example-select/"/>
-    <id>https://www.aisheishei.com/2017/08/24/go-by-example-select/</id>
-    <published>2017-08-24T02:03:07.000Z</published>
-    <updated>2023-01-10T07:40:42.122Z</updated>
     
     
       
