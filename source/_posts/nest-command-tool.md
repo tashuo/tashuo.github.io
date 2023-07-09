@@ -1,5 +1,5 @@
 ---
-title: nest-command-tool
+title: nest命令行工具
 date: 2023-07-09 23:30:53
 categories:
 - typescript
@@ -25,7 +25,7 @@ tags:
 
 ### 使用
 项目提供了`@Command`、`@Commands`和`@OriginYargsCommand`三个装饰器，分别用于单个命令、多个命令及原生yargs命令的注册.
-
+<!-- more -->
 1. @Command
 
 	直接声明单个命令，可以提供完整的配置，也可使用自动生成的配置，如下所示：
