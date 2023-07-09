@@ -2515,7 +2515,7 @@ Pragma: no-cache
       </tags>
   </entry>
   <entry>
-    <title>nest-command-tool</title>
+    <title>nest命令行工具</title>
     <url>/2023/07/09/nest-command-tool/</url>
     <content><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p><code>nest</code>官方未提供自定义命令的模块，所以出现很多功能丰富的第三方库，比如的有<a href="https://github.com/Pop-Code/nestjs-console">nestjs-console</a>(基于<a href="https://github.com/tj/commander.js">commande</a>)、<a href="https://gitlab.com/aa900031/nestjs-command">nestjs-command</a>(基于<a href="https://github.com/yargs/yargs">yargs</a>)，两者都提供了完善的命令行工具所需配置，引入项目及使用也很方便，但都不支持批量注册命令，每个命令的注册都要提供完整的配置信息，对于某些场景可能不是特别合适(比如偷懒)，所以奔着学习的目的新开一个项目实现缺失的功能</p>
 <h3 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h3><p>整个项目功能非常简单，逻辑也很清晰，主要有以下三点：</p>
@@ -2526,6 +2526,7 @@ Pragma: no-cache
 </ol>
 <p>具体实现可以在<a href="https://github.com/tashuo/nest-command">nest-command</a>项目中查看</p>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>项目提供了<code>@Command</code>、<code>@Commands</code>和<code>@OriginYargsCommand</code>三个装饰器，分别用于单个命令、多个命令及原生yargs命令的注册.</p>
+<span id="more"></span>
 <ol>
 <li><p>@Command</p>
 <p> 直接声明单个命令，可以提供完整的配置，也可使用自动生成的配置，如下所示：</p>
