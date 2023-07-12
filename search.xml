@@ -2558,4 +2558,104 @@ Pragma: no-cache
         <tag>commander</tag>
       </tags>
   </entry>
+  <entry>
+    <title>浅谈原型链</title>
+    <url>/2023/04/23/javascript-prototype/</url>
+    <content><![CDATA[<h3 id="上题"><a href="#上题" class="headerlink" title="上题"></a>上题</h3><p>先上前菜看段代码，思考以下几个问题</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"># test.<span class="property">ts</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Thing</span> &#123;</span><br><span class="line">  born = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;time to born&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">die</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;time to die&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Thing</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name = <span class="string">&quot;dog&quot;</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  eat = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;eat&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">say</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Hi, i&#x27;m <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cat = <span class="keyword">new</span> <span class="title class_">Animal</span>(<span class="string">&quot;cat&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> dog = <span class="keyword">new</span> <span class="title class_">Thing</span>();</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>以下几个的值分别是什么</p>
+<ol>
+<li><code>Object.getOwnPropertyNames(cat)</code></li>
+<li><code>Object.getOwnPropertyNames(dog)</code></li>
+<li><code>Object.getOwnPropertyNames(Object.getPrototypeOf(cat))</code></li>
+<li><code>Object.getOwnPropertyNames(Object.getPrototypeOf(dog))</code></li>
+<li><code>Object.getOwnPropertyNames(Animal)</code></li>
+<li><code>Object.getOwnPropertyNames(Thing)</code><span id="more"></span>
+<h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><h4 id="1-Object-getOwnPropertyNames-cat"><a href="#1-Object-getOwnPropertyNames-cat" class="headerlink" title="1. Object.getOwnPropertyNames(cat)"></a>1. <code>Object.getOwnPropertyNames(cat)</code></h4><code>cat</code>对象由<code>Animal</code>类实例化而来，继承Animal类(及其父类及父类的父类…)的所有属性，即**<code>[ &#39;born&#39;, &#39;eat&#39;, &#39;name&#39; ]</code>**</li>
+</ol>
+<h4 id="2-Object-getOwnPropertyNames-dog"><a href="#2-Object-getOwnPropertyNames-dog" class="headerlink" title="2. Object.getOwnPropertyNames(dog)"></a>2. <code>Object.getOwnPropertyNames(dog)</code></h4><p>同理1，dog对象继承Thing，拥有的属性是**<code>[ &#39;born&#39; ]</code>**</p>
+<h4 id="3-Object-getOwnPropertyNames-Object-getPrototypeOf-cat"><a href="#3-Object-getOwnPropertyNames-Object-getPrototypeOf-cat" class="headerlink" title="3. Object.getOwnPropertyNames(Object.getPrototypeOf(cat))"></a>3. <code>Object.getOwnPropertyNames(Object.getPrototypeOf(cat))</code></h4><p><code>cat</code>对象的原型对象即<code>Animal.prototype</code>，<strong>原型对象默认有一个constructor属性指向构造函数本身</strong>，即<code>Animal.prototype.constructor = Animal</code>，再加上<code>Animal</code>类本身定义的say方法，所以结果是**<code>[ &#39;constructor&#39;, &#39;say&#39; ]</code>**</p>
+<h4 id="4-Object-getOwnPropertyNames-Object-getPrototypeOf-dog"><a href="#4-Object-getOwnPropertyNames-Object-getPrototypeOf-dog" class="headerlink" title="4. Object.getOwnPropertyNames(Object.getPrototypeOf(dog))"></a>4. <code>Object.getOwnPropertyNames(Object.getPrototypeOf(dog))</code></h4><p>同理3，结果是**<code>[ &#39;constructor&#39;, &#39;die&#39; ]</code>**</p>
+<h4 id="5-Object-getOwnPropertyNames-Animal"><a href="#5-Object-getOwnPropertyNames-Animal" class="headerlink" title="5. Object.getOwnPropertyNames(Animal)"></a>5. <code>Object.getOwnPropertyNames(Animal)</code></h4><p>这个有点绕，在一切皆对象的<code>JavaScript</code>中，<code>Animal</code>类也是一个函数对象，实例化内置的<code>Function</code>对象而来，底层的定义类似于<code>let Animal = new Function(&#39;name&#39;, &#123; ...Animal构造函数的方法体... &#125;)</code>，所以继承了Function的所有属性，即**<code>[ &#39;length&#39;, &#39;name&#39;, &#39;arguments&#39;, &#39;caller&#39;, &#39;prototype&#39; ]</code>**(ES5, 新标准中Function的属性有所出入，此处暂不考虑)</p>
+<h4 id="6-Object-getOwnPropertyNames-Thing"><a href="#6-Object-getOwnPropertyNames-Thing" class="headerlink" title="6. Object.getOwnPropertyNames(Thing)"></a>6. <code>Object.getOwnPropertyNames(Thing)</code></h4><p>同理5，结果一样是**<code>[ &#39;length&#39;, &#39;name&#39;, &#39;arguments&#39;, &#39;caller&#39;, &#39;prototype&#39; ]</code>**</p>
+<h3 id="深入"><a href="#深入" class="headerlink" title="深入"></a>深入</h3><p>上面出现了三类数据</p>
+<ol>
+<li>类/class，即<code>Animal</code>、<code>Thing</code></li>
+<li>类的实例，即<code>cat</code>、<code>dog</code></li>
+<li>原型对象，即<code>Object.getPrototypeOf(cat)</code>、<code>Object.getPrototypeOf(dog)</code></li>
+</ol>
+<p>这三者之间的关联说简单也简单，说难也难，对于从其他语言转过来的筒子来说概念上很容易绕晕，首先看第3个本文重点关注的原型对象</p>
+<h4 id="原型对象"><a href="#原型对象" class="headerlink" title="原型对象"></a>原型对象</h4><p>原型对象相关的概念有4个：<code>__proto__</code>、<code>prototype</code>、<code>Object.setPrototypeOf</code>和<code>Object.getPrototypeOf</code>，我们看下它们的作用及历史渊源：</p>
+<blockquote>
+<ul>
+<li><p>构造函数的 “prototype” 属性自古以来就起作用。这是使用给定原型创建对象的最古老的方式。</p>
+</li>
+<li><p>之后，在 2012 年，Object.create 出现在标准中。它提供了使用给定原型创建对象的能力。但没有提供 get/set 它的能力。一些浏览器实现了非标准的 __proto__ 访问器，以为开发者提供更多的灵活性。</p>
+</li>
+<li><p>之后，在 2015 年，Object.setPrototypeOf 和 Object.getPrototypeOf 被加入到标准中，执行与 __proto__ 相同的功能。由于 __proto__ 实际上已经在所有地方都得到了实现，但它已过时，所以被加入到该标准的附件 B 中，即：在非浏览器环境下，它的支持是可选的。</p>
+</li>
+<li><p>之后，在 2022 年，官方允许在对象字面量 {…} 中使用 __proto__（从附录 B 中移出来了），但不能用作 getter/setter obj.__proto__（仍在附录 B 中）。</p>
+</li>
+</ul>
+</blockquote>
+<p><em>引用自<a href="https://zh.javascript.info/prototype-methods">https://zh.javascript.info/prototype-methods</a></em></p>
+<p>简单来讲，目前的标准有两种获取原型对象的方式，<code>prototype</code>和<code>Object.getPrototypeOf</code>，而且有使用限制：</p>
+<ul>
+<li><strong><code>prototype</code>只能用于构造函数，如本文中的<code>Animal</code>、<code>Thing</code></strong></li>
+</ul>
+<p>这句话除了含有<strong>非构造函数只能用<code>Object.getPrototypeOf</code>获取原型对象</strong>的意义外，还隐藏着另外一个原则，即<strong>构造函数也可以用<code>Object.getPrototypeOf</code>获取原型对象</strong>，这含义真的是九曲十八弯，脑袋冒烟不打紧，我们继续看，根据<code>JavaScript</code>原型链的定义，可得出以下结论：</p>
+<ol>
+<li><code>Object.getPrototypeOf(cat)</code> = <code>Animal.prototype</code></li>
+<li><code>Object.getPrototypeOf(dog)</code> = <code>Thing.prototype</code></li>
+<li><code>Object.getPrototypeOf(Animal.prototype)</code> = <code>Thing.prototype</code></li>
+<li><code>Object.getPrototypeOf(Thing.prototype)</code> = <code>Object.prototype</code></li>
+<li><code>Object.getPrototypeOf(Object.prototype)</code> = <code>null</code></li>
+</ol>
+<p>这个就是经典的原型链，这也是<code>JavaScript</code> <em>一切都从对象继承而来</em> 的原因，上面刚说了<em>构造函数也可以用<code>Object.getPrototypeOf</code>获取原型对象</em>，那<code>Animal</code>和<code>Thing</code>的原型对象分别是啥？<code>Object.getPrototypeOf(Thing) = ?</code></p>
+<h4 id="类"><a href="#类" class="headerlink" title="类"></a>类</h4><p><code>class</code>关键字非严谨层面可以看作一个语法糖，通过编译后的js关键代码可见一斑：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"># test.<span class="property">js</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">Thing</span> = <span class="comment">/** <span class="doctag">@class</span> */</span> (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Thing</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">born</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;time to born&quot;</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title class_">Thing</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">die</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;time to die&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Thing</span>;</span><br><span class="line">&#125;());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>class中定义的属性及<code>constructor</code>方法逻辑构成了同名的函数(即构造函数)，定义的方法被加在构造函数的原型链上(<code>prototype</code>)；</p>
+<p>而实例化对象的关键字<code>new</code>底层的逻辑大致是以下三步：</p>
+<ol>
+<li>创建一个新对象</li>
+<li>执行构造函数，并将this指向当前的新对象</li>
+<li>将新对象的原型对象设置为构造函数的原型对象</li>
+</ol>
+<p>第2步使实例化的对象继承了类的所有属性，可以解释<code>Object.getOwnPropertyNames(cat)</code>和<code>Object.getOwnPropertyNames(dog)</code>的值；</p>
+<p>第3步原型对象的设置，使实例化的对象继承了原型链上的所有方法，可以解释<code>Object.getOwnPropertyNames(Object.getPrototypeOf(cat))</code>和<code>Object.getOwnPropertyNames(Object.getPrototypeOf(dog))</code>的值；</p>
+<p>那上小节提及的<code>Animal</code>构造函数对象本身的原型链(<code>Object.getPrototypeOf(Animal)</code>)和<code>Thing</code>构造函数对象本身的原型链(<code>Object.getPrototypeOf(Thing)</code>)的值又是什么呢？</p>
+<p>其实上面稍为提到过，构造函数对象本身是由内建的类型<code>Function</code>实例化而来，以此可推论出<code>Object.getPrototypeOf(Thing)</code> = <code>Function.prototype</code>，简单来讲这里的<code>Thing</code>和<code>Function</code>类比于前面的<code>dog</code>和<code>Thing</code>，这里的绕在于<code>JavaScript</code>的类型系统，<code>class Thing</code>表面是一个类，实际上是一个构造函数，而底层又是<code>Function</code>类的实例，<code>Thing</code>是别人(Function)的实例，它又可以再实例出别的实例(dog)，实例实例无穷尽也~ 其实站在<code>JavaScript</code>一切皆对象的角度看，没有那些眼花缭乱的类呀、实例呀、函数呀、字符串呀、整数呀、布尔值呀等等，对v8来讲都是<code>object</code>，等等，是不是还有漏了个<code>Animal</code>，<code>Object.getPrototypeOf(Animal)</code> = ？</p>
+<p>这里又不得不提<code>extends</code>关键字了，和<code>class</code>类似，也是一个语法糖，咱直接看编译后的js关键代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"># test.<span class="property">js</span></span><br><span class="line"><span class="keyword">var</span> __extends = (<span class="variable language_">this</span> &amp;&amp; <span class="variable language_">this</span>.<span class="property">__extends</span>) || (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> extendStatics = <span class="keyword">function</span> (<span class="params">d, b</span>) &#123;</span><br><span class="line">        extendStatics = <span class="title class_">Object</span>.<span class="property">setPrototypeOf</span> ||</span><br><span class="line">            (&#123; <span class="attr">__proto__</span>: [] &#125; <span class="keyword">instanceof</span> <span class="title class_">Array</span> &amp;&amp; <span class="keyword">function</span> (<span class="params">d, b</span>) &#123; d.<span class="property">__proto__</span> = b; &#125;) ||</span><br><span class="line">            <span class="keyword">function</span> (<span class="params">d, b</span>) &#123; <span class="keyword">for</span> (<span class="keyword">var</span> p <span class="keyword">in</span> b) <span class="keyword">if</span> (<span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">hasOwnProperty</span>.<span class="title function_">call</span>(b, p)) d[p] = b[p]; &#125;;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">extendStatics</span>(d, b);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">d, b</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> b !== <span class="string">&quot;function&quot;</span> &amp;&amp; b !== <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>(<span class="string">&quot;Class extends value &quot;</span> + <span class="title class_">String</span>(b) + <span class="string">&quot; is not a constructor or null&quot;</span>);</span><br><span class="line">        <span class="title function_">extendStatics</span>(d, b);</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">__</span>(<span class="params"></span>) &#123; <span class="variable language_">this</span>.<span class="property">constructor</span> = d; &#125;</span><br><span class="line">        d.<span class="property"><span class="keyword">prototype</span></span> = b === <span class="literal">null</span> ? <span class="title class_">Object</span>.<span class="title function_">create</span>(b) : (__.<span class="property"><span class="keyword">prototype</span></span> = b.<span class="property"><span class="keyword">prototype</span></span>, <span class="keyword">new</span> <span class="title function_">__</span>());</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">Animal</span> = <span class="comment">/** <span class="doctag">@class</span> */</span> (<span class="keyword">function</span> (<span class="params">_super</span>) &#123;</span><br><span class="line">    <span class="title function_">__extends</span>(<span class="title class_">Animal</span>, _super);</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Animal</span>(<span class="params">type</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (type === <span class="keyword">void</span> <span class="number">0</span>) &#123; type = <span class="string">&quot;dog&quot;</span>; &#125;</span><br><span class="line">        <span class="keyword">var</span> _this = _super.<span class="title function_">call</span>(<span class="variable language_">this</span>) || <span class="variable language_">this</span>;</span><br><span class="line">        _this.<span class="property">eat</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;eat&quot;</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">        _this.<span class="property">type</span> = type;</span><br><span class="line">        <span class="keyword">return</span> _this;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title class_">Animal</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">say</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hi, i&#x27;m &quot;</span>.<span class="title function_">concat</span>(<span class="variable language_">this</span>.<span class="property">type</span>));</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Animal</span>;</span><br><span class="line">&#125;(<span class="title class_">Thing</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>有两个关键点：</p>
+<ol>
+<li><p><code>extendStatics(d, b)</code>其实执行了<code>Object.setPrototypeOf(d, b)</code>，在本文中即<code>Object.setPrototypeOf(Animal, Thing)</code>，这一下子不就找到了答案？<code>Object.getPrototypeOf(Animal)</code> = <code>Thing</code>；</p>
+</li>
+<li><p><code>d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());</code><br>这行代码大致可以拆分为以下几个流程：</p>
+<ol>
+<li>覆盖__的原型链: __.prototype = b.prototype</li>
+<li>使用__构造函数创建对象abc: let abc = { constructor: d; }</li>
+<li>设置abc的原型对象: abc.__proto__ = b.prototype;</li>
+<li>设置d的原型对象: d.prototype = abc</li>
+</ol>
+<p> 这个流程中，第一次看到整篇都在谈却一直没见踪影的的原型对象本尊，上面通过<code>prototype</code>和<code>Object.getPrototypeOf</code>获取到的就是abc这样的原型对象，结合我们的实例可得出：<code>Object.getPrototypeOf(cat)</code> = <code>Animal.prototype</code> = <code>abc</code>，<code>Object.getPrototypeOf(Animal.prototype)</code> = <code>abc.__proto__</code> = <code>Thing.prototype</code>，跟我们上面谈到的也对上了号</p>
+</li>
+</ol>
+<p><em>最后祭出这张神图！！</em><br><img src="https://i.imgloc.com/2023/07/12/VgXXkZ.png" alt="VgXXkZ.png"></p>
+<h3 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h3><p>完结撒花🎉，原型链在日常开发中直接碰到的不多，但每次遇到相关的问题都会很难绕出来，所以大致做了一下总结，有纰漏及错误之处还请勇猛指出</p>
+<p>本文完整示例代码：<a href="https://github.com/tashuo/note/tree/master/typescript/prototype">https://github.com/tashuo/note/tree/master/typescript/prototype</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://zh.javascript.info/prototypes">https://zh.javascript.info/prototypes</a></p>
+<p><a href="https://juejin.cn/post/6844903989088092174">https://juejin.cn/post/6844903989088092174</a></p>
+]]></content>
+      <categories>
+        <category>typescript</category>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>prototype</tag>
+        <tag>原型链</tag>
+      </tags>
+  </entry>
 </search>

@@ -155,18 +155,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -197,6 +197,138 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.aisheishei.com/2017/08/02/go-by-example-interface/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/1.jpg">
+      <meta itemprop="name" content="ta_shuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱谁谁">
+      <meta itemprop="description" content="我们坐着不同的井 望着同样的天">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 爱谁谁">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/08/02/go-by-example-interface/" class="post-title-link" itemprop="url">Go by Example - Interfaces</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-08-02 11:05:36" itemprop="dateCreated datePublished" datetime="2017-08-02T11:05:36+08:00">2017-08-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/golang/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2017/08/02/go-by-example-interface/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2017/08/02/go-by-example-interface/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/2017/08/02/go-by-example-interface/"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>翻译自 <a target="_blank" rel="noopener" href="https://gobyexample.com/">https://gobyexample.com/</a></p>
+<blockquote>
+<p>Go by Example</p>
+<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
+<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
+</blockquote>
+<h2 id="Go-by-Example-Interfaces"><a href="#Go-by-Example-Interfaces" class="headerlink" title="Go by Example: Interfaces"></a><center>Go by Example: Interfaces</center></h2><p>golang中接口被定义为一系列方法的集合。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;math&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个基本几何图形的接口</span></span><br><span class="line"><span class="keyword">type</span> geometry <span class="keyword">interface</span> &#123;</span><br><span class="line">    area() <span class="type">float64</span></span><br><span class="line">    perim() <span class="type">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义两个结构体 rect和circle 实现这个接口</span></span><br><span class="line"><span class="keyword">type</span> rect <span class="keyword">struct</span> &#123;</span><br><span class="line">    width, height <span class="type">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> circle <span class="keyword">struct</span> &#123;</span><br><span class="line">    radius <span class="type">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// golang中实现一个接口类型，只需实现该接口所有的方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r rect)</span></span> area() <span class="type">float64</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> r.width * r.height</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r rect)</span></span> perim() <span class="type">float64</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>*r.width + <span class="number">2</span>*r.height</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c circle)</span></span> area() <span class="type">float64</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> math.Pi * c.radius * c.radius</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c circle)</span></span> perim() <span class="type">float64</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> * math.Pi * c.radius</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果一个变量实现了一个接口类型，则该变量可以调用接口所有的方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">measure</span><span class="params">(g geometry)</span></span> &#123;</span><br><span class="line">    fmt.Println(g)</span><br><span class="line">    fmt.Println(g.area())</span><br><span class="line">    fmt.Println(g.perim())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    r := rect&#123;width: <span class="number">3</span>, height: <span class="number">4</span>&#125;</span><br><span class="line">    c := circle&#123;radius: <span class="number">5</span>&#125;</span><br><span class="line"></span><br><span class="line">    measure(r)</span><br><span class="line">    measure(c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ go run interfaces.go</span><br><span class="line">&#123;3 4&#125;</span><br><span class="line">12</span><br><span class="line">14</span><br><span class="line">&#123;5&#125;</span><br><span class="line">78.53981633974483</span><br><span class="line">31.41592653589793</span><br></pre></td></tr></table></figure>
+
+
+<p>延伸阅读: <a target="_blank" rel="noopener" href="http://jordanorelli.tumblr.com/post/32665860244/how-to-use-interfaces-in-go">how-to-use-interfaces-in-go</a></p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://gobyexample.com/interfaces">Go by Example: Interfaces</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1370,136 +1502,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.aisheishei.com/2017/07/12/go-by-example-map/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/1.jpg">
-      <meta itemprop="name" content="ta_shuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="爱谁谁">
-      <meta itemprop="description" content="我们坐着不同的井 望着同样的天">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 爱谁谁">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/07/12/go-by-example-map/" class="post-title-link" itemprop="url">Go by Example - Maps</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2017-07-12 11:25:16" itemprop="dateCreated datePublished" datetime="2017-07-12T11:25:16+08:00">2017-07-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/golang/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2017/07/12/go-by-example-map/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2017/07/12/go-by-example-map/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/2017/07/12/go-by-example-map/"></span>
-    </span>
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>翻译自 <a target="_blank" rel="noopener" href="https://gobyexample.com/">https://gobyexample.com/</a></p>
-<blockquote>
-<p>Go by Example</p>
-<p>Go is an open source programming language designed for building simple, fast, and reliable software.</p>
-<p>Go by Example is a hands-on introduction to Go using annotated example programs. Check out the first example or browse the full list below.</p>
-</blockquote>
-<h2 id="Go-by-Example-Maps"><a href="#Go-by-Example-Maps" class="headerlink" title="Go by Example: Maps"></a><center>Go by Example: Maps</center></h2><p>map是golang内置关联数组类型，在其他语言中也被称为hash或字典。</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 使用内置的make函数定义一个map，`make(map[key-type]val-type)`</span></span><br><span class="line">    <span class="comment">// 根据索引赋值</span></span><br><span class="line">    m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)</span><br><span class="line">    m[<span class="string">&quot;k1&quot;</span>] = <span class="number">7</span></span><br><span class="line">    m[<span class="string">&quot;k2&quot;</span>] = <span class="number">13</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;map:&quot;</span>, m)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据索引取值</span></span><br><span class="line">    v1 := m[<span class="string">&quot;k1&quot;</span>]</span><br><span class="line">    fmt.Println(<span class="string">&quot;v1:&quot;</span>, v1)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取map的长度</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;len:&quot;</span>, <span class="built_in">len</span>(m))</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 内置delete函数删除map中的元素</span></span><br><span class="line">    <span class="built_in">delete</span>(m, <span class="string">&quot;k2&quot;</span>)</span><br><span class="line">    fmt.Println(<span class="string">&quot;map:&quot;</span>, m)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取map中某个索引对应的值。</span></span><br><span class="line">    <span class="comment">// 返回的第一个值是map中对应的值，如果存在的话，否则是map的元素类型的零值。</span></span><br><span class="line">    <span class="comment">// 返回的第二值可选，如果k2在m中，prs为true。否则，prs为false，并且返回的第一个值是map的元素类型的零值。</span></span><br><span class="line">    <span class="comment">// 该例中省略了第一个返回值。这种用法可以用来判断某个key是否在map中存在，如果直接使用第一返回值是无法判断返回的零值是因为key不存在还是该key对应的元素刚好是零值。</span></span><br><span class="line">    _, prs := m[<span class="string">&quot;k2&quot;</span>]</span><br><span class="line">    fmt.Println(<span class="string">&quot;prs:&quot;</span>, prs)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// map也可以如其他元素一样定义和初始化赋值一起。</span></span><br><span class="line">    n := <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>&#123;<span class="string">&quot;foo&quot;</span>: <span class="number">1</span>, <span class="string">&quot;bar&quot;</span>: <span class="number">2</span>&#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;map:&quot;</span>, n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ go run maps.go </span><br><span class="line">map: map[k1:7 k2:13]</span><br><span class="line">v1:  7</span><br><span class="line">len: 2</span><br><span class="line">map: map[k1:7]</span><br><span class="line">prs: <span class="literal">false</span></span><br><span class="line">map: map[foo:1 bar:2]</span><br></pre></td></tr></table></figure>
-
-<p>原文链接：<a target="_blank" rel="noopener" href="https://gobyexample.com/maps">Go by Example: Maps</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1524,13 +1526,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">118k</span>
+    <span title="站点总字数">124k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:47</span>
+    <span title="站点阅读时长">1:53</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动

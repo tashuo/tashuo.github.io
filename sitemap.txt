@@ -1,3 +1,4 @@
+https://www.aisheishei.com/2023/04/23/javascript-prototype/
 https://www.aisheishei.com/2023/07/09/nest-command-tool/
 https://www.aisheishei.com/2023/04/23/first-nest-library/
 https://www.aisheishei.com/2023/04/14/nestjs-websocket/
@@ -93,6 +94,8 @@ https://www.aisheishei.com/tags/jest/
 https://www.aisheishei.com/tags/javascript/
 https://www.aisheishei.com/tags/yargs/
 https://www.aisheishei.com/tags/commander/
+https://www.aisheishei.com/tags/prototype/
+https://www.aisheishei.com/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/
 https://www.aisheishei.com/categories/life/
 https://www.aisheishei.com/categories/golang/
 https://www.aisheishei.com/categories/golang/%E7%AC%94%E8%AE%B0/
@@ -112,3 +115,4 @@ https://www.aisheishei.com/categories/symfony/%E7%AC%94%E8%AE%B0/
 https://www.aisheishei.com/categories/php/mysql/
 https://www.aisheishei.com/categories/typescript/
 https://www.aisheishei.com/categories/typescript/nestjs/
+https://www.aisheishei.com/categories/typescript/javascript/
