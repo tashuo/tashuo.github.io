@@ -1,4 +1,4 @@
-https://www.aisheishei.com/2023/04/23/javascript-prototype/
+https://www.aisheishei.com/2023/07/13/javascript-prototype/
 https://www.aisheishei.com/2023/07/09/nest-command-tool/
 https://www.aisheishei.com/2023/04/23/first-nest-library/
 https://www.aisheishei.com/2023/04/14/nestjs-websocket/
