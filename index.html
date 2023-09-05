@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">65</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -166,7 +166,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -197,6 +197,140 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.aisheishei.com/2023/09/01/nestjs-db-tree-query/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/1.jpg">
+      <meta itemprop="name" content="ta_shuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱谁谁">
+      <meta itemprop="description" content="我们坐着不同的井 望着同样的天">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 爱谁谁">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/01/nestjs-db-tree-query/" class="post-title-link" itemprop="url">nestjs-typeorm树形查询</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-01 20:30:39" itemprop="dateCreated datePublished" datetime="2023-09-01T20:30:39+08:00">2023-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/typescript/" itemprop="url" rel="index"><span itemprop="name">typescript</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/typescript/nestjs/" itemprop="url" rel="index"><span itemprop="name">nestjs</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/09/01/nestjs-db-tree-query/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/09/01/nestjs-db-tree-query/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/2023/09/01/nestjs-db-tree-query/"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>树形结构是一种常用的存储查询模型，比如后台菜单或评论列表，展开就是一棵树，对于数据库的表来讲，意味着自引用，即有一个外键字段关联本表的主键，该外键字段一般称为<code>parent_id</code>，由该字段串联起整颗树的结构，在数据量不大的场景中，单纯一个<code>parent_id</code>即可胜任树形数据的查询，只需对全表数据循环遍历组装，这种方案在前者后台菜单中比较常用</p>
+<p>当数据超过一定量级，一次性load全部数据并循环遍历对于io和cpu都是很大的负担也不现实，此时一般增加辅助字段来提升查询性能(空间换时间)，以及满足更多样性的查询需求。这里只介绍一种常用的方案-<code>path</code>，类似于unix的文件夹层级，该字段存储从根节点到该节点的整条路径，比如<code>100.120.200.</code>：代表这棵树根节点为100，该节点为200，该节点的父节点为120，最大的好处是比单纯的<code>parent_id</code>更容易获取任意节点的所有子节点</p>
+<p>很多orm都内置了树形模型方案，包括typeorm，具体可查看文档<a target="_blank" rel="noopener" href="https://typeorm.io/tree-entities">Tree Entities</a>，而<code>Materialized Path</code>就是上述<code>path</code>方案的实现，开箱即用</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>不同场景有不同的方案需求，我们限定当前的需求是评论列表，结合当前各大平台如知乎的交互方案，更细化的需求是<strong>二级评论列表(非完整树形)，第一层为所有的一级评论，一级评论分页加载所有的子评论</strong></p>
+<p>继续看typeorm提供的查询方案，有几个相关的方法：<code>findTrees</code>、<code>findRoots</code>、<code>findDescendants</code>、和<code>findDescendantsTree</code>：</p>
+<ul>
+<li><code>findTrees</code>：一次性返回所有的评论树</li>
+<li><code>findRoots</code>：一次性返回所有的根节点</li>
+<li><code>findDescendants</code>/<code>findDescendantsTree</code>：返回一棵树
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/09/01/nestjs-db-tree-query/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1410,172 +1544,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.aisheishei.com/2019/01/06/2018-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/1.jpg">
-      <meta itemprop="name" content="ta_shuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="爱谁谁">
-      <meta itemprop="description" content="我们坐着不同的井 望着同样的天">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 爱谁谁">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/01/06/2018-summary/" class="post-title-link" itemprop="url">2018年度总结</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-01-06 19:04:45" itemprop="dateCreated datePublished" datetime="2019-01-06T19:04:45+08:00">2019-01-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/life/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2019/01/06/2018-summary/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2019/01/06/2018-summary/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/2019/01/06/2018-summary/"></span>
-    </span>
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>未经审视的生活是不值得过的 - 苏格拉底</p>
-</blockquote>
-<blockquote>
-<p>生命是一团欲望，欲望不能满足便痛苦，满足便无聊，人生就在痛苦和无聊之间摇摆 - 叔本华</p>
-</blockquote>
-<p>上周五刚卷铺盖滚出了入职不满四个多月的厂子，如今写起字来不免<strong>悲凉</strong>，只希望接下来文思泉涌时莫泪洒键盘，笔记本给整坏了，恐怕一时半会都没钱修理了。</p>
-<hr>
-<h3 id="干过的事儿"><a href="#干过的事儿" class="headerlink" title="干过的事儿"></a>干过的事儿</h3><h4 id="书"><a href="#书" class="headerlink" title="书"></a>书</h4><ul>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26908213/">西西弗神话-加缪全集：第五卷</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/25956992/">博尔赫斯，口述</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/25796061/">杜撰集</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/5423785/">千年繁华-京都的街巷人生</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26270303/">永恒史</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/25862578/">解忧杂货店</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/27599965/">就喜欢你看不惯我又干不掉我的样子3</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/4105446/">十一种孤独 Eleven Kinds of Loneliness</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/27200261/">假面山庄</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/27085746/">漫长的告别</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/6125543/">北方的空地</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/3908240/">情人</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/1400707/">广岛之恋</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/27031276/">再见，宝贝 Farewell, My Lovely</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26863349/">湖底女人 The Lady in the Lake</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/6515859/">傅译巴尔扎克代表作1</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/6515860/">傅译巴尔扎克代表作2</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/6515861/">傅译巴尔扎克代表作3</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26841607/">高窗 The High Window</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/27614904/">房思琪的初恋乐园</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/10555509/">看不见的城市  Le città invisibili</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/1858513/">月亮和六便士</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26757680/">面纱</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26638213/">简爱</a> ✭✭✭✭ </li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/25752284/">艽野尘梦</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/4742918/">1Q84 BOOK 1</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/4885241/">1Q84 BOOK 2</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/5502995/">1Q84 BOOK 3</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/24382569/">一桩事先张扬的凶杀案</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26892991/">你的第一本哲学书 What Does it All Mean?</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26390842/">哲学家们都干了些什么</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/3131626/">荒原狼</a> ✭✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/3071717/">爱你就像爱生命</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/1917972/">在路上 On the Road</a> ✭✭✭✭</li>
-<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/5388095/">三个火枪手</a> ✭✭✭</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/06/2018-summary/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1600,13 +1568,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">124k</span>
+    <span title="站点总字数">128k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:53</span>
+    <span title="站点阅读时长">1:57</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
