@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.aisheishei.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="背景前段时间用flarum搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～ 中招 错误日志：这他娘的库子都没了:)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次mysql被黑的经历">
+<meta property="og:url" content="https://www.aisheishei.com/2023/03/17/flarum-mysql-recover/index.html">
+<meta property="og:site_name" content="爱谁谁">
+<meta property="og:description" content="背景前段时间用flarum搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～ 中招 错误日志：这他娘的库子都没了:)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.328888.xyz/2023/03/17/LGKvq.png">
+<meta property="og:image" content="https://i.328888.xyz/2023/03/17/LGoEN.png">
+<meta property="og:image" content="https://i.328888.xyz/2023/03/17/LGS2o.png">
+<meta property="og:image" content="https://i.328888.xyz/2023/03/17/LGsTV.png">
+<meta property="og:image" content="https://i.328888.xyz/2023/03/17/LG9Wd.png">
+<meta property="og:image" content="https://i.328888.xyz/2023/03/17/LGJpb.png">
+<meta property="og:image" content="https://i.328888.xyz/2023/03/17/LGM4z.png">
+<meta property="article:published_time" content="2023-03-17T15:11:11.000Z">
+<meta property="article:modified_time" content="2024-12-23T02:53:45.265Z">
+<meta property="article:author" content="ta_shuo">
+<meta property="article:tag" content="flarum">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.328888.xyz/2023/03/17/LGKvq.png">
+
+
+<link rel="canonical" href="https://www.aisheishei.com/2023/03/17/flarum-mysql-recover/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.aisheishei.com/2023/03/17/flarum-mysql-recover/","path":"2023/03/17/flarum-mysql-recover/","title":"记一次mysql被黑的经历"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>记一次mysql被黑的经历 | 爱谁谁</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?1ef328ecd38c7adcd2fa3ba484e2fa1a"></script>
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+<link rel="dns-prefetch" href="https://waline-psi-neon.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="爱谁谁" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">爱谁谁</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404.html" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E6%8B%9B"><span class="nav-number">2.</span> <span class="nav-text">中招</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A2%E6%8D%9F"><span class="nav-number">3.</span> <span class="nav-text">止损</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A5%AD%E5%87%BAmysqlbinlog%E8%BF%BD%E8%B8%AA%E6%BA%AF%E6%BA%90"><span class="nav-number">3.1.</span> <span class="nav-text">祭出mysqlbinlog追踪溯源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%A2%E5%A4%8Droot%E6%9D%83%E9%99%90"><span class="nav-number">3.2.</span> <span class="nav-text">恢复root权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E6%95%B0%E6%8D%AE"><span class="nav-number">3.3.</span> <span class="nav-text">恢复数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%87%BB"><span class="nav-number">4.</span> <span class="nav-text">反击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ta_shuo"
+      src="/1.jpg">
+  <p class="site-author-name" itemprop="name">ta_shuo</p>
+  <div class="site-description" itemprop="description">我们坐着不同的井 望着同样的天</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/tashuo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tashuo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:dangyaming@gmail.com" title="E-Mail → mailto:dangyaming@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://douban.com/people/ta_shuo" title="豆瓣 → http:&#x2F;&#x2F;douban.com&#x2F;people&#x2F;ta_shuo" rel="noopener me" target="_blank">豆瓣</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.aisheishei.com/2023/03/17/flarum-mysql-recover/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/1.jpg">
+      <meta itemprop="name" content="ta_shuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱谁谁">
+      <meta itemprop="description" content="我们坐着不同的井 望着同样的天">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="记一次mysql被黑的经历 | 爱谁谁">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          记一次mysql被黑的经历
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-17 23:11:11" itemprop="dateCreated datePublished" datetime="2023-03-17T23:11:11+08:00">2023-03-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/php/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/03/17/flarum-mysql-recover/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/03/17/flarum-mysql-recover/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/2023/03/17/flarum-mysql-recover/"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>11 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>前段时间用<code>flarum</code>搭了个论坛，由于docker设置mysql端口对外开放且密码很简单，不出意外中招了:) 一大早有群友找上来说网站又打不开，我收住了即将第五十三次劝她换掉e家宽的冲动，打开网页一看事情没那么简单～</p>
+<h2 id="中招"><a href="#中招" class="headerlink" title="中招"></a>中招</h2><p><img src="https://i.328888.xyz/2023/03/17/LGKvq.png" alt="LGKvq.png"></p>
+<p>错误日志：这他娘的库子都没了:)<br><img src="https://i.328888.xyz/2023/03/17/LGoEN.png" alt="LGoEN.png"></p>
+<span id="more"></span>
+<p>mysql：谁还硬给我套上一条形迹可疑的库子<br><img src="https://i.328888.xyz/2023/03/17/LGS2o.png" alt="LGS2o.png"></p>
+<p><img src="https://i.328888.xyz/2023/03/17/LGsTV.png" alt="LGsTV.png"></p>
+<p>mysql：是他动的手，看你选择我还是选择btc吧</p>
+<p><img src="https://i.328888.xyz/2023/03/17/LG9Wd.png" alt="LG9Wd.png"></p>
+<p>虽说不值钱吧，也Google了一下，发现大把的幸运儿都上了这趟车，基本都是弱密码、对外开放的mongo、mysql服务被自动化扫描工具拉上了车，对比其他网友我这0.21btc的价还算良心，要不给他汇过去？犹豫之余花呗账单发来了本期还款提醒，0.21rmb我也没能力给了！！淦他！！</p>
+<h2 id="止损"><a href="#止损" class="headerlink" title="止损"></a>止损</h2><p>从冰箱拽出已经见底的快乐水猛嘬一口缓了缓神， 一看这新库子的创建时间和编号000017的binlog时间有猫腻</p>
+<p><img src="https://i.328888.xyz/2023/03/17/LGJpb.png" alt="LGJpb.png"></p>
+<h3 id="祭出mysqlbinlog追踪溯源"><a href="#祭出mysqlbinlog追踪溯源" class="headerlink" title="祭出mysqlbinlog追踪溯源"></a>祭出mysqlbinlog追踪溯源</h3><p><code>mysqlbinlog --no-defaults --base64-output=decode-rows -v --database flarum_hnxc data/mysql/binlog.000017 | less</code><br><img src="https://i.328888.xyz/2023/03/17/LGM4z.png" alt="LGM4z.png"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">#<span class="number">230316</span> <span class="number">22</span>:<span class="number">22</span>:<span class="number">55</span> server id <span class="number">1</span>  end_log_pos <span class="number">817941</span> CRC32 <span class="number">0xb1803186</span> 	Xid <span class="operator">=</span> <span class="number">124243</span></span><br><span class="line"><span class="keyword">COMMIT</span><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">817941</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">11</span> server id <span class="number">1</span>  end_log_pos <span class="number">818018</span> CRC32 <span class="number">0x6ccc23b0</span> 	Anonymous_GTID	last_committed<span class="operator">=</span><span class="number">801</span>	sequence_number<span class="operator">=</span><span class="number">802</span>	rbr_only<span class="operator">=</span><span class="keyword">no</span>	original_committed_timestamp<span class="operator">=</span><span class="number">1678990932030791</span>	immediate_commit_timestamp<span class="operator">=</span><span class="number">1678990932030791</span>	transaction_length<span class="operator">=</span><span class="number">202</span></span><br><span class="line"># original_commit_timestamp<span class="operator">=</span><span class="number">1678990932030791</span> (<span class="number">2023</span><span class="number">-03</span><span class="number">-17</span> <span class="number">02</span>:<span class="number">22</span>:<span class="number">12.030791</span> CST)</span><br><span class="line"># immediate_commit_timestamp<span class="operator">=</span><span class="number">1678990932030791</span> (<span class="number">2023</span><span class="number">-03</span><span class="number">-17</span> <span class="number">02</span>:<span class="number">22</span>:<span class="number">12.030791</span> CST)</span><br><span class="line"><span class="comment">/*!80001 SET @@session.original_commit_timestamp=1678990932030791*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80014 SET @@session.original_server_version=80028*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80014 SET @@session.immediate_server_version=80028*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="variable">@SESSION</span>.GTID_NEXT<span class="operator">=</span> <span class="string">&#x27;ANONYMOUS&#x27;</span><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">818018</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">11</span> server id <span class="number">1</span>  end_log_pos <span class="number">818143</span> CRC32 <span class="number">0x6a55306b</span> 	Query	thread_id<span class="operator">=</span><span class="number">9046</span>	exec_time<span class="operator">=</span><span class="number">1</span>	error_code<span class="operator">=</span><span class="number">0</span>	Xid <span class="operator">=</span> <span class="number">138918</span></span><br><span class="line"><span class="keyword">SET</span> <span class="type">TIMESTAMP</span><span class="operator">=</span><span class="number">1678990931</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="variable">@session</span>.foreign_key_checks<span class="operator">=</span><span class="number">0</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="variable">@session</span>.sql_mode<span class="operator">=</span><span class="number">1168113696</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!\C utf8mb4 */</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="variable">@session</span>.character_set_client<span class="operator">=</span><span class="number">45</span>,@<span class="variable">@session</span>.collation_connection<span class="operator">=</span><span class="number">45</span>,@<span class="variable">@session</span>.collation_server<span class="operator">=</span><span class="number">255</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">DROP</span> DATABASE flarum_hnxc</span><br><span class="line"><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">818143</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">13</span> server id <span class="number">1</span>  end_log_pos <span class="number">818220</span> CRC32 <span class="number">0x3bb6c0c2</span> 	Anonymous_GTID	last_committed<span class="operator">=</span><span class="number">802</span>	sequence_number<span class="operator">=</span><span class="number">803</span>	rbr_only<span class="operator">=</span><span class="keyword">no</span>	original_committed_timestamp<span class="operator">=</span><span class="number">1678990933086201</span>	immediate_commit_timestamp<span class="operator">=</span><span class="number">1678990933086201</span>	transaction_length<span class="operator">=</span><span class="number">244</span></span><br><span class="line"># original_commit_timestamp<span class="operator">=</span><span class="number">1678990933086201</span> (<span class="number">2023</span><span class="number">-03</span><span class="number">-17</span> <span class="number">02</span>:<span class="number">22</span>:<span class="number">13.086201</span> CST)</span><br><span class="line"># immediate_commit_timestamp<span class="operator">=</span><span class="number">1678990933086201</span> (<span class="number">2023</span><span class="number">-03</span><span class="number">-17</span> <span class="number">02</span>:<span class="number">22</span>:<span class="number">13.086201</span> CST)</span><br><span class="line"><span class="comment">/*!80001 SET @@session.original_commit_timestamp=1678990933086201*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80014 SET @@session.original_server_version=80028*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80014 SET @@session.immediate_server_version=80028*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="variable">@SESSION</span>.GTID_NEXT<span class="operator">=</span> <span class="string">&#x27;ANONYMOUS&#x27;</span><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">818220</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">13</span> server id <span class="number">1</span>  end_log_pos <span class="number">818387</span> CRC32 <span class="number">0x23b60335</span> 	Query	thread_id<span class="operator">=</span><span class="number">9048</span>	exec_time<span class="operator">=</span><span class="number">0</span>	error_code<span class="operator">=</span><span class="number">0</span>	Xid <span class="operator">=</span> <span class="number">138923</span></span><br><span class="line"><span class="keyword">SET</span> <span class="type">TIMESTAMP</span><span class="operator">=</span><span class="number">1678990933</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="variable">@session</span>.foreign_key_checks<span class="operator">=</span><span class="number">1</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80016 SET @@session.default_table_encryption=0*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">CREATE</span> DATABASE IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> README_TO_RECOVER_A</span><br><span class="line"><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">818387</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">13</span> server id <span class="number">1</span>  end_log_pos <span class="number">818466</span> CRC32 <span class="number">0x38d5237c</span> 	Anonymous_GTID	last_committed<span class="operator">=</span><span class="number">803</span>	sequence_number<span class="operator">=</span><span class="number">804</span>	rbr_only<span class="operator">=</span><span class="keyword">no</span>	original_committed_timestamp<span class="operator">=</span><span class="number">1678990933650518</span>	immediate_commit_timestamp<span class="operator">=</span><span class="number">1678990933650518</span>	transaction_length<span class="operator">=</span><span class="number">261</span></span><br><span class="line"># original_commit_timestamp<span class="operator">=</span><span class="number">1678990933650518</span> (<span class="number">2023</span><span class="number">-03</span><span class="number">-17</span> <span class="number">02</span>:<span class="number">22</span>:<span class="number">13.650518</span> CST)</span><br><span class="line"># immediate_commit_timestamp<span class="operator">=</span><span class="number">1678990933650518</span> (<span class="number">2023</span><span class="number">-03</span><span class="number">-17</span> <span class="number">02</span>:<span class="number">22</span>:<span class="number">13.650518</span> CST)</span><br><span class="line"><span class="comment">/*!80001 SET @@session.original_commit_timestamp=1678990933650518*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80014 SET @@session.original_server_version=80028*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80014 SET @@session.immediate_server_version=80028*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="variable">@SESSION</span>.GTID_NEXT<span class="operator">=</span> <span class="string">&#x27;ANONYMOUS&#x27;</span><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">818466</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">13</span> server id <span class="number">1</span>  end_log_pos <span class="number">818648</span> CRC32 <span class="number">0xb40c7f04</span> 	Query	thread_id<span class="operator">=</span><span class="number">9048</span>	exec_time<span class="operator">=</span><span class="number">0</span>	error_code<span class="operator">=</span><span class="number">0</span>	Xid <span class="operator">=</span> <span class="number">138926</span></span><br><span class="line">use `README_TO_RECOVER_A`<span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">SET</span> <span class="type">TIMESTAMP</span><span class="operator">=</span><span class="number">1678990933</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80013 SET @@session.sql_require_primary_key=0*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> RECOVER_YOUR_DATA (text <span class="type">VARCHAR</span>(<span class="number">255</span>))</span><br><span class="line"><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">818648</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">14</span> server id <span class="number">1</span>  end_log_pos <span class="number">818727</span> CRC32 <span class="number">0x623fc5ec</span> 	Anonymous_GTID	last_committed<span class="operator">=</span><span class="number">804</span>	sequence_number<span class="operator">=</span><span class="number">805</span>	rbr_only<span class="operator">=</span>yes	original_committed_timestamp<span class="operator">=</span><span class="number">1678990934196612</span>	immediate_commit_timestamp<span class="operator">=</span><span class="number">1678990934196612</span>	transaction_length<span class="operator">=</span><span class="number">867</span></span><br><span class="line"><span class="comment">/*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"># original_commit_timestamp<span class="operator">=</span><span class="number">1678990934196612</span> (<span class="number">2023</span><span class="number">-03</span><span class="number">-17</span> <span class="number">02</span>:<span class="number">22</span>:<span class="number">14.196612</span> CST)</span><br><span class="line"># immediate_commit_timestamp<span class="operator">=</span><span class="number">1678990934196612</span> (<span class="number">2023</span><span class="number">-03</span><span class="number">-17</span> <span class="number">02</span>:<span class="number">22</span>:<span class="number">14.196612</span> CST)</span><br><span class="line"><span class="comment">/*!80001 SET @@session.original_commit_timestamp=1678990934196612*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80014 SET @@session.original_server_version=80028*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80014 SET @@session.immediate_server_version=80028*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="variable">@SESSION</span>.GTID_NEXT<span class="operator">=</span> <span class="string">&#x27;ANONYMOUS&#x27;</span><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">818727</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">13</span> server id <span class="number">1</span>  end_log_pos <span class="number">818817</span> CRC32 <span class="number">0x8823f509</span> 	Query	thread_id<span class="operator">=</span><span class="number">9048</span>	exec_time<span class="operator">=</span><span class="number">0</span>	error_code<span class="operator">=</span><span class="number">0</span></span><br><span class="line"><span class="keyword">SET</span> <span class="type">TIMESTAMP</span><span class="operator">=</span><span class="number">1678990933</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">818817</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">13</span> server id <span class="number">1</span>  end_log_pos <span class="number">818899</span> CRC32 <span class="number">0x7d2db7cd</span> 	Table_map: `README_TO_RECOVER_A`.`RECOVER_YOUR_DATA` mapped <span class="keyword">to</span> number <span class="number">214</span></span><br><span class="line"># <span class="keyword">at</span> <span class="number">818899</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">13</span> server id <span class="number">1</span>  end_log_pos <span class="number">819157</span> CRC32 <span class="number">0x9d8fc1a8</span> 	Write_rows: <span class="keyword">table</span> id <span class="number">214</span> flags: STMT_END_F</span><br><span class="line">### <span class="keyword">INSERT</span> <span class="keyword">INTO</span> `README_TO_RECOVER_A`.`RECOVER_YOUR_DATA`</span><br><span class="line">### <span class="keyword">SET</span></span><br><span class="line">###   <span class="variable">@1</span><span class="operator">=</span><span class="string">&#x27;All your data is a backed up. You must pay 0.21 BTC to 18FJ6C6TBpv6va7vLKDri9ibGDWgnYx8Me After 48 hours expiration we will leak and expose all your data. After 48 hours the database dump will be deleted from our server!&#x27;</span></span><br><span class="line"># <span class="keyword">at</span> <span class="number">819157</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">14</span> server id <span class="number">1</span>  end_log_pos <span class="number">819239</span> CRC32 <span class="number">0xe67f3dbd</span> 	Table_map: `README_TO_RECOVER_A`.`RECOVER_YOUR_DATA` mapped <span class="keyword">to</span> number <span class="number">214</span></span><br><span class="line"># <span class="keyword">at</span> <span class="number">819239</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">14</span> server id <span class="number">1</span>  end_log_pos <span class="number">819484</span> CRC32 <span class="number">0x732fb5ba</span> 	Write_rows: <span class="keyword">table</span> id <span class="number">214</span> flags: STMT_END_F</span><br><span class="line">### <span class="keyword">INSERT</span> <span class="keyword">INTO</span> `README_TO_RECOVER_A`.`RECOVER_YOUR_DATA`</span><br><span class="line">### <span class="keyword">SET</span></span><br><span class="line">###   <span class="variable">@1</span><span class="operator">=</span><span class="string">&#x27;You can buy bitcoin in https://binance.com After paying write to us in the mail with your DB IP: rasmus+2rps0@onionmail.org and you will receive a link to download your database dump. CHECK YOUR SPAM FOLDER!&#x27;</span></span><br><span class="line"># <span class="keyword">at</span> <span class="number">819484</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">14</span> server id <span class="number">1</span>  end_log_pos <span class="number">819515</span> CRC32 <span class="number">0xd9a7afc1</span> 	Xid <span class="operator">=</span> <span class="number">138927</span></span><br><span class="line"><span class="keyword">COMMIT</span><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">819515</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">14</span> server id <span class="number">1</span>  end_log_pos <span class="number">819592</span> CRC32 <span class="number">0xfa9fa3bd</span> 	Anonymous_GTID	last_committed<span class="operator">=</span><span class="number">805</span>	sequence_number<span class="operator">=</span><span class="number">806</span>	rbr_only<span class="operator">=</span><span class="keyword">no</span>	original_committed_timestamp<span class="operator">=</span><span class="number">1678990934381072</span>	immediate_commit_timestamp<span class="operator">=</span><span class="number">1678990934381072</span>	transaction_length<span class="operator">=</span><span class="number">241</span></span><br><span class="line"># original_commit_timestamp<span class="operator">=</span><span class="number">1678990934381072</span> (<span class="number">2023</span><span class="number">-03</span><span class="number">-17</span> <span class="number">02</span>:<span class="number">22</span>:<span class="number">14.381072</span> CST)</span><br><span class="line"># immediate_commit_timestamp<span class="operator">=</span><span class="number">1678990934381072</span> (<span class="number">2023</span><span class="number">-03</span><span class="number">-17</span> <span class="number">02</span>:<span class="number">22</span>:<span class="number">14.381072</span> CST)</span><br><span class="line"><span class="comment">/*!80001 SET @@session.original_commit_timestamp=1678990934381072*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80014 SET @@session.original_server_version=80028*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80014 SET @@session.immediate_server_version=80028*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="variable">@SESSION</span>.GTID_NEXT<span class="operator">=</span> <span class="string">&#x27;ANONYMOUS&#x27;</span><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">819592</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">14</span> server id <span class="number">1</span>  end_log_pos <span class="number">819756</span> CRC32 <span class="number">0xde317be1</span> 	Query	thread_id<span class="operator">=</span><span class="number">9048</span>	exec_time<span class="operator">=</span><span class="number">0</span>	error_code<span class="operator">=</span><span class="number">0</span>	Xid <span class="operator">=</span> <span class="number">138930</span></span><br><span class="line"><span class="keyword">SET</span> <span class="type">TIMESTAMP</span><span class="operator">=</span><span class="number">1678990934</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">REVOKE</span> <span class="keyword">INSERT</span>, <span class="keyword">DELETE</span>, <span class="keyword">CREATE</span>, <span class="keyword">DROP</span> <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">FROM</span> <span class="string">&#x27;root&#x27;</span></span><br><span class="line"><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">819756</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">14</span> server id <span class="number">1</span>  end_log_pos <span class="number">819833</span> CRC32 <span class="number">0xb128744c</span> 	Anonymous_GTID	last_committed<span class="operator">=</span><span class="number">806</span>	sequence_number<span class="operator">=</span><span class="number">807</span>	rbr_only<span class="operator">=</span><span class="keyword">no</span>	original_committed_timestamp<span class="operator">=</span><span class="number">1678990934564760</span>	immediate_commit_timestamp<span class="operator">=</span><span class="number">1678990934564760</span>	transaction_length<span class="operator">=</span><span class="number">186</span></span><br><span class="line"># original_commit_timestamp<span class="operator">=</span><span class="number">1678990934564760</span> (<span class="number">2023</span><span class="number">-03</span><span class="number">-17</span> <span class="number">02</span>:<span class="number">22</span>:<span class="number">14.564760</span> CST)</span><br><span class="line"># immediate_commit_timestamp<span class="operator">=</span><span class="number">1678990934564760</span> (<span class="number">2023</span><span class="number">-03</span><span class="number">-17</span> <span class="number">02</span>:<span class="number">22</span>:<span class="number">14.564760</span> CST)</span><br><span class="line"><span class="comment">/*!80001 SET @@session.original_commit_timestamp=1678990934564760*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80014 SET @@session.original_server_version=80028*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="comment">/*!80014 SET @@session.immediate_server_version=80028*/</span><span class="comment">/*!*/</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="variable">@SESSION</span>.GTID_NEXT<span class="operator">=</span> <span class="string">&#x27;ANONYMOUS&#x27;</span><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">819833</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">14</span> server id <span class="number">1</span>  end_log_pos <span class="number">819942</span> CRC32 <span class="number">0x16becbcb</span> 	Query	thread_id<span class="operator">=</span><span class="number">9048</span>	exec_time<span class="operator">=</span><span class="number">0</span>	error_code<span class="operator">=</span><span class="number">0</span></span><br><span class="line"><span class="keyword">SET</span> <span class="type">TIMESTAMP</span><span class="operator">=</span><span class="number">1678990934</span><span class="comment">/*!*/</span>;</span><br><span class="line">FLUSH PRIVILEGES</span><br><span class="line"><span class="comment">/*!*/</span>;</span><br><span class="line"># <span class="keyword">at</span> <span class="number">819942</span></span><br><span class="line">#<span class="number">230317</span>  <span class="number">2</span>:<span class="number">22</span>:<span class="number">15</span> server id <span class="number">1</span>  end_log_pos <span class="number">819965</span> CRC32 <span class="number">0x8b38ef1d</span> 	Stop</span><br><span class="line"><span class="keyword">SET</span> @<span class="variable">@SESSION</span>.GTID_NEXT<span class="operator">=</span> <span class="string">&#x27;AUTOMATIC&#x27;</span> <span class="comment">/* added by mysqlbinlog */</span> <span class="comment">/*!*/</span>;</span><br><span class="line">DELIMITER ;</span><br><span class="line"># <span class="keyword">End</span> <span class="keyword">of</span> log file</span><br><span class="line"><span class="comment">/*!50003 SET COMPLETION_TYPE=@OLD_COMPLETION_TYPE*/</span>;</span><br><span class="line"><span class="comment">/*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE=0*/</span>;</span><br></pre></td></tr></table></figure>
+
+<p>通过上面详细的日志看到这厮drop了俺的库，那条新库子也在此时创建，后面还修改了root用户的权限? 有意思，为啥留了update权限给俺:)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">user</span> <span class="operator">=</span> <span class="string">&#x27;root&#x27;</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------------------+--------------------------+----------------------------+---------------+-------------+-----------------+----------------------+-----------------------+------------------------------------------------------------------------+------------------+-----------------------+-------------------+----------------+------------------+----------------+------------------------+---------------------+--------------------------+-----------------+</span></span><br><span class="line"><span class="operator">|</span> Host      <span class="operator">|</span> <span class="keyword">User</span> <span class="operator">|</span> Select_priv <span class="operator">|</span> Insert_priv <span class="operator">|</span> Update_priv <span class="operator">|</span> Delete_priv <span class="operator">|</span> Create_priv <span class="operator">|</span> Drop_priv <span class="operator">|</span> Reload_priv <span class="operator">|</span> Shutdown_priv <span class="operator">|</span> Process_priv <span class="operator">|</span> File_priv <span class="operator">|</span> Grant_priv <span class="operator">|</span> References_priv <span class="operator">|</span> Index_priv <span class="operator">|</span> Alter_priv <span class="operator">|</span> Show_db_priv <span class="operator">|</span> Super_priv <span class="operator">|</span> Create_tmp_table_priv <span class="operator">|</span> Lock_tables_priv <span class="operator">|</span> Execute_priv <span class="operator">|</span> Repl_slave_priv <span class="operator">|</span> Repl_client_priv <span class="operator">|</span> Create_view_priv <span class="operator">|</span> Show_view_priv <span class="operator">|</span> Create_routine_priv <span class="operator">|</span> Alter_routine_priv <span class="operator">|</span> Create_user_priv <span class="operator">|</span> Event_priv <span class="operator">|</span> Trigger_priv <span class="operator">|</span> Create_tablespace_priv <span class="operator">|</span> ssl_type <span class="operator">|</span> ssl_cipher             <span class="operator">|</span> x509_issuer              <span class="operator">|</span> x509_subject               <span class="operator">|</span> max_questions <span class="operator">|</span> max_updates <span class="operator">|</span> max_connections <span class="operator">|</span> max_user_connections <span class="operator">|</span> plugin                <span class="operator">|</span> authentication_string                                                  <span class="operator">|</span> password_expired <span class="operator">|</span> password_last_changed <span class="operator">|</span> password_lifetime <span class="operator">|</span> account_locked <span class="operator">|</span> Create_role_priv <span class="operator">|</span> Drop_role_priv <span class="operator">|</span> Password_reuse_history <span class="operator">|</span> Password_reuse_time <span class="operator">|</span> Password_require_current <span class="operator">|</span> User_attributes <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------------------+--------------------------+----------------------------+---------------+-------------+-----------------+----------------------+-----------------------+------------------------------------------------------------------------+------------------+-----------------------+-------------------+----------------+------------------+----------------+------------------------+---------------------+--------------------------+-----------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="operator">%</span>         <span class="operator">|</span> root <span class="operator">|</span> Y           <span class="operator">|</span> N           <span class="operator">|</span> Y           <span class="operator">|</span> N           <span class="operator">|</span> N           <span class="operator">|</span> N         <span class="operator">|</span> Y           <span class="operator">|</span> Y             <span class="operator">|</span> Y            <span class="operator">|</span> Y         <span class="operator">|</span> Y          <span class="operator">|</span> Y               <span class="operator">|</span> Y          <span class="operator">|</span> Y          <span class="operator">|</span> Y            <span class="operator">|</span> Y          <span class="operator">|</span> Y                     <span class="operator">|</span> Y                <span class="operator">|</span> Y            <span class="operator">|</span> Y               <span class="operator">|</span> Y                <span class="operator">|</span> Y                <span class="operator">|</span> Y              <span class="operator">|</span> Y                   <span class="operator">|</span> Y                  <span class="operator">|</span> Y                <span class="operator">|</span> Y          <span class="operator">|</span> Y            <span class="operator">|</span> Y                      <span class="operator">|</span>          <span class="operator">|</span> <span class="number">0</span>x                     <span class="operator">|</span> <span class="number">0</span>x                       <span class="operator">|</span> <span class="number">0</span>x                         <span class="operator">|</span>             <span class="number">0</span> <span class="operator">|</span>           <span class="number">0</span> <span class="operator">|</span>               <span class="number">0</span> <span class="operator">|</span>                    <span class="number">0</span> <span class="operator">|</span> caching_sha2_password <span class="operator">|</span> $A$<span class="number">005</span>$j<span class="operator">&gt;</span></span><br><span class="line"><span class="number">.7</span>bh<span class="operator">&lt;</span>&quot;x7q-ZALT24E1ClL.JAtNSE4Bjd4.BAam2pFOYp90WiH0bxGpc7 | N                | 2023-03-09 17:01:43   |              NULL | N              | Y                | Y              |                   NULL |                NULL | NULL                     | NULL            |</span><br><span class="line">| localhost | root | Y           | Y           | Y           | Y           | Y           | Y         | Y           | Y             | Y            | Y         | Y          | Y               | Y          | Y          | Y            | Y          | Y                     | Y                | Y            | Y               | Y                | Y                | Y              | Y                   | Y                  | Y                | Y          | Y            | Y                      |          | 0x                     | 0x                       | 0x                         |             0 |           0 |               0 |                    0 | caching_sha2_password | $A$005$&amp;7Pz3w XDiVG9Fd0jiC8o/4Gz6j0QZbPwUEdAiSfgO.T8re68rW0gdJAOMm5 | N                | 2023-03-09 17:01:43   |              NULL | N              | Y                | Y              |                   NULL |                NULL | NULL                     | NULL            |</span><br><span class="line">+-----------+------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------------------+--------------------------+----------------------------+---------------+-------------+-----------------+----------------------+-----------------------+------------------------------------------------------------------------+------------------+-----------------------+-------------------+----------------+------------------+----------------+------------------------+---------------------+--------------------------+-----------------+</span><br><span class="line">2 rows in set (0.05 sec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="恢复root权限"><a href="#恢复root权限" class="headerlink" title="恢复root权限"></a>恢复root权限</h3><p>因为<code>root@%</code> 的create权限被收回，旧库子不能被直接创建，此时可以进入mysql容器通过<code>root@localhost</code>直接操作，但业务上还需要远程登录root账号的权限，所以需要使用好心人留下的update权限含泪重新给自己加回create权限及其他被收回的权限：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> mysql.user <span class="keyword">set</span> Create_priv <span class="operator">=</span> <span class="string">&#x27;Y&#x27;</span>, ... <span class="keyword">where</span> <span class="keyword">User</span> <span class="operator">=</span> <span class="string">&#x27;root&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="恢复数据"><a href="#恢复数据" class="headerlink" title="恢复数据"></a>恢复数据</h3><p>将所有有用的binlog重新导入db，记得编号<strong>000017</strong>这条需要特殊处理舍弃后面的黑化日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$: ...</span><br><span class="line">$: mysqlbinlog data/mysql/binlog.000016 | mysql -h 127.0.0.1 -uroot -p</span><br><span class="line"></span><br><span class="line">$: mysqlbinlog --stop-position=817941 data/mysql/binlog.000017 | mysql -h 127.0.0.1 -uroot -p</span><br></pre></td></tr></table></figure>
+
+<p>重新打开网站数据恢复如初～</p>
+<h2 id="反击"><a href="#反击" class="headerlink" title="反击"></a>反击</h2><p>反击？我嚼得这兄弟还是手下留情了，是不是可以做的更绝一点，后面得想想怎么再黑化黑化这个脚本</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>遇事不慌，别老想着打钱打钱，你有钱吗？binlog在mysql就在，一步一步来能救一个算一个</p>
+<p><strong>最重要的是mysql端口不要暴露到外网！！</strong></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/michael9/p/11923483.html">MySQL 5.7 - 通过 BINLOG 恢复数据 - 来份锅包肉 - 博客园</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ta_shuo
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.aisheishei.com/2023/03/17/flarum-mysql-recover/" title="记一次mysql被黑的经历">https://www.aisheishei.com/2023/03/17/flarum-mysql-recover/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/en" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/flarum/" rel="tag"><i class="fa fa-tag"></i> flarum</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/12/hexo-next/" rel="prev" title="hexo next及github配置">
+                  <i class="fa fa-chevron-left"></i> hexo next及github配置
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/04/14/nestjs-websocket/" rel="next" title="nestjs websocket 实现私聊、系统推送">
+                  nestjs websocket 实现私聊、系统推送 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ta_shuo</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">128k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:57</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+
+  <a href="https://github.com/tashuo" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://waline-psi-neon.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":true,"libUrl":"https://unpkg.com/@waline/client@v2/dist/waline.js","emoji":["https://unpkg.com/@waline/emojis@1.0.1/bilibili","https://unpkg.com/@waline/emojis@1.0.1/qq"],"pageSize":10,"el":"#waline","comment":true,"path":"/2023/03/17/flarum-mysql-recover/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.aisheishei.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="背景在前后端分离的应用中，需要使用CORS完成跨域访问。在CORS中发送 非简单请求时，前端会发一个请求方式为OPTIONS的预请求，前端只有收到服务器对这个OPTIONS请求的正确响应，才会发送正常的请求，否则将抛出跨域相关的错误。 跨域可实现跨域的方式 JSONP CORS Flash 服务器中转  比较常用的是 JSONP和 CORS，而后者相对前者来说有更方便实用：  JSONP只能实现G">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laravel跨域处理">
+<meta property="og:url" content="https://www.aisheishei.com/2020/06/05/laravel-cors/index.html">
+<meta property="og:site_name" content="爱谁谁">
+<meta property="og:description" content="背景在前后端分离的应用中，需要使用CORS完成跨域访问。在CORS中发送 非简单请求时，前端会发一个请求方式为OPTIONS的预请求，前端只有收到服务器对这个OPTIONS请求的正确响应，才会发送正常的请求，否则将抛出跨域相关的错误。 跨域可实现跨域的方式 JSONP CORS Flash 服务器中转  比较常用的是 JSONP和 CORS，而后者相对前者来说有更方便实用：  JSONP只能实现G">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-05T08:17:50.000Z">
+<meta property="article:modified_time" content="2024-12-23T02:53:45.288Z">
+<meta property="article:author" content="ta_shuo">
+<meta property="article:tag" content="跨域">
+<meta property="article:tag" content="CORS">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.aisheishei.com/2020/06/05/laravel-cors/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.aisheishei.com/2020/06/05/laravel-cors/","path":"2020/06/05/laravel-cors/","title":"Laravel跨域处理"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Laravel跨域处理 | 爱谁谁</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?1ef328ecd38c7adcd2fa3ba484e2fa1a"></script>
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+<link rel="dns-prefetch" href="https://waline-psi-neon.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="爱谁谁" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">爱谁谁</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404.html" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F"><span class="nav-number">2.</span> <span class="nav-text">跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%AF%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">可实现跨域的方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CORS"><span class="nav-number">2.2.</span> <span class="nav-text">CORS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Preflighted-Requests-%E9%A2%84%E6%A3%80%E8%AF%B7%E6%B1%82"><span class="nav-number">2.3.</span> <span class="nav-text">Preflighted Requests(预检请求)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFOPTIONS%E8%AF%B7%E6%B1%82"><span class="nav-number">2.3.1.</span> <span class="nav-text">什么是OPTIONS请求</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Laravel%E8%B7%AF%E7%94%B1%E9%80%BB%E8%BE%91"><span class="nav-number">2.4.</span> <span class="nav-text">Laravel路由逻辑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Laravel-options%E8%AF%B7%E6%B1%82%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86"><span class="nav-number">2.5.</span> <span class="nav-text">Laravel options请求跨域处理</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%96%B9%E6%A1%88"><span class="nav-number">2.5.1.</span> <span class="nav-text">中间件方案</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%80%9A%E9%85%8D%E8%B7%AF%E7%94%B1%E5%8C%B9%E9%85%8D%E6%96%B9%E6%A1%88"><span class="nav-number">2.5.2.</span> <span class="nav-text">通配路由匹配方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ta_shuo"
+      src="/1.jpg">
+  <p class="site-author-name" itemprop="name">ta_shuo</p>
+  <div class="site-description" itemprop="description">我们坐着不同的井 望着同样的天</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/tashuo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tashuo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:dangyaming@gmail.com" title="E-Mail → mailto:dangyaming@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://douban.com/people/ta_shuo" title="豆瓣 → http:&#x2F;&#x2F;douban.com&#x2F;people&#x2F;ta_shuo" rel="noopener me" target="_blank">豆瓣</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.aisheishei.com/2020/06/05/laravel-cors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/1.jpg">
+      <meta itemprop="name" content="ta_shuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱谁谁">
+      <meta itemprop="description" content="我们坐着不同的井 望着同样的天">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Laravel跨域处理 | 爱谁谁">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Laravel跨域处理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-06-05 16:17:50" itemprop="dateCreated datePublished" datetime="2020-06-05T16:17:50+08:00">2020-06-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/php/laravel/" itemprop="url" rel="index"><span itemprop="name">laravel</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2020/06/05/laravel-cors/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2020/06/05/laravel-cors/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/2020/06/05/laravel-cors/"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>在前后端分离的应用中，需要使用CORS完成跨域访问。在CORS中发送 <code>非简单请求</code>时，前端会发一个请求方式为OPTIONS的预请求，前端只有收到服务器对这个OPTIONS请求的正确响应，才会发送正常的请求，否则将抛出跨域相关的错误。</p>
+<h4 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h4><h5 id="可实现跨域的方式"><a href="#可实现跨域的方式" class="headerlink" title="可实现跨域的方式"></a>可实现跨域的方式</h5><ul>
+<li>JSONP</li>
+<li>CORS</li>
+<li>Flash</li>
+<li>服务器中转</li>
+</ul>
+<p>比较常用的是 <code>JSONP</code>和 <code>CORS</code>，而后者相对前者来说有更方便实用：</p>
+<ol>
+<li><code>JSONP</code>只能实现<code>GET</code>请求，而<code>CORS</code>支持所有类型的HTTP请求。</li>
+<li>使用<code>CORS</code>，开发者可以使用普通的<code>XMLHttpRequest</code>发起请求和获得数据，比起<code>JSONP</code>有更好的错误处理。</li>
+</ol>
+<p>此文暂不介绍jsonp</p>
+<h5 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h5><blockquote>
+<p><code>CORS</code>是一种网络浏览器的技术规范，它为Web服务器定义了一种方式，允许网页从不同的域访问其资源。而这种访问是被同源策略所禁止的。<code>CORS</code>系统定义了一种浏览器和服务器交互的方式来确定是否允许跨域请求。<br>使用 <code>CORS</code>的方式非常简单，但是需要同时对前端和服务器端做相应处理。</p>
+</blockquote>
+<p><strong>客户端使用XmlHttpRequest发起Ajax请求，当前绝大部分浏览器已经支持CORS方式，且主流浏览器均提供了对跨域资源共享的支持。</strong></p>
+<p>如上所述，接着只需<strong>在服务端配置可允许跨域的header</strong>即可:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="comment"># TestController.php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestController</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 跨域头</span></span><br><span class="line">        <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Access-Control-Allow-Origin: *&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p>之后测试发现 <code>GET</code> 网络请求正常，不会报跨域的错误，但是被调用方一直报调用方未登录的异常，定位到是调用方的cookie无法传输给被调用方，查到是需要手动在ajax中增加配置 <code>withCredentials: true</code></p>
+<blockquote>
+<p><em>XMLHttpRequest.withCredentials</em></p>
+<p>跨域请求是否提供凭据信息(cookie、HTTP认证及客户端SSL证明等)<br>也可以简单的理解为，当前请求为跨域类型时是否在请求中协带cookie。</p>
+</blockquote>
+<p>需要注意的是调用方配置了该参数后，被调用方的header中必须指定 <code>Access-Control-Allow-Origin</code> 的值，不可以用 <code>*</code>，不然会报错：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Response</span> to preflight request doesn<span class="string">&#x27;t pass access control check: A wildcard &#x27;</span>*<span class="string">&#x27; cannot be used in the &#x27;</span><span class="title class_">Access</span>-<span class="title class_">Control</span>-<span class="title class_">Allow</span>-<span class="title class_">Origin</span><span class="string">&#x27; header when the credentials flag is true. </span></span><br><span class="line"><span class="string">Origin &#x27;</span><span class="literal">null</span><span class="string">&#x27; is therefore not allowed access. </span></span><br><span class="line"><span class="string">The credentials mode of an XMLHttpRequest is controlled by the withCredentials attribute.</span></span><br></pre></td></tr></table></figure>
+
+<p>更新后的服务端代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="comment"># TestController.php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestController</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$origin</span> = <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">header</span>(<span class="string">&#x27;ORIGIN&#x27;</span>);</span><br><span class="line">        <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Access-Control-Allow-Origin: &#x27;</span> . <span class="variable">$origin</span>);</span><br><span class="line">        <span class="comment">// 定义支持哪些方法的跨域请求</span></span><br><span class="line">        <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE&#x27;</span>);</span><br><span class="line">        <span class="comment">// 服务端开启Access-Control-Allow-Credentials的支持</span></span><br><span class="line">        <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Access-Control-Allow-Credentials: true&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至此一般的 <code>GET</code> 跨域携带cookie的请求可以正常完成，那么 <code>POST</code>、<code>PUT</code>、<code>DELETE</code>这些请求呢？</p>
+<h5 id="Preflighted-Requests-预检请求"><a href="#Preflighted-Requests-预检请求" class="headerlink" title="Preflighted Requests(预检请求)"></a>Preflighted Requests(预检请求)</h5><blockquote>
+<p>Preflighted Requests是CORS中一种透明服务器验证机制。预检请求首先需要向另外一个域名的资源发送一个 HTTP OPTIONS 请求头，其目的就是为了判断实际发送的请求是否是安全的。</p>
+</blockquote>
+<h6 id="什么是OPTIONS请求"><a href="#什么是OPTIONS请求" class="headerlink" title="什么是OPTIONS请求"></a>什么是OPTIONS请求</h6><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html</a></p>
+</blockquote>
+<p>RFC2616标准（现行的HTTP/1.1）中定义了  <code>options</code>请求，主要用途有两个：</p>
+<ol>
+<li>获取服务器支持的HTTP请求方法</li>
+<li>用来检查服务器的性能</li>
+</ol>
+<p>什么情况会触发预检请求呢？就是上面提到的<code>POST</code>、<code>PUT</code>、<code>DELETE</code>等请求，大概来讲就是<br>RFC2616标准中规定的一些非 <code>Safe Methods</code>。</p>
+<p>回过头看，现在js代码加上发起 <code>POST</code>的ajax请求，打开控制台发现只有一条 <code>OPTIONS</code>请求，并无 <code>POST</code>，而且报了跟最开始 <code>GET</code>请求一样的跨域错误，什么情况？</p>
+<h5 id="Laravel路由逻辑"><a href="#Laravel路由逻辑" class="headerlink" title="Laravel路由逻辑"></a>Laravel路由逻辑</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="comment"># routes/api.php</span></span><br><span class="line">    <span class="title class_">Route</span>::<span class="title function_ invoke__">post</span>(<span class="string">&#x27;/test&#x27;</span>, <span class="string">&#x27;TestController@test&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>路由文件中并未定义‘/test’的 <code>OPTIONS</code>类型请求，laravel是怎么匹配且响应200的？分析也可发现这个 <code>OPTIONS</code>请求没有进到此api路由文件的生命周期内，因为没有加上允许跨域的头部，问题在哪儿？</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="comment"># vendor/laravel/framework/src/Illuminate/Routing/RouteCollection.php</span></span><br><span class="line">    <span class="variable">$routes</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">get</span>(<span class="variable">$request</span>-&gt;<span class="title function_ invoke__">getMethod</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// First, we will see if we can find a matching route for this current request</span></span><br><span class="line">    <span class="comment">// method. If we can, great, we can just return it so that it can be called</span></span><br><span class="line">    <span class="comment">// by the consumer. Otherwise we will check for routes with another verb.</span></span><br><span class="line">    <span class="variable">$route</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">matchAgainstRoutes</span>(<span class="variable">$routes</span>, <span class="variable">$request</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (! <span class="title function_ invoke__">is_null</span>(<span class="variable">$route</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$route</span>-&gt;<span class="title function_ invoke__">bind</span>(<span class="variable">$request</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If no route was found we will now check if a matching route is specified by</span></span><br><span class="line">    <span class="comment">// another HTTP verb. If it is we will need to throw a MethodNotAllowed and</span></span><br><span class="line">    <span class="comment">// inform the user agent of which HTTP verb it should use for this route.</span></span><br><span class="line">    <span class="variable">$others</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">checkForAlternateVerbs</span>(<span class="variable">$request</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">count</span>(<span class="variable">$others</span>) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">getRouteForMethods</span>(<span class="variable">$request</span>, <span class="variable">$others</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NotFoundHttpException</span>;</span><br></pre></td></tr></table></figure>
+
+<p>定位到Laravel路由的逻辑后知道了其中的端倪：</p>
+<ol>
+<li><p>首先根据当前HTTP方法（GET/POST/PUT/…）查找是否有匹配的路由，如果有<code>（if(! is_null($route))</code>条件成立)，非常好，绑定后直接返回，继续此后的调用流程即可；</p>
+</li>
+<li><p>否则，根据$request的路由找到可能匹配的HTTP方法（即URL匹配，但是HTTP请求方式为其它品种的），如果<code>count($others) &gt; 0)</code>条件成立，则继续进入<code>$this-&gt;getRouteForMethods($request, $others)</code>方法；</p>
+</li>
+<li><p>否则抛出NotFoundHttpException，即上述说到的<code>404 NOT FOUND</code>错误。</p>
+</li>
+</ol>
+<p>倘若走的是第2步，可看到函数逻辑为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="comment"># vendor/laravel/framework/src/Illuminate/Routing/RouteCollection.php</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Get a route (if necessary) that responds when other available methods are present.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  array  $methods</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> \Illuminate\Routing\Route</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">getRouteForMethods</span>(<span class="params"><span class="variable">$request</span>, <span class="keyword">array</span> <span class="variable">$methods</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$request</span>-&gt;<span class="title function_ invoke__">method</span>() == <span class="string">&#x27;OPTIONS&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">new</span> <span class="title class_">Route</span>(<span class="string">&#x27;OPTIONS&#x27;</span>, <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">path</span>(), <span class="function"><span class="keyword">function</span> (<span class="params"></span>) <span class="keyword">use</span> (<span class="params"><span class="variable">$methods</span></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="string">&#x27;&#x27;</span>, <span class="number">200</span>, [<span class="string">&#x27;Allow&#x27;</span> =&gt; <span class="title function_ invoke__">implode</span>(<span class="string">&#x27;,&#x27;</span>, <span class="variable">$methods</span>)]);</span><br><span class="line">            &#125;))-&gt;<span class="title function_ invoke__">bind</span>(<span class="variable">$request</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">methodNotAllowed</span>(<span class="variable">$methods</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>判断如果请求方式是<code>OPTIONS</code>，则返回状态码为200的正确响应（但是没有添加任何header信息），否则返回一个<code>methodNotAllowed</code>状态码为405的错误（即请求方式不允许的情况）。</p>
+<p>由此可见，Laravel针对<code>OPTIONS</code>方式的HTTP请求处理方式已经固定了，最笨的方法是对跨域请求的每一个GET或POST请求都撰写一个同名的<code>OPTIONS</code>类型的路由，添加允许跨域的header，也有其他方法进行处理。</p>
+<h5 id="Laravel-options请求跨域处理"><a href="#Laravel-options请求跨域处理" class="headerlink" title="Laravel options请求跨域处理"></a>Laravel options请求跨域处理</h5><h6 id="中间件方案"><a href="#中间件方案" class="headerlink" title="中间件方案"></a>中间件方案</h6><p>在文件 <code>app/Http/Kernel.php</code>中，有两处可以定义中间件。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="comment"># app/Http/Kernel.php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 总中间件</span></span><br><span class="line"><span class="keyword">protected</span> <span class="variable">$middleware</span> = [</span><br><span class="line">        <span class="title class_">\Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode</span>::<span class="variable language_">class</span>,</span><br><span class="line">        <span class="title class_">\Illuminate\Foundation\Http\Middleware\ValidatePostSize</span>::<span class="variable language_">class</span>,</span><br><span class="line">        <span class="title class_">\App\Http\Middleware\TrimStrings</span>::<span class="variable language_">class</span>,</span><br><span class="line">        <span class="title class_">\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull</span>::<span class="variable language_">class</span>,</span><br><span class="line">        <span class="title class_">\App\Http\Middleware\TrustProxies</span>::<span class="variable language_">class</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 群组中间件</span></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * The application&#x27;s route middleware groups.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$middlewareGroups</span> = [</span><br><span class="line">        <span class="string">&#x27;web&#x27;</span> =&gt; [</span><br><span class="line">            <span class="title class_">\App\Http\Middleware\EncryptCookies</span>::<span class="variable language_">class</span>,</span><br><span class="line">            <span class="title class_">\Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse</span>::<span class="variable language_">class</span>,</span><br><span class="line">            <span class="title class_">\Illuminate\Session\Middleware\StartSession</span>::<span class="variable language_">class</span>,</span><br><span class="line">            <span class="comment">// \Illuminate\Session\Middleware\AuthenticateSession::class,</span></span><br><span class="line">            <span class="title class_">\Illuminate\View\Middleware\ShareErrorsFromSession</span>::<span class="variable language_">class</span>,</span><br><span class="line">            <span class="title class_">\App\Http\Middleware\VerifyCsrfToken</span>::<span class="variable language_">class</span>,</span><br><span class="line">            <span class="title class_">\Illuminate\Routing\Middleware\SubstituteBindings</span>::<span class="variable language_">class</span>,</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">&#x27;api&#x27;</span> =&gt; [</span><br><span class="line">            <span class="string">&#x27;throttle:60,1&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;bindings&#x27;</span>,</span><br><span class="line">            <span class="title class_">\Illuminate\Session\Middleware\StartSession</span>::<span class="variable language_">class</span>,</span><br><span class="line">        ],</span><br><span class="line">    ];</span><br></pre></td></tr></table></figure>
+<p>第一处是总中间件 <code>$middleware</code>，任何请求都会通过这里；</p>
+<p>第二处是群组中间件 <code>middlewareGroups</code>，<strong>只有路由匹配上对应群组模式的才会通过这部分</strong>，之前的OPTIONS请求尚未通过此处中间件的handle函数，就会返回。</p>
+<p>因此我们添加的中间件，需要添加到$middleware数组中，不能添加到api群组路由中间件中。</p>
+<p>在<code>app/Http/Middleware</code>文件夹下新建<code>PreflightResponse.php</code>文件：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="comment">#PreflightResponse.php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Http</span>\<span class="title class_">Middleware</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PreflightResponse</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * Handle an incoming request.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span>  \Closure  $next</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span>  string|null  $guard</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"><span class="variable">$request</span>, <span class="built_in">Closure</span> <span class="variable">$next</span>, <span class="variable">$guard</span> = <span class="literal">null</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$request</span>-&gt;<span class="title function_ invoke__">getMethod</span>() === <span class="string">&#x27;OPTIONS&#x27;</span>)&#123;</span><br><span class="line">            <span class="variable">$origin</span> = <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">header</span>(<span class="string">&#x27;ORIGIN&#x27;</span>, <span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">            <span class="title function_ invoke__">header</span>(<span class="string">&quot;Access-Control-Allow-Origin: <span class="subst">$origin</span>&quot;</span>);</span><br><span class="line">            <span class="title function_ invoke__">header</span>(<span class="string">&quot;Access-Control-Allow-Credentials: true&quot;</span>);</span><br><span class="line">            <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE&#x27;</span>);</span><br><span class="line">            <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Access-Control-Allow-Headers: Origin, Access-Control-Request-Headers, SERVER_NAME, Access-Control-Allow-Headers, cache-control, token, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie, X-XSRF-TOKEN&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$next</span>(<span class="variable">$request</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中这里针对OPTIONS请求的处理内容是添加多个header内容，可根据实际需要修改相关处理逻辑。</p>
+<h6 id="通配路由匹配方案"><a href="#通配路由匹配方案" class="headerlink" title="通配路由匹配方案"></a>通配路由匹配方案</h6><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Route</span>::<span class="title function_ invoke__">options</span>(<span class="string">&#x27;/&#123;all&#125;&#x27;</span>, function(Request <span class="variable">$request</span>) &#123;</span><br><span class="line">    <span class="variable">$origin</span> = <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">header</span>(<span class="string">&#x27;ORIGIN&#x27;</span>, <span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Access-Control-Allow-Origin: <span class="subst">$origin</span>&quot;</span>);</span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Access-Control-Allow-Credentials: true&quot;</span>);</span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE&#x27;</span>);</span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Access-Control-Allow-Headers: Origin, Access-Control-Request-Headers, SERVER_NAME, Access-Control-Allow-Headers, cache-control, token, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie&#x27;</span>);</span><br><span class="line">&#125;)-&gt;<span class="title function_ invoke__">where</span>([<span class="string">&#x27;all&#x27;</span> =&gt; <span class="string">&#x27;([a-zA-Z0-9-]|/)+&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+<p>这样所有的OPTIONS请求都能找到匹配的路由，在此处可统一处理所有OPTIONS请求，不需要额外进行处理。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/virtual/p/3720750.html">https://www.cnblogs.com/virtual/p/3720750.html</a><br><a target="_blank" rel="noopener" href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/33542992">https://zhuanlan.zhihu.com/p/33542992</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/552daaf2869c">https://www.jianshu.com/p/552daaf2869c</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ta_shuo
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.aisheishei.com/2020/06/05/laravel-cors/" title="Laravel跨域处理">https://www.aisheishei.com/2020/06/05/laravel-cors/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/en" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag"><i class="fa fa-tag"></i> 跨域</a>
+              <a href="/tags/CORS/" rel="tag"><i class="fa fa-tag"></i> CORS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/04/13/go-by-example-sorting/" rel="prev" title="Go by Example - Sorting">
+                  <i class="fa fa-chevron-left"></i> Go by Example - Sorting
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/01/08/hyperf-db-connection-pool/" rel="next" title="Hyperf db连接池">
+                  Hyperf db连接池 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ta_shuo</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">128k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:57</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://lib.baomitu.com/canvas-nest.js/1.0.1/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+
+  <a href="https://github.com/tashuo" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://waline-psi-neon.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":true,"libUrl":"https://unpkg.com/@waline/client@v2/dist/waline.js","emoji":["https://unpkg.com/@waline/emojis@1.0.1/bilibili","https://unpkg.com/@waline/emojis@1.0.1/qq"],"pageSize":10,"el":"#waline","comment":true,"path":"/2020/06/05/laravel-cors/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
