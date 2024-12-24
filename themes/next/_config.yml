@@ -978,10 +978,10 @@ js: js
 images: images
 
 # 动画效果
-use_motion: false
+use_motion: true
 
 # 背景动画
-canvas_nest: false #开启动画
+canvas_nest: true #开启动画
 three_waves: false
 
 # JiaThis 分享服务
