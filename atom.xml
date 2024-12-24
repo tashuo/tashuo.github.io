@@ -122,7 +122,7 @@
     <link href="https://www.aisheishei.com/2023/04/23/first-nest-library/"/>
     <id>https://www.aisheishei.com/2023/04/23/first-nest-library/</id>
     <published>2023-04-23T10:00:58.000Z</published>
-    <updated>2024-12-23T02:53:45.264Z</updated>
+    <updated>2024-12-24T04:50:12.323Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;十万个为什么&quot;&gt;&lt;a href=&quot;#十万个为什么&quot; class=&quot;headerlink&quot; title=&quot;十万个为什么&quot;&gt;&lt;/a&gt;十万个为什么&lt;/h3&gt;&lt;p&gt;&lt;code&gt;nest&lt;/code&gt;库是什么？&lt;code&gt;nest&lt;/code&gt;是一个&lt;code&gt;typescript&lt;/code&gt;构建的&lt;code&gt;node&lt;/code&gt;框架，那&lt;code&gt;nest&lt;/code&gt;库可以理解为依赖&lt;code&gt;nest&lt;/code&gt;框架的&lt;code&gt;node&lt;/code&gt;库？&lt;code&gt;node&lt;/code&gt;是一个&lt;code&gt;javascript&lt;/code&gt;服务端的运行环境，那又要怎样用&lt;code&gt;typescript&lt;/code&gt;编写&lt;code&gt;javascript&lt;/code&gt;库呢？做为一只从其他语言(&lt;code&gt;js&lt;/code&gt;几乎零基础只会简单的&lt;code&gt;jQuery&lt;/code&gt;)转来学习&lt;code&gt;nest&lt;/code&gt;的菜鸟刚开始总会在某些时刻冷不丁得被这些概念绕的云里雾里，不过是因为直接跨过&lt;code&gt;js&lt;/code&gt;、&lt;code&gt;node&lt;/code&gt;、&lt;code&gt;ts&lt;/code&gt;直接啃&lt;code&gt;nest&lt;/code&gt;的原因，底层建筑不牢固直接搬砖终究是雾里看花，而从零手撸一个&lt;code&gt;nest&lt;/code&gt;库不妨可以视为一个敲门砖，可以带我们看一探&lt;code&gt;js&lt;/code&gt;世界的冰山一角.&lt;/p&gt;

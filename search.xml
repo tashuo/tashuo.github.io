@@ -327,7 +327,7 @@
 </ol>
 <p>需要注意的是，<code>npm</code>直接使用<code>package.json</code>中的<code>name</code>作为全局包名，如果包名已存在就会报错.</p>
 <p>本来以为像<code>php</code>的<code>composer</code>一样包名会带前缀，起码没那么容易冲突，结果<code>npm</code>这操作整的，会不会很多很屌的包名已经被人恶意占坑了.</p>
-<h3 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h3><p>所有的代码都在<a href="https://github.com/tashuo/nestjs-config">https://github.com/tashuo/nestjs-config</a>，欢迎提出问题一起交流</p>
+<h3 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h3><p>所有的代码都在<a href="https://github.com/tashuo/nestjs-config">https://github.com/tashuo/nestjs-config</a>，欢迎提出问题一起交流.</p>
 ]]></content>
       <categories>
         <category>typescript</category>
