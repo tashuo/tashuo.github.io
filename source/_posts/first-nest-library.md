@@ -78,4 +78,4 @@ $: npm init
 
 
 ### 仓库
-所有的代码都在[https://github.com/tashuo/nestjs-config](https://github.com/tashuo/nestjs-config)，欢迎提出问题一起交流
+所有的代码都在[https://github.com/tashuo/nestjs-config](https://github.com/tashuo/nestjs-config)，欢迎提出问题一起交流.
