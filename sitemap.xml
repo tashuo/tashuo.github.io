@@ -263,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/2017/09/05/go-by-example-timer/</loc>
+    <loc>https://www.aisheishei.com/2017/07/10/go-by-example-values/</loc>
     
     <lastmod>2024-12-23</lastmod>
     
@@ -272,7 +272,7 @@
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/2017/07/10/go-by-example-values/</loc>
+    <loc>https://www.aisheishei.com/2017/09/05/go-by-example-timer/</loc>
     
     <lastmod>2024-12-23</lastmod>
     
@@ -968,6 +968,13 @@
   </url>
   
   <url>
+    <loc>https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/programming/</loc>
+    <lastmod>2024-12-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.aisheishei.com/categories/PHP/%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2024-12-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -976,13 +983,6 @@
   
   <url>
     <loc>https://www.aisheishei.com/categories/symfony/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2024-12-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/programming/</loc>
     <lastmod>2024-12-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
