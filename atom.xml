@@ -6,7 +6,7 @@
   <link href="https://www.aisheishei.com/atom.xml" rel="self"/>
   
   <link href="https://www.aisheishei.com/"/>
-  <updated>2024-12-25T04:12:08.455Z</updated>
+  <updated>2024-12-25T04:26:26.806Z</updated>
   <id>https://www.aisheishei.com/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="https://www.aisheishei.com/2023/09/01/nestjs-db-tree-query/"/>
     <id>https://www.aisheishei.com/2023/09/01/nestjs-db-tree-query/</id>
     <published>2023-09-01T12:30:39.000Z</published>
-    <updated>2024-12-25T04:12:08.455Z</updated>
+    <updated>2024-12-25T04:26:26.806Z</updated>
     
     
-    <summary type="html">&lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;树形结构是一种常用的存储查询模型，比如后台菜单或评论列表，展开就是一棵树，对于数据库的表来讲，意味着自引用，即有一个外键字段关联本表的主键，该外键字段一般称为&lt;code&gt;parent_id&lt;/code&gt;，由该字段串联起整颗树的结构，在数据量不大的场景中，单纯一个&lt;code&gt;parent_id&lt;/code&gt;即可胜任树形数据的查询，只需对全表数据循环遍历组装，这种方案在前者后台菜单中比较常用…&lt;/p&gt;
+    <summary type="html">&lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;树形结构是一种常用的存储查询模型，比如后台菜单或评论列表，展开就是一棵树，对于数据库的表来讲，意味着自引用，即有一个外键字段关联本表的主键，该外键字段一般称为&lt;code&gt;parent_id&lt;/code&gt;，由该字段串联起整颗树的结构，在数据量不大的场景中，单纯一个&lt;code&gt;parent_id&lt;/code&gt;即可胜任树形数据的查询，只需对全表数据循环遍历组装，这种方案在前者后台菜单中比较常用&lt;/p&gt;
 &lt;p&gt;当数据超过一定量级，一次性load全部数据并循环遍历对于io和cpu都是很大的负担也不现实，此时一般增加辅助字段来提升查询性能(空间换时间)，以及满足更多样性的查询需求。这里只介绍一种常用的方案-&lt;code&gt;path&lt;/code&gt;，类似于unix的文件夹层级，该字段存储从根节点到该节点的整条路径，比如&lt;code&gt;100.120.200.&lt;/code&gt;：代表这棵树根节点为100，该节点为200，该节点的父节点为120，最大的好处是比单纯的&lt;code&gt;parent_id&lt;/code&gt;更容易获取任意节点的所有子节点&lt;/p&gt;
 &lt;p&gt;很多orm都内置了树形模型方案，包括typeorm，具体可查看文档&lt;a href=&quot;https://typeorm.io/tree-entities&quot;&gt;Tree Entities&lt;/a&gt;，而&lt;code&gt;Materialized Path&lt;/code&gt;就是上述&lt;code&gt;path&lt;/code&gt;方案的实现，开箱即用&lt;/p&gt;
 &lt;h3 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h3&gt;&lt;p&gt;不同场景有不同的方案需求，我们限定当前的需求是评论列表，结合当前各大平台如知乎的交互方案，更细化的需求是&lt;strong&gt;二级评论列表(非完整树形)，第一层为所有的一级评论，一级评论分页加载所有的子评论&lt;/strong&gt;&lt;/p&gt;
