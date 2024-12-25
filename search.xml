@@ -2135,7 +2135,7 @@
   <entry>
     <title>nestjs-typeorm树形查询</title>
     <url>/2023/09/01/nestjs-db-tree-query/</url>
-    <content><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>树形结构是一种常用的存储查询模型，比如后台菜单或评论列表，展开就是一棵树，对于数据库的表来讲，意味着自引用，即有一个外键字段关联本表的主键，该外键字段一般称为<code>parent_id</code>，由该字段串联起整颗树的结构，在数据量不大的场景中，单纯一个<code>parent_id</code>即可胜任树形数据的查询，只需对全表数据循环遍历组装，这种方案在前者后台菜单中比较常用..</p>
+    <content><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>树形结构是一种常用的存储查询模型，比如后台菜单或评论列表，展开就是一棵树，对于数据库的表来讲，意味着自引用，即有一个外键字段关联本表的主键，该外键字段一般称为<code>parent_id</code>，由该字段串联起整颗树的结构，在数据量不大的场景中，单纯一个<code>parent_id</code>即可胜任树形数据的查询，只需对全表数据循环遍历组装，这种方案在前者后台菜单中比较常用…</p>
 <p>当数据超过一定量级，一次性load全部数据并循环遍历对于io和cpu都是很大的负担也不现实，此时一般增加辅助字段来提升查询性能(空间换时间)，以及满足更多样性的查询需求。这里只介绍一种常用的方案-<code>path</code>，类似于unix的文件夹层级，该字段存储从根节点到该节点的整条路径，比如<code>100.120.200.</code>：代表这棵树根节点为100，该节点为200，该节点的父节点为120，最大的好处是比单纯的<code>parent_id</code>更容易获取任意节点的所有子节点</p>
 <p>很多orm都内置了树形模型方案，包括typeorm，具体可查看文档<a href="https://typeorm.io/tree-entities">Tree Entities</a>，而<code>Materialized Path</code>就是上述<code>path</code>方案的实现，开箱即用</p>
 <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>不同场景有不同的方案需求，我们限定当前的需求是评论列表，结合当前各大平台如知乎的交互方案，更细化的需求是<strong>二级评论列表(非完整树形)，第一层为所有的一级评论，一级评论分页加载所有的子评论</strong></p>
