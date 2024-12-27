@@ -1,0 +1,47 @@
+.product-list .product-item {
+    display: inline-block;
+    border: none;
+    transition: background-color 0.3s ease; /* 背景颜色的平滑过渡 */
+}
+
+.product-item:hover {
+    background-color: #dcdcdc; /* hover 时背景颜色变深 */
+}
+
+.text-center {
+  text-align: center;
+}
+
+.site-author-image {
+  background: white;
+  background-clip: content-box;
+}
+
+.sidebar .sidebar-button {
+  &:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  a {
+    button($orange);
+    
+    // To make line-height in button mixin work
+    display: inline-block;
+
+    .fa, .fab, .far, .fas {
+      margin-right: 5px;
+    }
+
+    if (($scheme == 'Pisces') or ($scheme == 'Gemini')) {
+      border: 0;
+      color: $orange;
+      display: block;
+
+      &:hover {
+        background: none;
+        border: 0;
+        color: darken($orange, 20%);
+      }
+    }
+  }
+}
