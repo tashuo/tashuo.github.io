@@ -218,7 +218,7 @@
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/2017/07/18/go-by-example-variadic-function/</loc>
+    <loc>https://www.aisheishei.com/2017/07/10/go-by-example-variables/</loc>
     
     <lastmod>2024-12-23</lastmod>
     
@@ -227,7 +227,7 @@
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/2017/07/10/go-by-example-variables/</loc>
+    <loc>https://www.aisheishei.com/2017/07/18/go-by-example-variadic-function/</loc>
     
     <lastmod>2024-12-23</lastmod>
     
@@ -263,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/2017/07/10/go-by-example-values/</loc>
+    <loc>https://www.aisheishei.com/2017/09/05/go-by-example-timer/</loc>
     
     <lastmod>2024-12-23</lastmod>
     
@@ -272,7 +272,7 @@
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/2017/09/05/go-by-example-timer/</loc>
+    <loc>https://www.aisheishei.com/2017/07/10/go-by-example-values/</loc>
     
     <lastmod>2024-12-23</lastmod>
     
@@ -515,6 +515,15 @@
   </url>
   
   <url>
+    <loc>https://www.aisheishei.com/2017/08/23/go-by-example-channel-direction/</loc>
+    
+    <lastmod>2024-12-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.aisheishei.com/2017/08/03/go-by-example-channel-synchronization/</loc>
     
     <lastmod>2024-12-23</lastmod>
@@ -525,15 +534,6 @@
   
   <url>
     <loc>https://www.aisheishei.com/2017/08/03/go-by-example-channel/</loc>
-    
-    <lastmod>2024-12-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aisheishei.com/2017/08/23/go-by-example-channel-direction/</loc>
     
     <lastmod>2024-12-23</lastmod>
     
@@ -616,232 +616,232 @@
 
   <url>
     <loc>https://www.aisheishei.com/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://www.aisheishei.com/tags/%E7%94%9F%E6%B4%BB/</loc>
-    <lastmod>2024-12-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aisheishei.com/tags/%E5%B9%BF%E5%B7%9E/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <loc>https://www.aisheishei.com/tags/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/npm/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/jest/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/javascript/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/tags/flarum/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <loc>https://www.aisheishei.com/tags/%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/tags/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <loc>https://www.aisheishei.com/tags/%E5%B9%BF%E5%B7%9E/</loc>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/hexo/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/next/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/%E8%BF%9E%E6%8E%A5%E6%B1%A0/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/prototype/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/%E8%B7%A8%E5%9F%9F/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/CORS/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/mysql/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/acid/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/yargs/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/commander/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/typeorm/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/tree/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/socket-io/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/webscoket/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/oauth/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/csrf/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/upload/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/security/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/session/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/symfony/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/unix-domain-socket/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/tcp-ip/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/php-fpm/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/tags/vim/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aisheishei.com/tags/flarum/</loc>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -850,140 +850,140 @@
   
   <url>
     <loc>https://www.aisheishei.com/categories/life/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/typescript/</loc>
-    <lastmod>2024-12-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aisheishei.com/categories/php/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/golang/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/typescript/nestjs/</loc>
-    <lastmod>2024-12-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aisheishei.com/categories/php/mysql/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/golang/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.aisheishei.com/categories/php/hyperf/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <loc>https://www.aisheishei.com/categories/php/</loc>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/typescript/javascript/</loc>
-    <lastmod>2024-12-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aisheishei.com/categories/php/laravel/</loc>
-    <lastmod>2024-12-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aisheishei.com/categories/%E6%96%87%E5%AD%A6/</loc>
-    <lastmod>2024-12-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.aisheishei.com/categories/PHP/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/mysql/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aisheishei.com/categories/%E6%96%87%E5%AD%A6/</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aisheishei.com/categories/PHP/</loc>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/PHP/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/symfony/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/%E7%A4%BE%E4%BC%9A/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/%E7%AC%94%E8%AE%B0/programming/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aisheishei.com/categories/php/hyperf/</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aisheishei.com/categories/php/laravel/</loc>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/PHP/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.aisheishei.com/categories/symfony/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2024-12-25</lastmod>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.aisheishei.com/categories/php/mysql/</loc>
+    <lastmod>2024-12-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
